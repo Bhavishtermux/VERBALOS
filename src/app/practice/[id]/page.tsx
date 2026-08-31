@@ -444,8 +444,8 @@ export default function RcReadingPage() {
     if (!selectedWord || isMobileScreen) return {};
 
     const { rect } = selectedWord;
-    const popupWidth = 250;
-    const popupHeight = 115;
+    const popupWidth = 280;
+    const popupHeight = 130;
     const scrollY = window.scrollY;
     const scrollX = window.scrollX;
 
@@ -457,9 +457,9 @@ export default function RcReadingPage() {
     }
 
     // Vertical positioning: Prefer above, fallback to below
-    let top = rect.top + scrollY - popupHeight - 8;
-    if (rect.top < popupHeight + 70) {
-      top = rect.bottom + scrollY + 8;
+    let top = rect.top + scrollY - popupHeight - 10;
+    if (rect.top < popupHeight + 80) {
+      top = rect.bottom + scrollY + 10;
     }
 
     return {
@@ -759,36 +759,39 @@ export default function RcReadingPage() {
           </div>
         </div>
 
-        {/* Quick Contextual Vocabulary Popup */}
+        {/* Quick Contextual Vocabulary Popup (100% Opaque & High-Contrast) */}
         {selectedWord && !isDetailedVocabOpen && (
           <>
             {isMobileScreen ? (
-              <div className="fixed inset-x-0 bottom-0 z-50 p-3 sm:hidden animate-in slide-in-from-bottom-2 duration-150">
+              <div className="fixed inset-x-0 bottom-0 z-[100] p-4 sm:hidden animate-ios-slide-up">
                 <div
                   ref={popupRef}
-                  className="rounded-xl border border-zinc-200/90 bg-white/98 p-4 shadow-2xl backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/98 text-zinc-950 dark:text-zinc-50 max-w-sm mx-auto"
+                  className="rounded-[6px] border-2 border-zinc-300 dark:border-zinc-700 bg-white dark:bg-[#121214] p-4 shadow-2xl text-zinc-950 dark:text-zinc-50 max-w-sm mx-auto ring-1 ring-black/10 dark:ring-white/10"
                 >
-                  <div className="flex items-start justify-between gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-1.5">
-                    <h4 className="text-sm font-serif font-bold text-zinc-900 dark:text-zinc-50 uppercase tracking-wide">
-                      {selectedWord.cleaned}
-                    </h4>
+                  <div className="flex items-start justify-between gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-2">
+                    <div className="flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#C83214]" />
+                      <h4 className="text-sm font-serif font-bold text-zinc-900 dark:text-zinc-50 uppercase tracking-wide">
+                        {selectedWord.cleaned}
+                      </h4>
+                    </div>
                     <button
                       onClick={() => setSelectedWord(null)}
-                      className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
+                      className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800"
                     >
                       <X className="h-4 w-4" />
                     </button>
                   </div>
 
-                  <p className="mt-2 text-xs text-zinc-750 dark:text-zinc-200 leading-relaxed font-sans">
+                  <p className="mt-2.5 text-xs text-zinc-800 dark:text-zinc-200 leading-relaxed font-sans font-medium">
                     {selectedWord.result.definition}
                   </p>
 
-                  <div className="mt-3 pt-2 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between">
-                    <span className="text-[10px] text-zinc-400 font-mono">RC Quick Lookup</span>
+                  <div className="mt-3.5 pt-2.5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+                    <span className="text-[10px] text-zinc-400 font-mono uppercase">Academic Lexicon</span>
                     <button
                       onClick={handleOpenDetailedView}
-                      className="text-xs font-semibold text-amber-700 dark:text-amber-400 hover:underline flex items-center gap-1"
+                      className="text-xs font-semibold text-[#C83214] dark:text-[#E04B2F] hover:underline flex items-center gap-1"
                     >
                       View more →
                     </button>
@@ -799,28 +802,32 @@ export default function RcReadingPage() {
               <div
                 ref={popupRef}
                 style={popupStyle}
-                className="absolute z-50 rounded-lg border border-zinc-200/90 bg-white/98 p-3 shadow-xl backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/98 text-zinc-950 dark:text-zinc-50 select-none animate-in fade-in-50 zoom-in-95 duration-100"
+                className="absolute z-[100] rounded-[6px] border-2 border-zinc-300 dark:border-zinc-700 bg-white dark:bg-[#121214] p-3.5 shadow-2xl text-zinc-950 dark:text-zinc-50 select-none animate-ios-slide-up ring-1 ring-black/10 dark:ring-white/10"
               >
-                <div className="flex items-start justify-between gap-2 border-b border-zinc-100 dark:border-zinc-800/80 pb-1">
-                  <span className="text-xs font-bold font-serif text-zinc-900 dark:text-zinc-50 uppercase tracking-wide">
-                    {selectedWord.cleaned}
-                  </span>
+                <div className="flex items-start justify-between gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-1.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#C83214]" />
+                    <span className="text-xs font-bold font-serif text-zinc-900 dark:text-zinc-50 uppercase tracking-wide">
+                      {selectedWord.cleaned}
+                    </span>
+                  </div>
                   <button
                     onClick={() => setSelectedWord(null)}
-                    className="p-0.5 text-zinc-400 hover:text-zinc-750 dark:hover:text-zinc-200 rounded"
+                    className="p-1 text-zinc-400 hover:text-zinc-750 dark:hover:text-zinc-200 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800"
                   >
-                    <X className="h-3 w-3" />
+                    <X className="h-3.5 w-3.5" />
                   </button>
                 </div>
 
-                <p className="mt-1.5 text-[11px] text-zinc-700 dark:text-zinc-300 leading-snug font-sans line-clamp-3">
+                <p className="mt-2 text-xs text-zinc-800 dark:text-zinc-200 leading-snug font-sans font-medium">
                   {selectedWord.result.definition}
                 </p>
 
-                <div className="mt-2.5 pt-1.5 border-t border-zinc-100 dark:border-zinc-800/60 flex items-center justify-end">
+                <div className="mt-2.5 pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+                  <span className="text-[10px] text-zinc-400 font-mono uppercase">Lexicon</span>
                   <button
                     onClick={handleOpenDetailedView}
-                    className="text-[11px] font-semibold text-amber-700 dark:text-amber-400 hover:underline flex items-center gap-0.5"
+                    className="text-xs font-semibold text-[#C83214] dark:text-[#E04B2F] hover:underline flex items-center gap-0.5"
                   >
                     View more →
                   </button>
