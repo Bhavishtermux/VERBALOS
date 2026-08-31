@@ -86,6 +86,31 @@ export default function RcReadingPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
 
+  // 2. Question Solving Timer State (Independent Countdown)
+  const [questionSeconds, setQuestionSeconds] = useState<number>(0);
+  const [isQuestionTimerActive, setIsQuestionTimerActive] = useState<boolean>(false);
+  const [questionStartTime, setQuestionStartTime] = useState<string>("");
+
+  // Vocabulary Lookup State
+  const [selectedWord, setSelectedWord] = useState<SelectedWordState | null>(null);
+  const [isDetailedVocabOpen, setIsDetailedVocabOpen] = useState<boolean>(false);
+  const [isMobileScreen, setIsMobileScreen] = useState<boolean>(false);
+  const [showPassageInQuestions, setShowPassageInQuestions] = useState<boolean>(false);
+
+  // Timer interval refs & popup ref
+  const readingTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const questionTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const popupRef = useRef<HTMLDivElement | null>(null);
+
+  // Allocated budgets
+  const allocatedReadingSeconds = useMemo(() => {
+    return Math.max((passage?.estimatedMinutes || 6) * 60, 180);
+  }, [passage]);
+
+  const allocatedQuestionSeconds = useMemo(() => {
+    return (passage?.questions?.length || 5) * 90; // 1.5 mins per question = 7:30
+  }, [passage]);
+
   // Auto-restore saved in-progress draft on mount
   useEffect(() => {
     if (!passageId) return;
@@ -143,31 +168,6 @@ export default function RcReadingPage() {
       setActiveSession(null);
     };
   }, [stage, readingSeconds, calculatedWpm, selectedAnswers, currentQuestionIndex, passage, setActiveSession]);
-
-  // Allocated budgets
-  const allocatedReadingSeconds = useMemo(() => {
-    return Math.max((passage?.estimatedMinutes || 6) * 60, 180);
-  }, [passage]);
-
-  const allocatedQuestionSeconds = useMemo(() => {
-    return (passage?.questions?.length || 5) * 90; // 1.5 mins per question = 7:30
-  }, [passage]);
-
-  // 2. Question Solving Timer State (Independent Countdown)
-  const [questionSeconds, setQuestionSeconds] = useState<number>(0);
-  const [isQuestionTimerActive, setIsQuestionTimerActive] = useState<boolean>(false);
-  const [questionStartTime, setQuestionStartTime] = useState<string>("");
-
-  // Vocabulary Lookup State
-  const [selectedWord, setSelectedWord] = useState<SelectedWordState | null>(null);
-  const [isDetailedVocabOpen, setIsDetailedVocabOpen] = useState<boolean>(false);
-  const [isMobileScreen, setIsMobileScreen] = useState<boolean>(false);
-  const [showPassageInQuestions, setShowPassageInQuestions] = useState<boolean>(false);
-
-  // Timer interval refs & popup ref
-  const readingTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const questionTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const popupRef = useRef<HTMLDivElement | null>(null);
 
   // Track window resize for mobile vs desktop positioning
   useEffect(() => {

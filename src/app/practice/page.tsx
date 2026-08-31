@@ -178,28 +178,28 @@ export default function PracticePage() {
           </span>
         </div>
 
-        {recommendationSummary && recommendationSummary.recommendations.length > 0 ? (
+        {recommendationSummary && recommendationSummary.recommendations && recommendationSummary.recommendations.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            {recommendationSummary.recommendations.map((rec, idx) => (
+            {recommendationSummary.recommendations.filter((r) => r && r.passage).map((rec, idx) => (
               <Card
-                key={rec.id}
+                key={rec.id || idx}
                 className="flex flex-col justify-between bg-white dark:bg-zinc-900 border-zinc-200/80 dark:border-zinc-800 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-all"
               >
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between gap-1 mb-1.5 flex-wrap">
                     <Badge variant="warning" className="text-[10px] font-mono font-semibold">
-                      {rec.badgeText}
+                      {rec.badgeText || "Recommended"}
                     </Badge>
                     <Badge variant="secondary" className="text-[10px] font-mono uppercase">
-                      {rec.passage.source}
+                      {rec.passage?.source || "CAT Bank"}
                     </Badge>
                   </div>
 
                   <CardTitle className="text-base font-serif leading-snug">
-                    {rec.passage.title}
+                    {rec.passage?.title}
                   </CardTitle>
                   <CardDescription className="text-xs font-mono">
-                    {rec.passage.topic} • {rec.passage.difficulty} • {rec.passage.wordCount} words
+                    {rec.passage?.topic} • {rec.passage?.difficulty} • {rec.passage?.wordCount} words
                   </CardDescription>
                 </CardHeader>
 
@@ -217,9 +217,9 @@ export default function PracticePage() {
 
                   <div className="pt-2 flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800">
                     <span className="text-[10px] font-mono text-zinc-400">
-                      ~{rec.passage.estimatedMinutes} mins • 5 Qs
+                      ~{rec.passage?.estimatedMinutes || 6} mins • 5 Qs
                     </span>
-                    <Link href={`/practice/${rec.passage.id}`}>
+                    <Link href={`/practice/${rec.passage?.id || "rc-01"}`}>
                       <Button size="sm" className="h-8 text-xs gap-1">
                         <span>Begin RC Practice</span>
                         <ArrowRight className="h-3 w-3" />
