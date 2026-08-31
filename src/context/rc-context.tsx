@@ -158,16 +158,18 @@ export function RcProvider({ children }: { children: ReactNode }) {
 
     // 3. Reset in-memory stats and records
     setStats({
-      totalPassagesRead: 0,
-      totalQuestionsSolved: 0,
-      totalCorrect: 0,
-      totalTimeSpentSeconds: 0,
-      averageWpm: 0,
-      currentStreak: 0,
-      longestStreak: 0,
       accuracy: 0,
-      passagesToday: 0,
-      lastActiveDate: new Date().toISOString().slice(0, 10),
+      averageWpm: 0,
+      rcsCompleted: 0,
+      vaCompleted: 0,
+      mocksCompleted: 0,
+      currentStreak: 0,
+      bestStreak: 0,
+      totalTimeMinutes: 0,
+      todayCompleted: 0,
+      todayGoal: 3,
+      todayAccuracy: 0,
+      projectedPercentile: 0,
     });
     setRecentAttempts([]);
     setVocabulary([]);
