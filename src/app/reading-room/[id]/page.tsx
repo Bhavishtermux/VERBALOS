@@ -220,22 +220,24 @@ export default function SourceArticleReadingPage() {
     });
   }
 
-  const renderInteractiveParagraph = (text: string, pIdx: number) => {
-    const tokens = text.split(/(\s+)/);
+  function renderInteractiveParagraph(text: string, pIdx: number) {
+    const tokens = text.split(new RegExp("(\\s+)", "g"));
     return (
       <p key={pIdx} className="mb-4 leading-relaxed font-serif text-base text-zinc-800 dark:text-zinc-200">
         {tokens.map((token, tIdx) => {
-          if (/^\s+$/.test(token)) return token;
-          const clean = token.replace(/[^a-zA-Z-]/g, "");
-          const isHighlighted = selectedWord?.word.toLowerCase() === clean.toLowerCase();
+          if (!token || token.trim().length === 0) return token;
+          const clean = token.replace(new RegExp("[^a-zA-Z-]", "g"), "");
+          const isHighlighted = Boolean(selectedWord && selectedWord.word.toLowerCase() === clean.toLowerCase());
 
           return (
             <span
               key={tIdx}
               onClick={(e) => handleWordClick(clean, e)}
-              className={`cursor-pointer rounded-[2px] transition-colors hover:bg-amber-100 hover:text-amber-950 dark:hover:bg-amber-950/60 dark:hover:text-amber-200 ${
-                isHighlighted ? "bg-amber-200 text-amber-950 dark:bg-amber-900/80 dark:text-amber-100" : ""
-              }`}
+              className={
+                isHighlighted
+                  ? "cursor-pointer rounded-[2px] transition-colors bg-amber-200 text-amber-950 dark:bg-amber-900/80 dark:text-amber-100"
+                  : "cursor-pointer rounded-[2px] transition-colors hover:bg-amber-100 hover:text-amber-950 dark:hover:bg-amber-950/60 dark:hover:text-amber-200"
+              }
             >
               {token}
             </span>
@@ -243,7 +245,7 @@ export default function SourceArticleReadingPage() {
         })}
       </p>
     );
-  };
+  }
 
   return (
     <div className="max-w-3xl mx-auto py-6 space-y-6">
