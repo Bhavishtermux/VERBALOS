@@ -11,6 +11,7 @@ import {
   ArrowRight,
   CheckCircle2,
   XCircle,
+  X,
   RotateCcw,
   Sparkles,
   Zap,
