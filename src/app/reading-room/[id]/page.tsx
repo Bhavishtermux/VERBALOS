@@ -29,7 +29,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getSourceArticleById } from "@/lib/source-discovery";
 import { saveReadingRecord } from "@/lib/source-recommendations";
-import { lookupWord, VocabLookupResult, saveLookedUpWord } from "@/lib/vocabulary";
+import { lookupWord, fetchWordDefinition, VocabLookupResult, saveLookedUpWord } from "@/lib/vocabulary";
 import { RealSourceArticle } from "@/lib/sources/types";
 
 interface SelectedWordState {
@@ -160,18 +160,18 @@ export default function SourceArticleReadingPage() {
     };
   }, []);
 
-  // Handle word click for vocabulary popup
-  const handleWordClick = (word: string, e: React.MouseEvent<HTMLSpanElement>) => {
+  // Handle word click for vocabulary popup with live dictionary lookup
+  const handleWordClick = async (word: string, e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     const cleanWord = word.replace(new RegExp("[^a-zA-Z-]", "g"), "").trim();
     if (!cleanWord || cleanWord.length < 2) return;
 
-    const data = lookupWord(cleanWord);
+    const initialData = lookupWord(cleanWord);
     const rect = e.currentTarget.getBoundingClientRect();
 
     setSelectedWord({
       word: cleanWord,
-      data,
+      data: initialData,
       rect: {
         top: rect.top,
         bottom: rect.bottom,
@@ -181,6 +181,20 @@ export default function SourceArticleReadingPage() {
         height: rect.height,
       },
     });
+
+    // If not from curated cache or marked as fetching, resolve from dictionary API
+    if (!initialData.isCurated || initialData.isFetching) {
+      const realData = await fetchWordDefinition(cleanWord);
+      setSelectedWord((prev) => {
+        if (prev && prev.word.toLowerCase() === cleanWord.toLowerCase()) {
+          return {
+            ...prev,
+            data: realData,
+          };
+        }
+        return prev;
+      });
+    }
   };
 
   const handleStartReading = () => {
@@ -734,32 +748,56 @@ export default function SourceArticleReadingPage() {
           ref={popupRef}
           style={{
             position: "fixed",
-            top: `${Math.min(selectedWord.rect.top + 28, window.innerHeight - 150)}px`,
-            left: `${Math.max(16, Math.min(selectedWord.rect.left, window.innerWidth - 300))}px`,
-            width: "280px",
+            top: `${Math.min(selectedWord.rect.top + 28, window.innerHeight - 180)}px`,
+            left: `${Math.max(16, Math.min(selectedWord.rect.left, window.innerWidth - 320))}px`,
+            width: "300px",
           }}
-          className="z-50 rounded-lg border border-zinc-200/90 bg-white p-3.5 shadow-xl dark:border-zinc-700 dark:bg-zinc-900 text-xs space-y-2 animate-in fade-in-50 zoom-in-95"
+          className="z-50 rounded-xl border border-zinc-200/95 bg-white p-3.5 shadow-2xl dark:border-zinc-700 dark:bg-zinc-900 text-xs space-y-2 animate-in fade-in-50 zoom-in-95"
         >
           <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-1.5">
             <div>
               <strong className="font-serif font-bold text-sm capitalize text-zinc-900 dark:text-zinc-100">
                 {selectedWord.word}
               </strong>
-              <span className="text-[10px] font-mono text-zinc-400 italic pl-1.5">
-                {selectedWord.data.partOfSpeech}
-              </span>
+              {selectedWord.data.pronunciation && (
+                <span className="text-[10px] font-mono text-zinc-400 pl-1.5">
+                  {selectedWord.data.pronunciation}
+                </span>
+              )}
             </div>
-            <button
-              onClick={() => setSelectedWord(null)}
-              className="text-zinc-400 hover:text-zinc-600 font-mono text-xs"
-            >
-              ✕
-            </button>
+            <div className="flex items-center gap-1.5">
+              <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                {selectedWord.data.partOfSpeech || "Term"}
+              </span>
+              <button
+                onClick={() => setSelectedWord(null)}
+                className="text-zinc-400 hover:text-zinc-600 font-mono text-xs pl-1"
+              >
+                ✕
+              </button>
+            </div>
           </div>
 
-          <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed font-sans text-[11px]">
+          <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed font-sans text-xs">
             {selectedWord.data.definition}
           </p>
+
+          {selectedWord.data.example && selectedWord.data.example.trim() !== "" && (
+            <div className="p-2 rounded bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-900/30 text-[11px] text-amber-950 dark:text-amber-200/90 italic font-serif leading-snug">
+              &ldquo;{selectedWord.data.example}&rdquo;
+            </div>
+          )}
+
+          {selectedWord.data.synonyms && selectedWord.data.synonyms.length > 0 && (
+            <div className="flex items-center gap-1 flex-wrap text-[10px] font-mono text-zinc-500 pt-0.5">
+              <span className="text-zinc-400">Synonyms:</span>
+              {selectedWord.data.synonyms.slice(0, 3).map((syn, sIdx) => (
+                <span key={sIdx} className="px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
+                  {syn}
+                </span>
+              ))}
+            </div>
+          )}
 
           <div className="pt-1.5 flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800 text-[10px] font-mono">
             <button

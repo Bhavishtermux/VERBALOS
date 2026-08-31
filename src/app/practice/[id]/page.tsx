@@ -34,6 +34,7 @@ import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
 import {
   lookupWord,
+  fetchWordDefinition,
   cleanWord,
   saveLookedUpWord,
   VocabLookupResult,
@@ -270,8 +271,8 @@ export default function RcReadingPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Handler: Click a word token in the passage
-  const handleWordClick = (rawToken: string, e: React.MouseEvent<HTMLSpanElement>) => {
+  // Handler: Click a word token in the passage with live dictionary lookup
+  const handleWordClick = async (rawToken: string, e: React.MouseEvent<HTMLSpanElement>) => {
     e.stopPropagation();
     const target = e.currentTarget;
     const rect = target.getBoundingClientRect();
@@ -279,7 +280,7 @@ export default function RcReadingPage() {
 
     if (!cleaned) return;
 
-    // Lookup definition
+    // Synchronous initial lookup
     const result = lookupWord(cleaned);
 
     setSelectedWord({
@@ -295,6 +296,20 @@ export default function RcReadingPage() {
         height: rect.height,
       },
     });
+
+    // Asynchronously resolve from live dictionary API if needed
+    if (!result.isCurated || result.isFetching) {
+      const realResult = await fetchWordDefinition(cleaned);
+      setSelectedWord((prev) => {
+        if (prev && prev.cleaned.toLowerCase() === cleaned.toLowerCase()) {
+          return {
+            ...prev,
+            result: realResult,
+          };
+        }
+        return prev;
+      });
+    }
   };
 
   // Handler: Click "View more →" in quick popup
@@ -908,28 +923,46 @@ export default function RcReadingPage() {
               <div className="fixed inset-x-0 bottom-0 z-[100] p-4 sm:hidden animate-ios-slide-up">
                 <div
                   ref={popupRef}
-                  className="rounded-[6px] border-2 border-zinc-300 dark:border-zinc-700 bg-white dark:bg-[#121214] p-4 shadow-2xl text-zinc-950 dark:text-zinc-50 max-w-sm mx-auto ring-1 ring-black/10 dark:ring-white/10"
+                  className="rounded-xl border-2 border-zinc-300 dark:border-zinc-700 bg-white dark:bg-[#121214] p-4 shadow-2xl text-zinc-950 dark:text-zinc-50 max-w-sm mx-auto ring-1 ring-black/10 dark:ring-white/10 space-y-2"
                 >
                   <div className="flex items-start justify-between gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-2">
-                    <div className="flex items-center gap-1.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#C83214]" />
-                      <h4 className="text-sm font-serif font-bold text-zinc-900 dark:text-zinc-50 uppercase tracking-wide">
-                        {selectedWord.cleaned}
-                      </h4>
+                    <div>
+                      <div className="flex items-center gap-1.5">
+                        <span className="h-1.5 w-1.5 rounded-full bg-[#C83214]" />
+                        <h4 className="text-sm font-serif font-bold text-zinc-900 dark:text-zinc-50 uppercase tracking-wide">
+                          {selectedWord.cleaned}
+                        </h4>
+                        {selectedWord.result.pronunciation && (
+                          <span className="text-[10px] font-mono text-zinc-400">
+                            {selectedWord.result.pronunciation}
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    <button
-                      onClick={() => setSelectedWord(null)}
-                      className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
+                    <div className="flex items-center gap-1">
+                      <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                        {selectedWord.result.partOfSpeech || "Term"}
+                      </span>
+                      <button
+                        onClick={() => setSelectedWord(null)}
+                        className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
                   </div>
 
-                  <p className="mt-2.5 text-xs text-zinc-800 dark:text-zinc-200 leading-relaxed font-sans font-medium">
+                  <p className="text-xs text-zinc-800 dark:text-zinc-200 leading-relaxed font-sans">
                     {selectedWord.result.definition}
                   </p>
 
-                  <div className="mt-3.5 pt-2.5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+                  {selectedWord.result.example && (
+                    <div className="p-2 rounded bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-900/30 text-[11px] text-amber-950 dark:text-amber-200/90 italic font-serif leading-snug">
+                      &ldquo;{selectedWord.result.example}&rdquo;
+                    </div>
+                  )}
+
+                  <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
                     <span className="text-[10px] text-zinc-400 font-mono uppercase">Academic Lexicon</span>
                     <button
                       onClick={handleOpenDetailedView}
@@ -944,28 +977,46 @@ export default function RcReadingPage() {
               <div
                 ref={popupRef}
                 style={popupStyle}
-                className="absolute z-[100] rounded-[6px] border-2 border-zinc-300 dark:border-zinc-700 bg-white dark:bg-[#121214] p-3.5 shadow-2xl text-zinc-950 dark:text-zinc-50 select-none animate-ios-slide-up ring-1 ring-black/10 dark:ring-white/10"
+                className="absolute z-[100] rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-[#121214] p-3.5 shadow-2xl text-zinc-950 dark:text-zinc-50 select-none animate-ios-slide-up ring-1 ring-black/10 dark:ring-white/10 space-y-2 max-w-xs"
               >
                 <div className="flex items-start justify-between gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-1.5">
-                  <div className="flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#C83214]" />
-                    <span className="text-xs font-bold font-serif text-zinc-900 dark:text-zinc-50 uppercase tracking-wide">
-                      {selectedWord.cleaned}
-                    </span>
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#C83214]" />
+                      <span className="text-xs font-bold font-serif text-zinc-900 dark:text-zinc-50 uppercase tracking-wide">
+                        {selectedWord.cleaned}
+                      </span>
+                    </div>
+                    {selectedWord.result.pronunciation && (
+                      <span className="text-[10px] font-mono text-zinc-400 block pt-0.5">
+                        {selectedWord.result.pronunciation}
+                      </span>
+                    )}
                   </div>
-                  <button
-                    onClick={() => setSelectedWord(null)}
-                    className="p-1 text-zinc-400 hover:text-zinc-750 dark:hover:text-zinc-200 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800"
-                  >
-                    <X className="h-3.5 w-3.5" />
-                  </button>
+                  <div className="flex items-center gap-1">
+                    <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                      {selectedWord.result.partOfSpeech || "Term"}
+                    </span>
+                    <button
+                      onClick={() => setSelectedWord(null)}
+                      className="p-1 text-zinc-400 hover:text-zinc-750 dark:hover:text-zinc-200 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                    >
+                      <X className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
                 </div>
 
-                <p className="mt-2 text-xs text-zinc-800 dark:text-zinc-200 leading-snug font-sans font-medium">
+                <p className="text-xs text-zinc-800 dark:text-zinc-200 leading-snug font-sans">
                   {selectedWord.result.definition}
                 </p>
 
-                <div className="mt-2.5 pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+                {selectedWord.result.example && (
+                  <div className="p-2 rounded bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-900/30 text-[11px] text-amber-950 dark:text-amber-200/90 italic font-serif leading-snug">
+                    &ldquo;{selectedWord.result.example}&rdquo;
+                  </div>
+                )}
+
+                <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
                   <span className="text-[10px] text-zinc-400 font-mono uppercase">Lexicon</span>
                   <button
                     onClick={handleOpenDetailedView}

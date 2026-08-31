@@ -8,6 +8,9 @@ export interface VocabLookupResult {
   synonyms?: string[];
   antonyms?: string[];
   isAvailable: boolean;
+  isCurated?: boolean;
+  isFetching?: boolean;
+  meaningsList?: { partOfSpeech: string; definition: string; example?: string }[];
 }
 
 export interface VocabEntry {
@@ -1134,13 +1137,48 @@ function getMorphologicalStems(cleaned: string): string[] {
   return list;
 }
 
+const DYNAMIC_DICTIONARY_CACHE_KEY = "verbalos_live_dictionary_cache_v2";
+const RUNTIME_CACHE = new Map<string, VocabLookupResult>();
+
 /**
- * High-performance smart dictionary lookup.
- * Attempts direct match, prefix/suffix stemming, root lemma mapping,
- * and contextual academic synthesis before falling back.
+ * Retrieves all locally cached dictionary entries
+ */
+export function getCachedDictionary(): Record<string, VocabLookupResult> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = window.localStorage.getItem(DYNAMIC_DICTIONARY_CACHE_KEY);
+    if (raw) {
+      return JSON.parse(raw);
+    }
+  } catch (e) {
+    console.warn("Could not load dictionary cache", e);
+  }
+  return {};
+}
+
+/**
+ * Saves a dictionary result into in-memory and persistent cache
+ */
+export function saveCachedWord(result: VocabLookupResult): void {
+  if (!result.word) return;
+  const key = result.word.toLowerCase();
+  RUNTIME_CACHE.set(key, result);
+  if (typeof window === "undefined") return;
+  try {
+    const existing = getCachedDictionary();
+    existing[key] = result;
+    window.localStorage.setItem(DYNAMIC_DICTIONARY_CACHE_KEY, JSON.stringify(existing));
+  } catch (e) {
+    console.warn("Could not save word to cache", e);
+  }
+}
+
+/**
+ * High-performance smart dictionary lookup (Synchronous).
+ * Checks memory cache, local cache, curated database, and stem roots.
  */
 export function lookupWord(rawWord: string): VocabLookupResult {
-  const cleaned = cleanWord(rawWord);
+  const cleaned = cleanWord(rawWord).toLowerCase();
   if (!cleaned || cleaned.length < 2) {
     return {
       word: rawWord,
@@ -1150,115 +1188,230 @@ export function lookupWord(rawWord: string): VocabLookupResult {
     };
   }
 
-  // 1. Direct match in local dictionary
+  // 1. Check runtime memory cache
+  if (RUNTIME_CACHE.has(cleaned)) {
+    return RUNTIME_CACHE.get(cleaned)!;
+  }
+
+  // 2. Check persistent localStorage cache
+  const localCache = getCachedDictionary();
+  if (localCache[cleaned]) {
+    RUNTIME_CACHE.set(cleaned, localCache[cleaned]);
+    return localCache[cleaned];
+  }
+
+  // 3. Direct match in curated CAT local dictionary
   if (VOCABULARY_DATABASE[cleaned]) {
     const entry = VOCABULARY_DATABASE[cleaned];
-    return {
+    const res = {
       ...entry,
       abbreviation: entry.abbreviation || "No commonly used abbreviation",
       isAvailable: true,
+      isCurated: true,
     };
+    RUNTIME_CACHE.set(cleaned, res);
+    return res;
   }
 
-  // 2. Morphological stem matching
+  // 4. Morphological stem matching in curated DB
   const stems = getMorphologicalStems(cleaned);
   for (const stem of stems) {
     if (VOCABULARY_DATABASE[stem]) {
       const entry = VOCABULARY_DATABASE[stem];
-      return {
+      const res = {
         ...entry,
         word: cleaned,
         abbreviation: entry.abbreviation || "No commonly used abbreviation",
         isAvailable: true,
+        isCurated: true,
       };
+      RUNTIME_CACHE.set(cleaned, res);
+      return res;
     }
   }
 
-  // 3. Smart contextual academic generator for known roots/patterns
-  // If word ends in -ly (Adverb)
+  // 5. Contextual academic generator for common patterns
   if (cleaned.endsWith("ly") && cleaned.length > 4) {
     const base = cleaned.slice(0, -2);
     return {
       word: cleaned,
-      definition: `In a manner characterized by being ${base}; used adverbially to qualify actions or degrees.`,
+      definition: `In a manner characterized by being ${base}; used adverbially to modify or describe the degree of an action.`,
       partOfSpeech: "Adverb",
       pronunciation: `/${cleaned}/`,
       abbreviation: "No commonly used abbreviation",
-      example: `The theoretical principles were ${cleaned} articulated in the concluding remarks.`,
-      synonyms: ["characteristically", "distinctly"],
+      example: `The argument was ${cleaned} presented to support the central hypothesis.`,
+      synonyms: ["characteristically", "distinctly", "expressly"],
       isAvailable: true,
+      isCurated: false,
     };
   }
 
-  // If word ends in -tion / -sion (Noun: state/action)
   if ((cleaned.endsWith("tion") || cleaned.endsWith("sion")) && cleaned.length > 5) {
     return {
       word: cleaned,
-      definition: `The formal act, state, or process of ${cleaned.replace(/tion$|sion$/, "ing")}.`,
+      definition: `The formal act, state, condition, or result of ${cleaned.replace(/tion$|sion$/, "ing")}.`,
       partOfSpeech: "Noun",
       pronunciation: `/${cleaned}/`,
       abbreviation: "No commonly used abbreviation",
-      example: `The author explored the conceptual ramifications of ${cleaned} within contemporary discourse.`,
-      synonyms: ["process", "operation", "manifestation"],
+      example: `The author explored the systemic implications of ${cleaned}.`,
+      synonyms: ["process", "action", "state", "manifestation"],
       isAvailable: true,
+      isCurated: false,
     };
   }
 
-  // If word ends in -ism (Noun: philosophy/doctrine/system)
   if (cleaned.endsWith("ism") && cleaned.length > 5) {
     const base = cleaned.slice(0, -3);
     return {
       word: cleaned,
-      definition: `A distinctive doctrine, philosophical theory, system of belief, or socio-economic practice centered around ${base}.`,
+      definition: `A distinctive doctrine, theory, system of thought, or ideological framework centered around ${base}.`,
       partOfSpeech: "Noun",
       pronunciation: `/${cleaned}/`,
       abbreviation: "No commonly used abbreviation",
-      example: `Scholars have extensively analyzed the historical emergence of ${cleaned}.`,
-      synonyms: ["doctrine", "ideology", "philosophy", "movement"],
+      example: `The critique focuses on the structural contradictions of ${cleaned}.`,
+      synonyms: ["doctrine", "ideology", "philosophy", "school of thought"],
       isAvailable: true,
+      isCurated: false,
     };
   }
 
-  // If word ends in -ic or -ical (Adjective)
   if ((cleaned.endsWith("ic") || cleaned.endsWith("ical")) && cleaned.length > 4) {
     const base = cleaned.replace(/ical$|ic$/, "");
     return {
       word: cleaned,
-      definition: `Relating to, characteristic of, or exhibiting the fundamental properties of ${base}.`,
+      definition: `Pertaining to, having the quality of, or derived from the principles of ${base}.`,
       partOfSpeech: "Adjective",
       pronunciation: `/${cleaned}/`,
       abbreviation: "No commonly used abbreviation",
-      example: `The essay employs a ${cleaned} framework to investigate the central dilemma.`,
+      example: `The essay employs a ${cleaned} approach to examine the dilemma.`,
       synonyms: ["characteristic", "distinctive", "theoretical"],
       isAvailable: true,
+      isCurated: false,
     };
   }
 
-  // If word ends in -ive (Adjective: performing an action)
-  if (cleaned.endsWith("ive") && cleaned.length > 4) {
-    return {
-      word: cleaned,
-      definition: `Tending to, serving to, or having the distinct capacity to perform the associated function.`,
-      partOfSpeech: "Adjective",
-      pronunciation: `/${cleaned}/`,
-      abbreviation: "No commonly used abbreviation",
-      example: `The mechanism serves an active ${cleaned} role in regulating structural outcomes.`,
-      synonyms: ["functional", "active", "dynamic"],
-      isAvailable: true,
-    };
-  }
-
-  // 4. Default fallback: synthesize general academic definition so no word shows "Definition not available yet"
+  // 6. General fallback: return looking-up state
   return {
     word: cleaned,
-    definition: `Academic terminology referenced in the context of critical reading and logical comprehension.`,
-    partOfSpeech: "Noun / Term",
+    definition: `Looking up exact dictionary definition for "${cleaned}"...`,
+    partOfSpeech: "Academic Term",
     pronunciation: `/${cleaned}/`,
     abbreviation: "No commonly used abbreviation",
-    example: `The passage incorporates "${cleaned}" to delineate critical nuance in the author's argument.`,
-    synonyms: ["concept", "term", "formulation"],
+    example: `Featured in critical reading and reasoning passages.`,
     isAvailable: true,
+    isCurated: false,
+    isFetching: true,
   };
+}
+
+/**
+ * Asynchronous Full-Text Dictionary Lookup.
+ * Queries FreeDictionaryAPI and caches real multi-meaning definitions.
+ */
+export async function fetchWordDefinition(rawWord: string): Promise<VocabLookupResult> {
+  const cleaned = cleanWord(rawWord).toLowerCase();
+  if (!cleaned || cleaned.length < 2) {
+    return {
+      word: rawWord,
+      definition: "Definition not available.",
+      isAvailable: false,
+    };
+  }
+
+  // 1. Check memory cache
+  if (RUNTIME_CACHE.has(cleaned) && RUNTIME_CACHE.get(cleaned)?.isCurated) {
+    return RUNTIME_CACHE.get(cleaned)!;
+  }
+
+  // 2. Check local storage cache
+  const localCache = getCachedDictionary();
+  if (localCache[cleaned] && localCache[cleaned].isCurated) {
+    RUNTIME_CACHE.set(cleaned, localCache[cleaned]);
+    return localCache[cleaned];
+  }
+
+  // 3. Check curated database
+  if (VOCABULARY_DATABASE[cleaned]) {
+    const entry = VOCABULARY_DATABASE[cleaned];
+    const res: VocabLookupResult = {
+      ...entry,
+      isAvailable: true,
+      isCurated: true,
+    };
+    saveCachedWord(res);
+    return res;
+  }
+
+  // 4. Fetch live from FreeDictionaryAPI
+  try {
+    const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(cleaned)}`);
+    if (response.ok) {
+      const data = await response.json();
+      if (Array.isArray(data) && data.length > 0) {
+        const item = data[0];
+        const phonetic = item.phonetic || item.phonetics?.find((p: any) => p.text)?.text || `/${cleaned}/`;
+
+        let primaryDefinition = "";
+        let primaryPartOfSpeech = "Noun";
+        let primaryExample: string | undefined = undefined;
+        const allSynonyms: string[] = [];
+        const allAntonyms: string[] = [];
+        const meaningsList: { partOfSpeech: string; definition: string; example?: string }[] = [];
+
+        if (Array.isArray(item.meanings)) {
+          item.meanings.forEach((m: any) => {
+            const pos = m.partOfSpeech ? m.partOfSpeech.charAt(0).toUpperCase() + m.partOfSpeech.slice(1) : "Noun";
+            if (Array.isArray(m.definitions)) {
+              m.definitions.forEach((d: any) => {
+                if (d.definition) {
+                  meaningsList.push({
+                    partOfSpeech: pos,
+                    definition: d.definition,
+                    example: d.example,
+                  });
+                  if (!primaryDefinition) {
+                    primaryDefinition = d.definition;
+                    primaryPartOfSpeech = pos;
+                    primaryExample = d.example;
+                  }
+                }
+              });
+            }
+            if (Array.isArray(m.synonyms)) {
+              allSynonyms.push(...m.synonyms);
+            }
+            if (Array.isArray(m.antonyms)) {
+              allAntonyms.push(...m.antonyms);
+            }
+          });
+        }
+
+        if (primaryDefinition) {
+          const res: VocabLookupResult = {
+            word: item.word || cleaned,
+            definition: primaryDefinition,
+            partOfSpeech: primaryPartOfSpeech,
+            pronunciation: phonetic,
+            example: primaryExample || `Used in intellectual discourse to describe ${cleaned}.`,
+            synonyms: Array.from(new Set(allSynonyms)).slice(0, 5),
+            antonyms: Array.from(new Set(allAntonyms)).slice(0, 5),
+            isAvailable: true,
+            isCurated: true,
+            meaningsList: meaningsList.slice(0, 4),
+          };
+          saveCachedWord(res);
+          return res;
+        }
+      }
+    }
+  } catch (e) {
+    console.warn("Live dictionary lookup failed for word: " + cleaned, e);
+  }
+
+  // 5. Fallback to synchronous morphological solver
+  const fallback = lookupWord(cleaned);
+  saveCachedWord({ ...fallback, isCurated: true });
+  return fallback;
 }
 
 const USER_VOCAB_STORAGE_KEY = "rc_lab_user_vocabulary_v1";
