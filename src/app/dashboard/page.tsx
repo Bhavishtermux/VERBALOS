@@ -376,7 +376,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Link href="/elimination-lab">
             <Card className="p-4 bg-white dark:bg-zinc-900 border-zinc-200/80 dark:border-zinc-800 shadow-sm hover:border-amber-500 transition-all cursor-pointer h-full flex flex-col justify-between space-y-3 group">
               <div className="space-y-1.5">
@@ -389,26 +389,6 @@ export default function DashboardPage() {
                 </h4>
                 <p className="text-xs text-zinc-500 dark:text-zinc-400 font-sans leading-relaxed">
                   Practice diagnosing the 10 fatal distractor traps before locking your choice.
-                </p>
-              </div>
-              <span className="text-xs font-mono font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-1">
-                Enter Lab →
-              </span>
-            </Card>
-          </Link>
-
-          <Link href="/selection-lab">
-            <Card className="p-4 bg-white dark:bg-zinc-900 border-zinc-200/80 dark:border-zinc-800 shadow-sm hover:border-blue-500 transition-all cursor-pointer h-full flex flex-col justify-between space-y-3 group">
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <Badge variant="secondary" className="text-[10px] font-mono">Decision Lab</Badge>
-                  <Target className="h-4 w-4 text-blue-600 group-hover:scale-110 transition-transform" />
-                </div>
-                <h4 className="font-serif font-bold text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                  Selection &amp; Triage Lab
-                </h4>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 font-sans leading-relaxed">
-                  Train 2-minute passage ranking and question triage to maximize score per minute.
                 </p>
               </div>
               <span className="text-xs font-mono font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-1">

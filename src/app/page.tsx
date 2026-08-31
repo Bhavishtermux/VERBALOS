@@ -229,10 +229,10 @@ export default function HomePage() {
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
-                  href={user ? "/library" : "/login"}
+                  href={user ? "/reading-room" : "/login"}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[4px] border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:border-zinc-900 dark:hover:border-zinc-100 ios-tap"
                 >
-                  <span>EXPLORE PASSAGE LIBRARY</span>
+                  <span>EXPLORE READING ROOM</span>
                   <ArrowUpRight className="h-3.5 w-3.5" />
                 </Link>
               </div>

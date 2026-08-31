@@ -491,7 +491,7 @@ export default function RcReadingPage() {
 
   const handleSaveProgressAndExit = () => {
     if (!passage) {
-      router.push("/library");
+      router.push("/practice");
       return;
     }
 
@@ -512,7 +512,7 @@ export default function RcReadingPage() {
     });
 
     setShowExitModal(false);
-    router.push("/library");
+    router.push("/practice");
   };
 
   const handleDiscardAndExit = () => {
@@ -520,7 +520,7 @@ export default function RcReadingPage() {
       deleteInProgressDrill(passage.id);
     }
     setShowExitModal(false);
-    router.push("/library");
+    router.push("/practice");
   };
 
   // Reset drill to start fresh
@@ -547,11 +547,11 @@ export default function RcReadingPage() {
           Passage Not Found
         </h2>
         <p className="text-xs text-zinc-500">
-          The requested reading comprehension passage could not be located in the library.
+          The requested reading comprehension passage could not be located.
         </p>
-        <Link href="/library">
+        <Link href="/practice">
           <Button size="sm" variant="outline">
-            Return to RC Library
+            Return to RC Practice
           </Button>
         </Link>
       </div>
@@ -597,10 +597,10 @@ export default function RcReadingPage() {
         {/* Navigation Breadcrumb */}
         <div className="flex items-center justify-between">
           <Link
-            href="/library"
+            href="/practice"
             className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
           >
-            <ArrowLeft className="h-3.5 w-3.5" /> Back to RC Library
+            <ArrowLeft className="h-3.5 w-3.5" /> Back to RC Practice
           </Link>
 
           <button

@@ -33,6 +33,14 @@ const pageTitles: Record<string, { title: string; subtitle: string }> = {
     title: "RC Practice",
     subtitle: "Calibrated reading speed & comprehensive RC question drills",
   },
+  "/elimination-lab": {
+    title: "Elimination Lab",
+    subtitle: "Process-oriented distractor trap identification & option elimination",
+  },
+  "/reading-room": {
+    title: "Active Reading Room",
+    subtitle: "Long-form curated essays across 12 CAT disciplines with active mental mapping",
+  },
   "/verbal-ability": {
     title: "Verbal Ability",
     subtitle: "Para Summary, Para Jumbles & Odd Sentence Out mastery",
@@ -40,10 +48,6 @@ const pageTitles: Record<string, { title: string; subtitle: string }> = {
   "/mocks": {
     title: "VARC Section Mocks",
     subtitle: "Timed 40-minute simulated sectional tests with question palette",
-  },
-  "/library": {
-    title: "RC Library",
-    subtitle: "Original CAT passages across Philosophy, Economics, Science & Culture",
   },
   "/vocabulary": {
     title: "My Vocabulary",
@@ -58,8 +62,8 @@ const pageTitles: Record<string, { title: string; subtitle: string }> = {
     subtitle: "Speed vs accuracy matrix, topic trends & diagnostic diagnostics",
   },
   "/strategy": {
-    title: "Strategy & Selection",
-    subtitle: "RC triage drills, question prediction & 40-minute attempt strategy",
+    title: "CAT VARC Playbook",
+    subtitle: "Active reading blueprints, 10-trap encyclopedia & sectional pacing",
   },
   "/settings": {
     title: "Settings",

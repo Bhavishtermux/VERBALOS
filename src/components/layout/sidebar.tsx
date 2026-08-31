@@ -44,11 +44,6 @@ export const navItems = [
     icon: Crosshair,
   },
   {
-    label: "Selection Lab",
-    href: "/selection-lab",
-    icon: Target,
-  },
-  {
     label: "Reading Room",
     href: "/reading-room",
     icon: BookOpen,
@@ -62,11 +57,6 @@ export const navItems = [
     label: "VARC Mocks",
     href: "/mocks",
     icon: FileCheck,
-  },
-  {
-    label: "RC Library",
-    href: "/library",
-    icon: BookOpen,
   },
   {
     label: "Mistake Journal",

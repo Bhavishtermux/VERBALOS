@@ -202,9 +202,9 @@ export default function RcResultsPage() {
           The requested practice session data could not be retrieved from local storage.
         </p>
         <div className="pt-2">
-          <Link href="/library">
+          <Link href="/practice">
             <Button size="sm" variant="outline">
-              Return to RC Library
+              Return to RC Practice
             </Button>
           </Link>
         </div>
@@ -219,10 +219,10 @@ export default function RcResultsPage() {
       {/* Navigation Breadcrumb */}
       <div className="flex items-center justify-between">
         <Link
-          href="/library"
+          href="/practice"
           className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
         >
-          <ArrowLeft className="h-3.5 w-3.5" /> Back to RC Library
+          <ArrowLeft className="h-3.5 w-3.5" /> Back to RC Practice
         </Link>
 
         <span className="text-[11px] font-mono text-zinc-400">
@@ -341,9 +341,9 @@ export default function RcResultsPage() {
                 <RotateCcw className="h-3.5 w-3.5" /> Retake Drill
               </Button>
             </Link>
-            <Link href="/library">
+            <Link href="/practice">
               <Button size="sm" className="text-xs gap-1.5">
-                <span>Browse Library</span>
+                <span>More Practice</span>
                 <ChevronRight className="h-3.5 w-3.5" />
               </Button>
             </Link>
@@ -594,9 +594,9 @@ export default function RcResultsPage() {
 
       {/* Footer Navigation */}
       <div className="flex items-center justify-between pt-6 border-t border-zinc-200 dark:border-zinc-800">
-        <Link href="/library">
+        <Link href="/practice">
           <Button variant="outline" size="sm" className="text-xs">
-            Return to RC Library
+            Return to RC Practice
           </Button>
         </Link>
 

@@ -133,7 +133,7 @@ export default function ProgressPage() {
           </p>
         </div>
 
-        <Link href="/library" className="self-start md:self-auto">
+        <Link href="/practice" className="self-start md:self-auto">
           <Button size="sm" className="gap-1.5 text-xs h-9">
             <BookOpen className="h-3.5 w-3.5" />
             <span>Practice Next RC</span>

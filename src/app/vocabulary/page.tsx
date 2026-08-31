@@ -188,10 +188,10 @@ export default function VocabularyPage() {
               <span>Daily Review (5-8 Words)</span>
             </Button>
           )}
-          <Link href="/library">
+          <Link href="/practice">
             <Button size="sm" variant="outline" className="gap-1.5 text-xs h-8">
               <BookOpen className="h-3.5 w-3.5" />
-              <span>Read New RC</span>
+              <span>Practice RC</span>
             </Button>
           </Link>
         </div>
@@ -356,9 +356,9 @@ export default function VocabularyPage() {
               Tap any word inside an RC passage during practice to instantly view its meaning and capture it to your vocabulary list across all devices.
             </p>
             <div className="pt-2">
-              <Link href="/library">
+              <Link href="/practice">
                 <Button size="sm" className="text-xs">
-                  Go to RC Library to Start Reading
+                  Go to RC Practice to Start Reading
                 </Button>
               </Link>
             </div>

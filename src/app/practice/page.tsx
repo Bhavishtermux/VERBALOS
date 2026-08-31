@@ -39,14 +39,29 @@ import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
+import {
+  getInProgressDrills,
+  deleteInProgressDrill,
+  InProgressDrill,
+} from "@/lib/in-progress";
 
 export default function PracticePage() {
   const { rcPassages, settings } = useRc();
   const [analytics, setAnalytics] = useState<CalculatedAnalytics | null>(null);
+  const [inProgressDrills, setInProgressDrills] = useState<InProgressDrill[]>([]);
 
   const safePassages = useMemo(() => {
     return Array.isArray(rcPassages) && rcPassages.length > 0 ? rcPassages : initialRcPassages;
   }, [rcPassages]);
+
+  useEffect(() => {
+    const updateDrills = () => {
+      setInProgressDrills(getInProgressDrills());
+    };
+    updateDrills();
+    window.addEventListener("storage", updateDrills);
+    return () => window.removeEventListener("storage", updateDrills);
+  }, []);
 
   useEffect(() => {
     const loadData = () => {
@@ -166,15 +181,76 @@ export default function PracticePage() {
             Training Lab
           </span>
           <span className="text-zinc-300 dark:text-zinc-700">•</span>
-          <span className="text-xs text-zinc-500 font-mono">Personalized & Structured Drills</span>
+          <span className="text-xs text-zinc-500 font-mono">Personalized &amp; Structured Drills</span>
         </div>
         <h1 className="mt-1 text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 font-serif">
-          Practice & Remediation
+          Practice &amp; Remediation
         </h1>
         <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
           Targeted practice drills calibrated directly against your accuracy, pacing, and mistake diagnostic data.
         </p>
       </div>
+
+      {/* In-Progress Drills & Saved Drafts Section */}
+      {inProgressDrills.length > 0 && (
+        <div className="space-y-3 rounded-xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/50 dark:bg-amber-950/30 p-4 shadow-sm animate-in fade-in-50 duration-200">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 font-serif font-bold text-sm text-amber-900 dark:text-amber-300">
+              <Clock className="h-4 w-4 text-amber-600 shrink-0" />
+              <span>In-Progress Drills &amp; Saved Drafts ({inProgressDrills.length})</span>
+            </div>
+            <span className="text-[11px] font-mono text-amber-700 dark:text-amber-400 hidden sm:inline">
+              Resume your saved reading sessions where you left off
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+            {inProgressDrills.map((drill) => (
+              <Card
+                key={drill.passageId}
+                className="bg-white dark:bg-zinc-900 border-amber-200/80 dark:border-amber-900/60 p-4 flex flex-col justify-between gap-3 shadow-sm hover:border-amber-400 transition-all"
+              >
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between gap-2">
+                    <Badge variant="warning" className="text-[10px] font-mono uppercase">
+                      {drill.stage === "reading" ? "Reading Phase" : "Question Solving"}
+                    </Badge>
+                    <span className="text-[10px] font-mono text-zinc-400">
+                      {drill.topic} • {drill.difficulty}
+                    </span>
+                  </div>
+                  <h3 className="font-serif font-bold text-sm text-zinc-900 dark:text-zinc-100 leading-snug line-clamp-1">
+                    {drill.passageTitle}
+                  </h3>
+                  <div className="flex items-center gap-3 text-[11px] font-mono text-zinc-500 dark:text-zinc-400 pt-0.5">
+                    <span>Reading Pace: <strong>{Math.floor(drill.readingSeconds / 60)}m {drill.readingSeconds % 60}s</strong></span>
+                    <span>•</span>
+                    <span>Answered: <strong>{Object.keys(drill.selectedAnswers || {}).length} of {drill.totalQuestions || 5} Qs</strong></span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-2 border-t border-zinc-100 dark:border-zinc-800 text-xs">
+                  <button
+                    onClick={() => {
+                      deleteInProgressDrill(drill.passageId);
+                      setInProgressDrills(getInProgressDrills());
+                    }}
+                    className="text-xs text-rose-600 hover:text-rose-700 font-mono hover:underline"
+                  >
+                    Discard Draft
+                  </button>
+                  <Link href={`/practice/${drill.passageId}?resume=true`}>
+                    <Button size="sm" className="h-8 text-xs gap-1.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-50 dark:bg-zinc-100 dark:text-zinc-900 font-semibold shadow-sm">
+                      <span>Resume RC Drill</span>
+                      <ArrowRight className="h-3 w-3" />
+                    </Button>
+                  </Link>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* 1. PERSONALIZED RECOMMENDATIONS SECTION */}
       <div className="space-y-4">
@@ -244,7 +320,7 @@ export default function PracticePage() {
           </div>
         ) : (
           <div className="rounded-xl border border-dashed border-zinc-200 p-8 text-center text-xs text-zinc-400 font-mono">
-            Complete your first reading comprehension drill in the RC Library to generate personalized diagnostic practice recommendations.
+            Complete your first reading comprehension drill in the Reading Room or Practice modes to generate personalized diagnostic practice recommendations.
           </div>
         )}
       </div>
@@ -258,8 +334,8 @@ export default function PracticePage() {
               Structured Sectional Modes
             </h2>
           </div>
-          <Link href="/library" className="text-xs text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 font-mono">
-            Browse Full Library →
+          <Link href="/reading-room" className="text-xs text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 font-mono">
+            Explore Reading Room →
           </Link>
         </div>
 
