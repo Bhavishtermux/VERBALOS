@@ -21,6 +21,7 @@ import {
   Compass,
 } from "lucide-react";
 import { useRc } from "@/context/rc-context";
+import { initialRcPassages } from "@/data/rc-passages";
 import {
   calculateAnalytics,
   getAllSessions,
@@ -43,12 +44,20 @@ export default function PracticePage() {
   const { rcPassages, settings } = useRc();
   const [analytics, setAnalytics] = useState<CalculatedAnalytics | null>(null);
 
+  const safePassages = useMemo(() => {
+    return Array.isArray(rcPassages) && rcPassages.length > 0 ? rcPassages : initialRcPassages;
+  }, [rcPassages]);
+
   useEffect(() => {
     const loadData = () => {
-      const sessions = getAllSessions();
-      const mistakes = getStoredMistakes();
-      const calculated = calculateAnalytics(sessions, mistakes);
-      setAnalytics(calculated);
+      try {
+        const sessions = getAllSessions();
+        const mistakes = getStoredMistakes();
+        const calculated = calculateAnalytics(sessions, mistakes);
+        setAnalytics(calculated);
+      } catch (e) {
+        console.warn("Could not calculate practice analytics", e);
+      }
     };
 
     loadData();
@@ -57,11 +66,14 @@ export default function PracticePage() {
     return () => window.removeEventListener("storage", loadData);
   }, []);
 
-  // Compute recommendations
+  // Compute recommendations safely
   const recommendationSummary = useMemo(() => {
-    if (!analytics) return null;
-    return generateRecommendations(analytics, rcPassages);
-  }, [analytics, rcPassages]);
+    try {
+      return generateRecommendations(analytics, safePassages);
+    } catch {
+      return null;
+    }
+  }, [analytics, safePassages]);
 
   const [selectedDrill, setSelectedDrill] = useState<{
     id: string;
@@ -78,7 +90,7 @@ export default function PracticePage() {
   const [customGenre, setCustomGenre] = useState<string>("All");
   const [customDifficulty, setCustomDifficulty] = useState<string>("All");
 
-  const practiceModes = [
+  const practiceModes = useMemo(() => [
     {
       id: "cat-full",
       title: "CAT Full Section Simulation",
@@ -93,7 +105,7 @@ export default function PracticePage() {
       badgeVariant: "default" as const,
       icon: Timer,
       strategy: "Allocate ~9-10 mins per passage. Triage and begin with your highest-comfort genre first.",
-      linkPassageId: rcPassages[0]?.id || "rc-01",
+      linkPassageId: safePassages[0]?.id || "rc-01",
     },
     {
       id: "weak-inference",
@@ -109,7 +121,7 @@ export default function PracticePage() {
       badgeVariant: "danger" as const,
       icon: Target,
       strategy: "Scrutinize subtle qualifiers (e.g. 'seldom', 'plausible', 'partially') and resist extrapolating beyond the text.",
-      linkPassageId: rcPassages.find((p) => p.topic === "Philosophy")?.id || "rc-01",
+      linkPassageId: safePassages.find((p) => p?.topic === "Philosophy")?.id || safePassages[0]?.id || "rc-01",
     },
     {
       id: "genre-deep-dive",
@@ -125,7 +137,7 @@ export default function PracticePage() {
       badgeVariant: "warning" as const,
       icon: Layers,
       strategy: "Map the paragraph-level thesis before diving into options. Maintain focus on the author's primary conflict.",
-      linkPassageId: rcPassages.find((p) => p.topic === "Sociology")?.id || "rc-04",
+      linkPassageId: safePassages.find((p) => p?.topic === "Sociology")?.id || safePassages[1]?.id || "rc-04",
     },
     {
       id: "speed-pacer",
@@ -141,9 +153,9 @@ export default function PracticePage() {
       badgeVariant: "academic" as const,
       icon: Zap,
       strategy: "Aim for a 2.5-minute initial read followed by active question verification.",
-      linkPassageId: rcPassages.find((p) => p.topic === "Economics")?.id || "rc-02",
+      linkPassageId: safePassages.find((p) => p?.topic === "Economics")?.id || safePassages[2]?.id || "rc-02",
     },
-  ];
+  ], [safePassages]);
 
   return (
     <div className="space-y-10">
