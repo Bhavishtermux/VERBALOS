@@ -742,64 +742,59 @@ export default function SourceArticleReadingPage() {
         </div>
       )}
 
-      {/* Vocabulary Contextual Popup */}
+      {/* Vocabulary Contextual Popup (Compact & Informative) */}
       {selectedWord && !isMobileScreen && (
         <div
           ref={popupRef}
           style={{
             position: "fixed",
-            top: `${Math.min(selectedWord.rect.top + 28, window.innerHeight - 180)}px`,
-            left: `${Math.max(16, Math.min(selectedWord.rect.left, window.innerWidth - 320))}px`,
-            width: "300px",
+            top: `${Math.min(selectedWord.rect.top + 28, window.innerHeight - 200)}px`,
+            left: `${Math.max(16, Math.min(selectedWord.rect.left, window.innerWidth - 330))}px`,
+            width: "310px",
           }}
-          className="z-50 rounded-xl border border-zinc-200/95 bg-white p-3.5 shadow-2xl dark:border-zinc-700 dark:bg-zinc-900 text-xs space-y-2 animate-in fade-in-50 zoom-in-95"
+          className="z-50 rounded-2xl border-2 border-zinc-300 dark:border-zinc-700 bg-white dark:bg-[#141416] p-3.5 shadow-2xl text-xs space-y-2 animate-in fade-in-50 zoom-in-95 select-none"
         >
-          <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-1.5">
+          {/* Top: WORD + Part of speech */}
+          <div className="flex items-start justify-between border-b border-zinc-100 dark:border-zinc-800/80 pb-1.5">
             <div>
-              <strong className="font-serif font-bold text-sm capitalize text-zinc-900 dark:text-zinc-100">
+              <h4 className="text-xs font-serif font-bold uppercase tracking-wider text-zinc-950 dark:text-zinc-50 leading-tight">
                 {selectedWord.word}
-              </strong>
-              {selectedWord.data.pronunciation && (
-                <span className="text-[10px] font-mono text-zinc-400 pl-1.5">
-                  {selectedWord.data.pronunciation}
-                </span>
-              )}
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
-                {selectedWord.data.partOfSpeech || "Term"}
+              </h4>
+              <span className="text-[10px] font-mono lowercase text-zinc-500 dark:text-zinc-400 block mt-0.5">
+                {selectedWord.data.partOfSpeech?.toLowerCase() || "noun"}
               </span>
-              <button
-                onClick={() => setSelectedWord(null)}
-                className="text-zinc-400 hover:text-zinc-600 font-mono text-xs pl-1"
-              >
-                ✕
-              </button>
             </div>
+            <button
+              onClick={() => setSelectedWord(null)}
+              className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
           </div>
 
-          <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed font-sans text-xs">
-            {selectedWord.data.definition}
-          </p>
+          {/* Meaning: Simple definition */}
+          <div className="text-xs text-zinc-850 dark:text-zinc-200 leading-snug font-sans">
+            <strong className="font-semibold text-zinc-900 dark:text-zinc-100">Meaning: </strong>
+            <span>{selectedWord.data.definition}</span>
+          </div>
 
-          {selectedWord.data.example && selectedWord.data.example.trim() !== "" && (
-            <div className="p-2 rounded bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-900/30 text-[11px] text-amber-950 dark:text-amber-200/90 italic font-serif leading-snug">
+          {/* In context: Contextual nuance */}
+          {selectedWord.data.inContext && (
+            <div className="text-xs text-zinc-700 dark:text-zinc-300 leading-snug font-sans">
+              <strong className="font-semibold text-amber-700 dark:text-amber-400">In context: </strong>
+              <span>{selectedWord.data.inContext}</span>
+            </div>
+          )}
+
+          {/* Example sentence */}
+          {selectedWord.data.example && (
+            <div className="p-2 rounded bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-900/30 text-[11px] text-zinc-800 dark:text-zinc-200 italic font-serif leading-snug">
               &ldquo;{selectedWord.data.example}&rdquo;
             </div>
           )}
 
-          {selectedWord.data.synonyms && selectedWord.data.synonyms.length > 0 && (
-            <div className="flex items-center gap-1 flex-wrap text-[10px] font-mono text-zinc-500 pt-0.5">
-              <span className="text-zinc-400">Synonyms:</span>
-              {selectedWord.data.synonyms.slice(0, 3).map((syn, sIdx) => (
-                <span key={sIdx} className="px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
-                  {syn}
-                </span>
-              ))}
-            </div>
-          )}
-
-          <div className="pt-1.5 flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800 text-[10px] font-mono">
+          {/* Footer with + Save Word */}
+          <div className="pt-1.5 flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800/80 text-[10px] font-mono">
             <button
               onClick={() => {
                 saveLookedUpWord(selectedWord.data, article.id, article.title);
@@ -809,8 +804,9 @@ export default function SourceArticleReadingPage() {
               className="text-amber-600 hover:text-amber-700 dark:text-amber-400 font-semibold flex items-center gap-1"
             >
               <Bookmark className="h-3 w-3" />
-              <span>{savedSuccessWord === selectedWord.word ? "Saved to Vocab!" : "+ Save Word"}</span>
+              <span>{savedSuccessWord === selectedWord.word ? "Saved to Vocab!" : "+ Save to Vocab"}</span>
             </button>
+            <span className="text-zinc-400">VerbalOS Lexicon</span>
           </div>
         </div>
       )}

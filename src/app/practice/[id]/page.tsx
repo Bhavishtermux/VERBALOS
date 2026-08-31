@@ -916,57 +916,60 @@ export default function RcReadingPage() {
           </div>
         </div>
 
-        {/* Quick Contextual Vocabulary Popup (100% Opaque & High-Contrast) */}
+        {/* Quick Contextual Vocabulary Popup (Compact & Informative) */}
         {selectedWord && !isDetailedVocabOpen && (
           <>
             {isMobileScreen ? (
               <div className="fixed inset-x-0 bottom-0 z-[100] p-4 sm:hidden animate-ios-slide-up">
                 <div
                   ref={popupRef}
-                  className="rounded-xl border-2 border-zinc-300 dark:border-zinc-700 bg-white dark:bg-[#121214] p-4 shadow-2xl text-zinc-950 dark:text-zinc-50 max-w-sm mx-auto ring-1 ring-black/10 dark:ring-white/10 space-y-2"
+                  className="rounded-2xl border-2 border-zinc-300 dark:border-zinc-700 bg-white dark:bg-[#141416] p-4 shadow-2xl text-zinc-950 dark:text-zinc-50 max-w-sm mx-auto ring-1 ring-black/10 dark:ring-white/10 space-y-2.5"
                 >
-                  <div className="flex items-start justify-between gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-2">
+                  {/* Top: WORD + Part of speech */}
+                  <div className="flex items-start justify-between border-b border-zinc-100 dark:border-zinc-800/80 pb-2">
                     <div>
-                      <div className="flex items-center gap-1.5">
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#C83214]" />
-                        <h4 className="text-sm font-serif font-bold text-zinc-900 dark:text-zinc-50 uppercase tracking-wide">
-                          {selectedWord.cleaned}
-                        </h4>
-                        {selectedWord.result.pronunciation && (
-                          <span className="text-[10px] font-mono text-zinc-400">
-                            {selectedWord.result.pronunciation}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
-                        {selectedWord.result.partOfSpeech || "Term"}
+                      <h4 className="text-sm font-serif font-bold text-zinc-900 dark:text-zinc-50 uppercase tracking-wider">
+                        {selectedWord.cleaned}
+                      </h4>
+                      <span className="text-[11px] font-mono lowercase text-zinc-500 dark:text-zinc-400 block mt-0.5">
+                        {selectedWord.result.partOfSpeech?.toLowerCase() || "noun"}
                       </span>
-                      <button
-                        onClick={() => setSelectedWord(null)}
-                        className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800"
-                      >
-                        <X className="h-4 w-4" />
-                      </button>
                     </div>
+                    <button
+                      onClick={() => setSelectedWord(null)}
+                      className="p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
                   </div>
 
-                  <p className="text-xs text-zinc-800 dark:text-zinc-200 leading-relaxed font-sans">
-                    {selectedWord.result.definition}
-                  </p>
+                  {/* Meaning: Simple definition */}
+                  <div className="text-xs text-zinc-850 dark:text-zinc-200 leading-relaxed font-sans">
+                    <strong className="font-semibold text-zinc-900 dark:text-zinc-100">Meaning: </strong>
+                    <span>{selectedWord.result.definition}</span>
+                  </div>
 
+                  {/* In context: Contextual nuance */}
+                  {selectedWord.result.inContext && (
+                    <div className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed font-sans">
+                      <strong className="font-semibold text-amber-700 dark:text-amber-400">In context: </strong>
+                      <span>{selectedWord.result.inContext}</span>
+                    </div>
+                  )}
+
+                  {/* Example sentence */}
                   {selectedWord.result.example && (
-                    <div className="p-2 rounded bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-900/30 text-[11px] text-amber-950 dark:text-amber-200/90 italic font-serif leading-snug">
+                    <div className="p-2 rounded-lg bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-900/30 text-xs text-zinc-800 dark:text-zinc-200 italic font-serif leading-snug">
                       &ldquo;{selectedWord.result.example}&rdquo;
                     </div>
                   )}
 
-                  <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
-                    <span className="text-[10px] text-zinc-400 font-mono uppercase">Academic Lexicon</span>
+                  {/* Footer: View more */}
+                  <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between">
+                    <span className="text-[10px] text-zinc-400 font-mono">VerbalOS Lexicon</span>
                     <button
                       onClick={handleOpenDetailedView}
-                      className="text-xs font-semibold text-[#C83214] dark:text-[#E04B2F] hover:underline flex items-center gap-1"
+                      className="text-xs font-semibold text-[#C83214] dark:text-[#E04B2F] hover:underline flex items-center gap-1 font-mono"
                     >
                       View more →
                     </button>
@@ -977,50 +980,53 @@ export default function RcReadingPage() {
               <div
                 ref={popupRef}
                 style={popupStyle}
-                className="absolute z-[100] rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-[#121214] p-3.5 shadow-2xl text-zinc-950 dark:text-zinc-50 select-none animate-ios-slide-up ring-1 ring-black/10 dark:ring-white/10 space-y-2 max-w-xs"
+                className="absolute z-[100] rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-[#141416] p-3.5 shadow-2xl text-zinc-950 dark:text-zinc-50 select-none animate-ios-slide-up ring-1 ring-black/10 dark:ring-white/10 space-y-2 max-w-[320px]"
               >
-                <div className="flex items-start justify-between gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-1.5">
+                {/* Top: WORD + Part of speech */}
+                <div className="flex items-start justify-between border-b border-zinc-100 dark:border-zinc-800/80 pb-1.5">
                   <div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#C83214]" />
-                      <span className="text-xs font-bold font-serif text-zinc-900 dark:text-zinc-50 uppercase tracking-wide">
-                        {selectedWord.cleaned}
-                      </span>
-                    </div>
-                    {selectedWord.result.pronunciation && (
-                      <span className="text-[10px] font-mono text-zinc-400 block pt-0.5">
-                        {selectedWord.result.pronunciation}
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
-                      {selectedWord.result.partOfSpeech || "Term"}
+                    <h4 className="text-xs font-serif font-bold text-zinc-900 dark:text-zinc-50 uppercase tracking-wider">
+                      {selectedWord.cleaned}
+                    </h4>
+                    <span className="text-[10px] font-mono lowercase text-zinc-500 dark:text-zinc-400 block">
+                      {selectedWord.result.partOfSpeech?.toLowerCase() || "noun"}
                     </span>
-                    <button
-                      onClick={() => setSelectedWord(null)}
-                      className="p-1 text-zinc-400 hover:text-zinc-750 dark:hover:text-zinc-200 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800"
-                    >
-                      <X className="h-3.5 w-3.5" />
-                    </button>
                   </div>
+                  <button
+                    onClick={() => setSelectedWord(null)}
+                    className="p-1 text-zinc-400 hover:text-zinc-750 dark:hover:text-zinc-200 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                  >
+                    <X className="h-3.5 w-3.5" />
+                  </button>
                 </div>
 
-                <p className="text-xs text-zinc-800 dark:text-zinc-200 leading-snug font-sans">
-                  {selectedWord.result.definition}
-                </p>
+                {/* Meaning: Simple definition */}
+                <div className="text-xs text-zinc-850 dark:text-zinc-200 leading-snug font-sans">
+                  <strong className="font-semibold text-zinc-900 dark:text-zinc-100">Meaning: </strong>
+                  <span>{selectedWord.result.definition}</span>
+                </div>
 
+                {/* In context: Contextual nuance */}
+                {selectedWord.result.inContext && (
+                  <div className="text-xs text-zinc-700 dark:text-zinc-300 leading-snug font-sans">
+                    <strong className="font-semibold text-amber-700 dark:text-amber-400">In context: </strong>
+                    <span>{selectedWord.result.inContext}</span>
+                  </div>
+                )}
+
+                {/* Example sentence */}
                 {selectedWord.result.example && (
-                  <div className="p-2 rounded bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-900/30 text-[11px] text-amber-950 dark:text-amber-200/90 italic font-serif leading-snug">
+                  <div className="p-2 rounded bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-900/30 text-[11px] text-zinc-800 dark:text-zinc-200 italic font-serif leading-snug">
                     &ldquo;{selectedWord.result.example}&rdquo;
                   </div>
                 )}
 
-                <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
-                  <span className="text-[10px] text-zinc-400 font-mono uppercase">Lexicon</span>
+                {/* Footer: View more */}
+                <div className="pt-1.5 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between">
+                  <span className="text-[10px] text-zinc-400 font-mono">Lexicon</span>
                   <button
                     onClick={handleOpenDetailedView}
-                    className="text-xs font-semibold text-[#C83214] dark:text-[#E04B2F] hover:underline flex items-center gap-0.5"
+                    className="text-xs font-semibold text-[#C83214] dark:text-[#E04B2F] hover:underline flex items-center gap-0.5 font-mono"
                   >
                     View more →
                   </button>
