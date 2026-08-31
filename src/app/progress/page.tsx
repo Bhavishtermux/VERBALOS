@@ -37,9 +37,11 @@ import { Progress } from "@/components/ui/progress";
 
 export default function ProgressPage() {
   const { user } = useAuth();
+  const [mounted, setMounted] = useState(false);
   const [analytics, setAnalytics] = useState<CalculatedAnalytics | null>(null);
 
   useEffect(() => {
+    setMounted(true);
     let isMounted = true;
 
     // 1. Immediately calculate and display local analytics (0ms latency)
@@ -83,7 +85,7 @@ export default function ProgressPage() {
     };
   }, [user]);
 
-  if (!analytics) {
+  if (!mounted || !analytics) {
     return (
       <div className="max-w-2xl mx-auto py-20 text-center space-y-3">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-900 border-t-transparent mx-auto dark:border-zinc-100" />

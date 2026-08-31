@@ -52,6 +52,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     );
   }
 
+  // Unauthenticated guard on protected routes: render redirect screen rather than rendering children
+  if (!user && !isPublicPage) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#fafafa] dark:bg-zinc-950">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-900 border-t-transparent dark:border-zinc-100 mb-3" />
+        <p className="text-xs text-zinc-400 font-mono">Redirecting to sign in...</p>
+      </div>
+    );
+  }
+
   return (
     <div className={`min-h-screen bg-[#fafafa] dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col md:flex-row ${fontClass}`}>
       {/* Desktop Fixed Sidebar */}

@@ -36,7 +36,8 @@ import {
 
 export default function EliminationLabPage() {
   const { rcPassages } = useRc();
-  const [selectedPassageId, setSelectedPassageId] = useState<string>(rcPassages[0]?.id || "rc-01");
+  const [mounted, setMounted] = useState(false);
+  const [selectedPassageId, setSelectedPassageId] = useState<string>("rc-01");
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState<number>(0);
 
   // Elimination interaction state
@@ -44,12 +45,17 @@ export default function EliminationLabPage() {
   const [pendingEliminationOption, setPendingEliminationOption] = useState<number | null>(null);
   const [selectedFinalAnswer, setSelectedFinalAnswer] = useState<number | null>(null);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-  const [startTime, setStartTime] = useState<number>(Date.now());
+  const [startTime, setStartTime] = useState<number>(0);
 
   // Analytics state
   const [analytics, setAnalytics] = useState(calculateEliminationAnalytics([]));
 
   useEffect(() => {
+    setMounted(true);
+    setStartTime(Date.now());
+    if (rcPassages && rcPassages.length > 0) {
+      setSelectedPassageId(rcPassages[0].id);
+    }
     const loadAnalytics = () => {
       const attempts = getEliminationAttempts();
       setAnalytics(calculateEliminationAnalytics(attempts));
@@ -57,7 +63,7 @@ export default function EliminationLabPage() {
     loadAnalytics();
     window.addEventListener("storage", loadAnalytics);
     return () => window.removeEventListener("storage", loadAnalytics);
-  }, []);
+  }, [rcPassages]);
 
   const passage = useMemo(() => {
     return rcPassages.find((p) => p.id === selectedPassageId) || rcPassages[0];
@@ -156,10 +162,11 @@ export default function EliminationLabPage() {
     }
   };
 
-  if (!passage || !currentQuestion) {
+  if (!mounted || !passage || !currentQuestion) {
     return (
-      <div className="max-w-4xl mx-auto py-16 text-center">
-        <p className="text-zinc-500 font-mono">No RC passages loaded in library.</p>
+      <div className="max-w-4xl mx-auto py-20 text-center space-y-3">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-900 border-t-transparent mx-auto dark:border-zinc-100" />
+        <p className="text-xs text-zinc-500 font-mono">Calibrating Elimination Lab...</p>
       </div>
     );
   }

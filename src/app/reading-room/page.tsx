@@ -46,6 +46,7 @@ import { calculateAnalytics, getAllSessions, getStoredMistakes } from "@/lib/ana
 
 export default function ReadingRoomPage() {
   const { stats } = useRc();
+  const [mounted, setMounted] = useState(false);
   const [readingRecords, setReadingRecords] = useState<UserReadingRecord[]>([]);
   const [selectedSource, setSelectedSource] = useState<string>("All");
   const [selectedTopic, setSelectedTopic] = useState<string>("All");
@@ -55,6 +56,7 @@ export default function ReadingRoomPage() {
   const [activeTab, setActiveTab] = useState<"recommended" | "all" | "completed">("recommended");
 
   useEffect(() => {
+    setMounted(true);
     const loadRecords = () => {
       setReadingRecords(getStoredReadingRecords());
     };
@@ -149,6 +151,15 @@ export default function ReadingRoomPage() {
         return "neutral";
     }
   };
+
+  if (!mounted) {
+    return (
+      <div className="max-w-6xl mx-auto py-20 text-center space-y-3">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-900 border-t-transparent mx-auto dark:border-zinc-100" />
+        <p className="text-xs text-zinc-500 font-mono">Loading curated source library...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8 max-w-6xl">
