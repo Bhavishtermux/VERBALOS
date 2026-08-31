@@ -132,46 +132,56 @@ export default function HomePage() {
           </h1>
 
           <p className="mt-4 text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
-            Eliminate cognitive traps in Reading Comprehension, calibrate your reading speed (WPM), and master Verbal Ability drills with authentic editorial passages and worked diagnostics.
+            Curated dense academic reading passages from <strong>Aeon Essays</strong>, <strong>The Atlantic</strong>, <strong>The Hindu</strong>, and <strong>Scientific American</strong> — specifically engineered for CAT VARC with live WPM speed calibration and cognitive mistake diagnostics.
           </p>
 
-          {/* Stats Bar & Difficulty Distribution */}
+          {/* Editorial Sources Badges */}
+          <div className="mt-6 flex flex-wrap items-center gap-2 text-xs font-mono text-zinc-500">
+            <span className="text-zinc-400 text-[11px] uppercase tracking-wider font-semibold">RC Sources:</span>
+            <span className="px-2.5 py-1 rounded-md bg-purple-50 dark:bg-purple-950/40 border border-purple-200/60 dark:border-purple-800/40 text-purple-700 dark:text-purple-300 font-medium">Aeon Essays</span>
+            <span className="px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">The Atlantic</span>
+            <span className="px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">The Hindu / Frontline</span>
+            <span className="px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">Scientific American</span>
+            <span className="px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">Smithsonian</span>
+          </div>
+
+          {/* Key CAT Focus Highlights & Difficulty Distribution */}
           <div className="mt-10 pt-8 border-t border-zinc-200/80 dark:border-zinc-800/80 flex flex-col md:flex-row md:items-end justify-between gap-8">
-            {/* Stat Counters */}
+            {/* Source & CAT Highlights */}
             <div className="flex flex-wrap items-end gap-6 sm:gap-10">
               <div>
-                <span className="text-2xl sm:text-3xl font-serif font-bold text-zinc-900 dark:text-zinc-100 block">
-                  10+
+                <span className="text-xl sm:text-2xl font-serif font-bold text-zinc-900 dark:text-zinc-100 block">
+                  Aeon &amp; Atlantic
                 </span>
                 <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500">
-                  Dense Passages
+                  Dense Philosophy &amp; Sociology
                 </span>
               </div>
-              <div className="h-8 w-px bg-zinc-200 dark:bg-zinc-800" />
+              <div className="h-8 w-px bg-zinc-200 dark:bg-zinc-800 hidden sm:block" />
               <div>
-                <span className="text-2xl sm:text-3xl font-serif font-bold text-zinc-900 dark:text-zinc-100 block">
-                  50+
+                <span className="text-xl sm:text-2xl font-serif font-bold text-zinc-900 dark:text-zinc-100 block">
+                  The Hindu &amp; Mint
                 </span>
                 <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500">
-                  CAT Questions
+                  Economics &amp; Policy RCs
                 </span>
               </div>
-              <div className="h-8 w-px bg-zinc-200 dark:bg-zinc-800" />
+              <div className="h-8 w-px bg-zinc-200 dark:bg-zinc-800 hidden sm:block" />
               <div>
-                <span className="text-2xl sm:text-3xl font-serif font-bold text-zinc-900 dark:text-zinc-100 block">
-                  5
+                <span className="text-xl sm:text-2xl font-serif font-bold text-purple-600 dark:text-purple-400 block">
+                  WPM Calibration
                 </span>
                 <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500">
-                  Chapters
+                  Speed vs Comprehension
                 </span>
               </div>
-              <div className="h-8 w-px bg-zinc-200 dark:bg-zinc-800" />
+              <div className="h-8 w-px bg-zinc-200 dark:bg-zinc-800 hidden sm:block" />
               <div>
-                <span className="text-2xl sm:text-3xl font-serif font-bold text-purple-600 dark:text-purple-400 block">
-                  40m
+                <span className="text-xl sm:text-2xl font-serif font-bold text-zinc-900 dark:text-zinc-100 block">
+                  40m Mocks
                 </span>
                 <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500">
-                  Timed Mocks
+                  +3 / -1 CAT Scoring
                 </span>
               </div>
             </div>
@@ -179,8 +189,8 @@ export default function HomePage() {
             {/* Difficulty Pill Bar */}
             <div className="w-full md:max-w-xs space-y-2">
               <div className="flex h-2 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
-                <span className="bg-emerald-500" style={{ width: "25%" }} />
-                <span className="bg-amber-500" style={{ width: "50%" }} />
+                <span className="bg-emerald-500" style={{ width: "20%" }} />
+                <span className="bg-amber-500" style={{ width: "55%" }} />
                 <span className="bg-rose-500" style={{ width: "25%" }} />
               </div>
               <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500">
@@ -188,10 +198,10 @@ export default function HomePage() {
                   <span className="h-2 w-2 rounded-full bg-emerald-500" /> Easy
                 </span>
                 <span className="inline-flex items-center gap-1.5">
-                  <span className="h-2 w-2 rounded-full bg-amber-500" /> Medium
+                  <span className="h-2 w-2 rounded-full bg-amber-500" /> Moderate
                 </span>
                 <span className="inline-flex items-center gap-1.5">
-                  <span className="h-2 w-2 rounded-full bg-rose-500" /> Hard / CAT+
+                  <span className="h-2 w-2 rounded-full bg-rose-500" /> CAT+ Hard
                 </span>
               </div>
             </div>
