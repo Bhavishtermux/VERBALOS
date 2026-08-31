@@ -25,6 +25,7 @@ import {
   FileCheck,
   SpellCheck,
   ShieldAlert,
+  HelpCircle,
 } from "lucide-react";
 import { useRc } from "@/context/rc-context";
 import { useAuth } from "@/context/auth-context";
@@ -46,7 +47,7 @@ import { Progress } from "@/components/ui/progress";
 
 export default function DashboardPage() {
   const router = useRouter();
-  const { rcPassages, settings } = useRc();
+  const { rcPassages, settings, stats } = useRc();
   const { user, profile } = useAuth();
   const [analytics, setAnalytics] = useState<CalculatedAnalytics | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -97,6 +98,7 @@ export default function DashboardPage() {
     : [];
 
   const displayName = profile?.displayName || user?.email?.split("@")[0] || "Aspirant";
+  const hasData = analytics && analytics.totalSessions > 0;
 
   return (
     <div className="space-y-8 max-w-6xl">
@@ -174,7 +176,7 @@ export default function DashboardPage() {
                 <Layers className="h-3.5 w-3.5 text-purple-600" /> 15 VA Questions
               </div>
               <strong className="text-sm font-serif text-zinc-900 dark:text-zinc-100 block">
-                Para Summary & Jumbles
+                Para Summary &amp; Jumbles
               </strong>
               <span className="text-[10px] text-zinc-400">Target: ~1.5m / question</span>
             </div>
@@ -192,7 +194,7 @@ export default function DashboardPage() {
 
           <div className="flex items-center justify-between pt-2 border-t border-zinc-100 dark:border-zinc-800 text-xs">
             <span className="text-zinc-500 font-sans">
-              Focus of the day: <strong className="text-zinc-800 dark:text-zinc-200">Inference & Option Elimination</strong>
+              Focus of the day: <strong className="text-zinc-800 dark:text-zinc-200">Inference &amp; Option Elimination</strong>
             </span>
             <Button
               onClick={() => router.push("/practice")}
@@ -220,31 +222,38 @@ export default function DashboardPage() {
             <div className="space-y-1">
               <div className="flex justify-between font-mono text-[11px]">
                 <span className="text-zinc-500">Reading Comprehension:</span>
-                <strong className="text-zinc-900 dark:text-zinc-100">1 / 2 RCs</strong>
+                <strong className="text-zinc-900 dark:text-zinc-100">
+                  {stats.todayCompleted || 0} / {settings.dailyGoalPassages || 3} RCs
+                </strong>
               </div>
-              <Progress value={50} className="h-1.5" />
+              <Progress
+                value={((stats.todayCompleted || 0) / Math.max(settings.dailyGoalPassages || 3, 1)) * 100}
+                className="h-1.5"
+              />
             </div>
 
             <div className="space-y-1">
               <div className="flex justify-between font-mono text-[11px]">
                 <span className="text-zinc-500">Verbal Ability Drills:</span>
-                <strong className="text-zinc-900 dark:text-zinc-100">8 / 15 Qs</strong>
+                <strong className="text-zinc-900 dark:text-zinc-100">
+                  {hasData ? "0 / 15 Qs" : "0 / 15 Qs"}
+                </strong>
               </div>
-              <Progress value={53} className="h-1.5" />
+              <Progress value={0} className="h-1.5" />
             </div>
 
             <div className="space-y-1">
               <div className="flex justify-between font-mono text-[11px]">
                 <span className="text-zinc-500">Vocabulary Reviews:</span>
-                <strong className="text-zinc-900 dark:text-zinc-100">6 / 10 Words</strong>
+                <strong className="text-zinc-900 dark:text-zinc-100">0 / 10 Words</strong>
               </div>
-              <Progress value={60} className="h-1.5" />
+              <Progress value={0} className="h-1.5" />
             </div>
           </div>
 
           <div className="pt-1 text-[11px] font-mono text-zinc-400 flex items-center gap-1">
             <Flame className="h-3.5 w-3.5 text-amber-500 fill-amber-500" />
-            <span>Streak: <strong>{analytics?.currentStreak || 5} days active</strong></span>
+            <span>Streak: <strong>{stats.currentStreak || 0} days active</strong></span>
           </div>
         </Card>
       </div>
@@ -254,64 +263,104 @@ export default function DashboardPage() {
         <Card className="bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 p-4 text-center">
           <span className="text-[11px] font-mono text-zinc-400 uppercase block">Overall Accuracy</span>
           <strong className="text-2xl sm:text-3xl font-serif text-emerald-600 dark:text-emerald-400 font-bold block pt-1">
-            {analytics?.overallAccuracy || 78}%
+            {hasData ? `${analytics.overallAccuracy}%` : "0%"}
           </strong>
-          <span className="text-[10px] text-zinc-400 font-mono">Total VARC Questions</span>
+          <span className="text-[10px] text-zinc-400 font-mono">
+            {hasData ? `${analytics.totalQuestionsAnswered} Questions Answered` : "0 Questions Attempted"}
+          </span>
         </Card>
 
         <Card className="bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 p-4 text-center">
           <span className="text-[11px] font-mono text-zinc-400 uppercase block">Average WPM</span>
           <strong className="text-2xl sm:text-3xl font-serif text-zinc-900 dark:text-zinc-100 font-bold block pt-1">
-            {analytics?.averageWpm || 285}
+            {hasData ? `${analytics.averageWpm}` : "—"}
           </strong>
-          <span className="text-[10px] text-zinc-400 font-mono">Calibrated Reading Speed</span>
+          <span className="text-[10px] text-zinc-400 font-mono">
+            {hasData ? "Calibrated Reading Speed" : "Not calibrated yet"}
+          </span>
         </Card>
 
         <Card className="bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 p-4 text-center">
           <span className="text-[11px] font-mono text-zinc-400 uppercase block">Mock Section Score</span>
           <strong className="text-2xl sm:text-3xl font-serif text-zinc-900 dark:text-zinc-100 font-bold block pt-1">
-            42 / 72
+            {hasData && analytics.averageScoreOutOfFive > 0
+              ? `${Math.round(analytics.averageScoreOutOfFive * 14.4)} / 72`
+              : "— / 72"}
           </strong>
-          <span className="text-[10px] text-zinc-400 font-mono">CAT Benchmark Pace</span>
+          <span className="text-[10px] text-zinc-400 font-mono">
+            {hasData ? "CAT Benchmark Pace" : "0 mocks completed"}
+          </span>
         </Card>
 
         <Card className="bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 p-4 text-center">
           <span className="text-[11px] font-mono text-zinc-400 uppercase block">Practice Streak</span>
           <strong className="text-2xl sm:text-3xl font-serif text-amber-600 dark:text-amber-400 font-bold block pt-1">
-            {analytics?.currentStreak || 5} Days
+            {stats.currentStreak || 0} Days
           </strong>
           <span className="text-[10px] text-zinc-400 font-mono">Consecutive Training</span>
         </Card>
       </div>
 
-      {/* 3. WEAK AREA HIGHLIGHT & DIRECT ACTION */}
-      <Card className="bg-rose-50/50 dark:bg-rose-950/20 border-rose-200/80 dark:border-rose-900/40 p-5 space-y-3">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-lg bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300">
-              <ShieldAlert className="h-5 w-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-serif font-bold text-base text-zinc-900 dark:text-zinc-100">
-                  Critical Focus: Inference Questions
-                </span>
-                <Badge className="bg-rose-600 text-white text-[10px] font-mono">61% Accuracy</Badge>
+      {/* 3. WEAK AREA HIGHLIGHT OR ONBOARDING READINESS BANNER */}
+      {hasData && analytics.mistakeTypeBreakdown.length > 0 ? (
+        <Card className="bg-rose-50/50 dark:bg-rose-950/20 border-rose-200/80 dark:border-rose-900/40 p-5 space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 rounded-lg bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300">
+                <ShieldAlert className="h-5 w-5" />
               </div>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400 pt-0.5">
-                Your accuracy dropped on multi-sentence inference options over your last 5 practice sessions.
-              </p>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="font-serif font-bold text-base text-zinc-900 dark:text-zinc-100">
+                    Critical Focus: {analytics.mistakeTypeBreakdown[0].category}
+                  </span>
+                  <Badge className="bg-rose-600 text-white text-[10px] font-mono">
+                    {analytics.mistakeTypeBreakdown[0].percentage}% of Errors
+                  </Badge>
+                </div>
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 pt-0.5">
+                  {analytics.mistakeTypeBreakdown[0].recommendation}
+                </p>
+              </div>
             </div>
-          </div>
 
-          <Button
-            onClick={() => router.push("/practice")}
-            className="text-xs font-semibold px-4 h-9 bg-rose-600 hover:bg-rose-700 text-white shadow-sm shrink-0"
-          >
-            Practice Inference Drills →
-          </Button>
-        </div>
-      </Card>
+            <Button
+              onClick={() => router.push("/practice")}
+              className="text-xs font-semibold px-4 h-9 bg-rose-600 hover:bg-rose-700 text-white shadow-sm shrink-0"
+            >
+              Practice Drills →
+            </Button>
+          </div>
+        </Card>
+      ) : (
+        <Card className="bg-zinc-50/70 dark:bg-zinc-900/50 border-zinc-200/80 dark:border-zinc-800 p-5 space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
+                <Target className="h-5 w-5 text-[#C83214]" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="font-serif font-bold text-base text-zinc-900 dark:text-zinc-100">
+                    Diagnostic Engine Ready // 0 Errors Recorded
+                  </span>
+                  <Badge variant="neutral" className="text-[10px] font-mono">Fresh Profile</Badge>
+                </div>
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 pt-0.5">
+                  Complete your first Reading Comprehension passage or Verbal Ability drill to calculate your accuracy, WPM speed, and personalized cognitive error profile.
+                </p>
+              </div>
+            </div>
+
+            <Button
+              onClick={() => router.push("/practice")}
+              className="text-xs font-semibold px-4 h-9 bg-zinc-900 text-zinc-50 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 shadow-sm shrink-0"
+            >
+              Start First RC Drill →
+            </Button>
+          </div>
+        </Card>
+      )}
 
       {/* 4. RECOMMENDED FOR YOU (RULE-BASED) */}
       <div className="space-y-4">

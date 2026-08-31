@@ -151,6 +151,9 @@ export function RcProvider({ children }: { children: ReactNode }) {
       window.localStorage.removeItem("rc_lab_pending_sync");
       window.localStorage.removeItem("rc_lab_attempts_v2");
       window.localStorage.removeItem("rc_lab_vocabulary_v2");
+      window.localStorage.removeItem("rc_lab_stats_v2");
+      window.localStorage.removeItem("rc_lab_weak_areas_v2");
+      window.localStorage.removeItem("rc_lab_rc_passages_v2");
       if (user?.id) {
         window.localStorage.setItem(`rc_lab_migrated_user_${user.id}`, "true");
       }
@@ -161,8 +164,6 @@ export function RcProvider({ children }: { children: ReactNode }) {
       accuracy: 0,
       averageWpm: 0,
       rcsCompleted: 0,
-      vaCompleted: 0,
-      mocksCompleted: 0,
       currentStreak: 0,
       bestStreak: 0,
       totalTimeMinutes: 0,
@@ -173,7 +174,12 @@ export function RcProvider({ children }: { children: ReactNode }) {
     });
     setRecentAttempts([]);
     setVocabulary([]);
-    setWeakAreas(initialWeakAreas);
+    setWeakAreas([]);
+    setRcPassages(initialRcPassages.map((p) => ({ ...p, completed: false, lastScore: undefined, flaggedForReview: false })));
+
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("storage"));
+    }
   };
 
   const resetToDefaults = () => {

@@ -124,7 +124,7 @@ export function Header({ onOpenMobileNav }: { onOpenMobileNav?: () => void }) {
           className="gap-1 px-2.5 py-1 text-xs font-semibold bg-amber-50 text-amber-900 border-amber-200/80 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800/40"
         >
           <Flame className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
-          <span>{stats.currentStreak || 5}d Streak</span>
+          <span>{stats.currentStreak || 0}d Streak</span>
         </Badge>
 
         {/* Account Menu Dropdown */}
