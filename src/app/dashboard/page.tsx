@@ -26,6 +26,7 @@ import {
   SpellCheck,
   ShieldAlert,
   HelpCircle,
+  Crosshair,
 } from "lucide-react";
 import { useRc } from "@/context/rc-context";
 import { useAuth } from "@/context/auth-context";
@@ -361,6 +362,82 @@ export default function DashboardPage() {
           </div>
         </Card>
       )}
+
+      {/* TRAINING LABS LAUNCHPAD */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="font-serif font-bold text-lg text-zinc-900 dark:text-zinc-50">
+              Interactive Reasoning Labs
+            </h3>
+            <p className="text-xs text-zinc-500 font-sans">
+              Targeted cognitive training environments for process elimination, exam triage, and stamina
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <Link href="/elimination-lab">
+            <Card className="p-4 bg-white dark:bg-zinc-900 border-zinc-200/80 dark:border-zinc-800 shadow-sm hover:border-amber-500 transition-all cursor-pointer h-full flex flex-col justify-between space-y-3 group">
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <Badge variant="warning" className="text-[10px] font-mono">Process Lab</Badge>
+                  <Crosshair className="h-4 w-4 text-amber-600 group-hover:scale-110 transition-transform" />
+                </div>
+                <h4 className="font-serif font-bold text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                  Elimination Lab
+                </h4>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 font-sans leading-relaxed">
+                  Practice diagnosing the 10 fatal distractor traps before locking your choice.
+                </p>
+              </div>
+              <span className="text-xs font-mono font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-1">
+                Enter Lab →
+              </span>
+            </Card>
+          </Link>
+
+          <Link href="/selection-lab">
+            <Card className="p-4 bg-white dark:bg-zinc-900 border-zinc-200/80 dark:border-zinc-800 shadow-sm hover:border-blue-500 transition-all cursor-pointer h-full flex flex-col justify-between space-y-3 group">
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <Badge variant="secondary" className="text-[10px] font-mono">Decision Lab</Badge>
+                  <Target className="h-4 w-4 text-blue-600 group-hover:scale-110 transition-transform" />
+                </div>
+                <h4 className="font-serif font-bold text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  Selection &amp; Triage Lab
+                </h4>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 font-sans leading-relaxed">
+                  Train 2-minute passage ranking and question triage to maximize score per minute.
+                </p>
+              </div>
+              <span className="text-xs font-mono font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-1">
+                Enter Lab →
+              </span>
+            </Card>
+          </Link>
+
+          <Link href="/reading-room">
+            <Card className="p-4 bg-white dark:bg-zinc-900 border-zinc-200/80 dark:border-zinc-800 shadow-sm hover:border-emerald-500 transition-all cursor-pointer h-full flex flex-col justify-between space-y-3 group">
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <Badge variant="success" className="text-[10px] font-mono">Stamina Lab</Badge>
+                  <BookOpen className="h-4 w-4 text-emerald-600 group-hover:scale-110 transition-transform" />
+                </div>
+                <h4 className="font-serif font-bold text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                  Active Reading Room
+                </h4>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 font-sans leading-relaxed">
+                  Long-form essays across 12 disciplines with active thesis and mental mapping.
+                </p>
+              </div>
+              <span className="text-xs font-mono font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-1">
+                Enter Room →
+              </span>
+            </Card>
+          </Link>
+        </div>
+      </div>
 
       {/* 4. RECOMMENDED FOR YOU (RULE-BASED) */}
       <div className="space-y-4">

@@ -2074,4 +2074,897 @@ Unlike historical totalitarian regimes that demanded internal terror and ideolog
       },
     ],
   },
+
+  {
+    id: "rc-26",
+    title: "The Art of Slow Reading: How Digital Culture Erodes Deep Comprehension",
+    author: "Maryanne Wolf",
+    source: "Aeon",
+    topic: "Psychology",
+    difficulty: "CAT Standard",
+    wordCount: 810,
+    estimatedMinutes: 7,
+    genre: "Psychology / Education",
+    completed: false,
+    flaggedForReview: false,
+    content: `The reading brain is not a static structure. It transforms itself each time it encounters a new writing system, a new language, or a new cognitive demand. Over the past two decades, as screen-based reading has supplanted the immersive reading of print, neuroscientists and cognitive psychologists have begun documenting a measurable decline in what is termed "deep reading"—the cluster of sophisticated processes that include inferential reasoning, critical analysis, analogical thinking, and the imaginative projection of one's self into another's experience.
+
+Maryanne Wolf, a cognitive neuroscientist at UCLA, describes deep reading as a "private miracle" enabled by the remarkable plasticity of the human brain. The brain did not evolve to read. Unlike language, which has ancient biological roots, reading is an invention—roughly 5,000 years old—that must be learned anew by each individual. To do so, the brain forges new circuits by repurposing regions originally dedicated to object recognition, language, and motor functions. These circuits, once formed through immersive engagement with print, enable the reader to go beyond the text itself—to pause, to question, to hypothesize, and to rethink.
+
+The concern is that this laboriously constructed circuit is vulnerable. Research by Anne Mangen and others suggests that habitual screen reading—characterized by rapid skimming, non-linear navigation, and perpetual distraction—may recondition the reading brain in ways that make sustained, deep engagement increasingly effortful. In studies of university students, even those who identify as avid readers report diminishing ability to concentrate on long-form texts. They read words but feel that comprehension slips away.
+
+Wolf distinguishes between two reading modes: the "fast" mode optimized for efficiency, pattern recognition, and information triage, and the "slow" mode associated with full semantic processing, empathic imagination, and reflective judgment. The problem is not technology per se, but the cognitive habits it cultivates. Digital platforms monetize attention by maximizing scroll velocity. The result is a reader trained to skim rather than absorb, to react rather than reflect.
+
+This has implications that extend beyond literacy. Slow reading is not merely academic; it is, Wolf argues, a civic and moral capacity. The ability to understand a novel's character from the inside—to feel, through language, what it is to be other than oneself—cultivates empathy, reduces prejudice, and deepens ethical reasoning. If the circuit for deep reading erodes, so too may the capacity for thoughtful democratic participation.
+
+Wolf is not a digital fatalist. She proposes the cultivation of "a bi-literate reading brain": one that can exploit the speed and connectivity of digital reading while retaining the depth and reflective quality of print. This requires deliberate practice—intentional slow reading with sustained focus—in the same way that athletes build capacities through deliberate training. The circuit can be rebuilt, but only if we recognize its value and prioritize its cultivation.`,
+    questions: [
+      {
+        id: "q-26-1",
+        type: "Main Idea",
+        questionText: "The central argument of the passage is that:",
+        options: [
+          "Digital reading platforms are inherently inferior to print media for educational purposes.",
+          "Habitual screen reading may erode the neural circuits that enable deep, reflective comprehension.",
+          "Maryanne Wolf has conclusively proven that the internet causes cognitive decline.",
+          "Reading is a biologically natural activity that should not be altered by technology.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage argues that habitual screen reading can recondition the brain away from deep reading, which is the central concern Wolf raises.",
+      },
+      {
+        id: "q-26-2",
+        type: "Inference",
+        questionText: "The author's use of the phrase 'private miracle' to describe deep reading implies that:",
+        options: [
+          "Deep reading requires supernatural cognitive abilities unavailable to most people.",
+          "The achievement of deep reading is remarkable given that the brain was not naturally designed for it.",
+          "Reading is a personal and secretive activity best done in isolation.",
+          "Modern education systems have failed to teach the miraculous potential of books.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage explains that reading is an invention the brain must learn—not a natural capacity—making the achievement of deep reading a remarkable feat of neural plasticity.",
+      },
+      {
+        id: "q-26-3",
+        type: "Vocabulary",
+        questionText: "In the passage, 'bi-literate reading brain' most nearly means a brain that:",
+        options: [
+          "Can read in two different languages with equal fluency.",
+          "Retains both the speed of digital reading and the depth of print-based reading.",
+          "Has been medically enhanced to process text faster than the average reader.",
+          "Prefers print over digital reading in all academic contexts.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Wolf explicitly describes the bi-literate brain as one capable of both digital efficiency and deep print-based reflection.",
+      },
+      {
+        id: "q-26-4",
+        type: "Tone",
+        questionText: "The author's tone toward the phenomenon of declining deep reading can best be described as:",
+        options: [
+          "Alarmed but measured, seeking constructive solutions rather than pure condemnation.",
+          "Dismissive of technological progress and nostalgic for an idealized print era.",
+          "Clinically detached and purely descriptive without normative judgment.",
+          "Pessimistic, concluding that the cognitive damage from screens is irreversible.",
+        ],
+        correctOptionIndex: 0,
+        explanation: "The passage is concerned and analytical, but Wolf explicitly proposes solutions, making the tone alarmed yet constructive rather than fatalistic.",
+      },
+      {
+        id: "q-26-5",
+        type: "Detail",
+        questionText: "According to the passage, the ability to 'feel, through language, what it is to be other than oneself' is important because it:",
+        options: [
+          "Enables faster information processing across cultural contexts.",
+          "Cultivates empathy, reduces prejudice, and supports democratic reasoning.",
+          "Allows readers to master complex grammatical structures more efficiently.",
+          "Has been proven to increase standardized test performance significantly.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage explicitly links imaginative projection through reading to empathy, reduced prejudice, and thoughtful democratic participation.",
+      },
+    ],
+  },
+  {
+    id: "rc-27",
+    title: "The Paradox of Choice: When More Options Reduce Satisfaction",
+    author: "Barry Schwartz",
+    source: "The Atlantic",
+    topic: "Psychology",
+    difficulty: "CAT",
+    wordCount: 795,
+    estimatedMinutes: 7,
+    genre: "Behavioral Psychology",
+    completed: false,
+    flaggedForReview: false,
+    content: `In the Western liberal tradition, freedom of choice is regarded as one of the highest goods—a prerequisite for autonomy, self-actualization, and democratic participation. Yet psychologist Barry Schwartz argues, counterintuitively, that an abundance of choice does not reliably increase human wellbeing and may, paradoxically, diminish it. His central thesis is that beyond a certain threshold, the proliferation of options generates decision paralysis, regret, and chronic dissatisfaction.
+
+Schwartz distinguishes between two decision-making orientations: "maximizers," who seek the objectively best option from among all available choices, and "satisficers," who settle for an option that meets a predefined standard of adequacy. Maximizers, he found in empirical studies, consistently report lower life satisfaction, higher regret, and greater susceptibility to depression compared to satisficers—even when maximizers objectively attain better outcomes. The reason is that maximizers are haunted by the roads not taken. With more choices available, the opportunity cost of any decision rises, and counterfactual thinking—"what if I had chosen differently?"—intensifies.
+
+The phenomenon of "choice overload" was demonstrated in a classic study by Iyengar and Lepper. When grocery shoppers encountered a display of six jams, approximately 30% made a purchase. When the display featured 24 jams, traffic was higher but purchases fell to 3%. Abundance attracted but paralyzed. The implication—uncomfortable for neoclassical economics—is that preference satisfaction is not simply additive: more options do not mean more utility.
+
+Several mechanisms explain this paradox. First, cognitive load: evaluating more options demands greater mental resources, leading to decision fatigue. Second, elevated expectations: when a choice is made from many alternatives, the chooser expects superior outcomes. If reality disappoints—which it often does—dissatisfaction is amplified. Third, self-blame: in a high-choice environment, responsibility for outcomes is attributed to the individual. Poor outcomes therefore produce not just disappointment but guilt.
+
+Schwartz does not argue for the elimination of choice. He recognizes that some choice is essential for autonomy and that insufficient options produce oppression. His prescription is structural and attitudinal: societies and individuals should impose voluntary "choice constraints"—pre-committed rules that limit the range of options considered. Expert advice, institutional norms, and habituated routines function as such constraints, reducing deliberation costs and protecting against the paralysis of maximizing.`,
+    questions: [
+      {
+        id: "q-27-1",
+        type: "Main Idea",
+        questionText: "The central claim of the passage is that:",
+        options: [
+          "Democratic societies provide too many freedoms, causing widespread depression.",
+          "Beyond a threshold, excessive choice reduces rather than enhances human wellbeing.",
+          "Satisficers are intellectually inferior to maximizers in complex decision-making environments.",
+          "Consumer choice is always inferior to state-imposed standardization of options.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Schwartz's paradox of choice is the central thesis: abundance of choice beyond a threshold reduces satisfaction rather than improving it.",
+      },
+      {
+        id: "q-27-2",
+        type: "Inference",
+        questionText: "From the jam study described in the passage, one can reasonably infer that:",
+        options: [
+          "Consumers prefer fewer products across all categories of consumer goods.",
+          "A large assortment of options can attract attention without facilitating purchase decisions.",
+          "Jam is an inherently low-stakes product, making choice irrelevant to satisfaction.",
+          "Supermarkets maximize revenue by minimizing product variety on display.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The study shows that more options attracted traffic but drastically reduced actual purchases, implying that abundance can attract without enabling decision.",
+      },
+      {
+        id: "q-27-3",
+        type: "Vocabulary",
+        questionText: "The term 'counterfactual thinking' in the passage refers to:",
+        options: [
+          "Objective evaluation of competing options using quantitative metrics.",
+          "Imagining alternative outcomes that could have resulted from different choices.",
+          "The tendency to dismiss factual information when making intuitive decisions.",
+          "A logical fallacy in which correlation is mistaken for causation.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Counterfactual thinking refers to the mental simulation of alternative scenarios—'what if I had chosen differently'—which is intensified when more choices are available.",
+      },
+      {
+        id: "q-27-4",
+        type: "Inference",
+        questionText: "Schwartz's finding that maximizers report lower satisfaction even when attaining better outcomes suggests that:",
+        options: [
+          "Objective outcome quality is a reliable predictor of subjective wellbeing.",
+          "The psychological cost of choosing well can outweigh the material benefits achieved.",
+          "Satisficers are incapable of recognizing when their outcomes are suboptimal.",
+          "High standards invariably produce superior results in competitive environments.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Maximizers achieve better outcomes but feel worse—suggesting the psychological process of choosing (regret, opportunity cost) undermines whatever is gained.",
+      },
+      {
+        id: "q-27-5",
+        type: "Detail",
+        questionText: "According to the passage, 'self-blame' as a consequence of choice overload arises because:",
+        options: [
+          "High-choice environments reward maximizers and punish satisficers publicly.",
+          "When many options exist, responsibility for poor outcomes is attributed to the chooser personally.",
+          "Consumers who choose poorly are socially stigmatized by retailers and peers.",
+          "Cognitive load from too many options leads to permanent reduction in judgment capacity.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage states that in high-choice environments, individuals attribute outcomes to their own choices, so disappointment becomes guilt.",
+      },
+    ],
+  },
+  {
+    id: "rc-28",
+    title: "Plate Tectonics and the Architecture of Life: How Moving Continents Shaped Evolution",
+    author: "Ted Nield",
+    source: "Nature",
+    topic: "Science",
+    difficulty: "CAT",
+    wordCount: 820,
+    estimatedMinutes: 7,
+    genre: "Geology / Evolutionary Biology",
+    completed: false,
+    flaggedForReview: false,
+    content: `When Alfred Wegener proposed continental drift in 1912, the geological establishment dismissed him with contempt. His evidence—the jigsaw-like fit of continents, matching rock strata across ocean basins, and identical fossil assemblages on continents separated by thousands of miles—was compelling but lacked a physical mechanism. Only in the 1960s, when seafloor spreading and subduction were understood, did plate tectonics achieve scientific consensus. Today, it is recognized not merely as geological doctrine but as one of the master processes of life on Earth.
+
+The movement of tectonic plates operates on timescales of tens of millions of years, yet its effects on biodiversity are profound. The opening of the Atlantic Ocean, beginning roughly 180 million years ago, gradually isolated the biota of what would become South America and Africa, driving divergent evolution on each landmass. The closure of the Tethys Sea and the collision of India with Asia produced the Himalayas, creating new ecological niches and blocking the exchange of tropical fauna between East Africa and Southeast Asia. The Isthmus of Panama, formed approximately 3 million years ago, connected North and South America—triggering the "Great American Biotic Interchange" in which fauna flooded across in both directions, causing significant extinctions and adaptive radiations.
+
+Plate tectonics also governs Earth's long-term carbon cycle, which in turn regulates global temperature. Volcanic activity at mid-ocean ridges releases carbon dioxide; the weathering of silicate rocks as continents erode consumes it; and the subduction of carbonate sediments recycles it back into the mantle. Over geological time, shifts in this cycle have driven ice ages and warming episodes that radically restructured ecosystems and imposed evolutionary bottlenecks on lineages across the tree of life.
+
+The deep connection between geology and biology challenges a view of evolution as solely driven by organism-level selection. Gould and Lewontin's critique of "adaptationist programmes"—the tendency to explain every biological trait as a direct product of natural selection—gains geological depth when one recognizes that continental movement can isolate populations not because of any adaptive advantage but because the earth itself shifted. Speciation events triggered by continental rifting are, in one sense, accidental; they owe nothing to the fitness of the organisms involved.
+
+For astrobiology, the implications are equally significant. Plate tectonics may be a precondition for complex life: without it, carbon dioxide accumulates, temperatures rise, oceans acidify, and long-term habitability becomes improbable. The question of whether Earth-like plate tectonics are common or rare on other terrestrial planets shapes estimates of how frequently complex life might arise in the universe.`,
+    questions: [
+      {
+        id: "q-28-1",
+        type: "Main Idea",
+        questionText: "The passage argues that plate tectonics:",
+        options: [
+          "Was a controversial theory invented by Alfred Wegener that remains disputed today.",
+          "Functions as a fundamental driver of biodiversity, climate, and evolutionary history on Earth.",
+          "Is primarily relevant to geology and has limited implications for biology or astrobiology.",
+          "Demonstrates that natural selection is insufficient to explain speciation events.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage presents plate tectonics as a 'master process' shaping life through continental drift, climate regulation, and evolutionary pressure.",
+      },
+      {
+        id: "q-28-2",
+        type: "Inference",
+        questionText: "The Great American Biotic Interchange mentioned in the passage implies that:",
+        options: [
+          "Geographic isolation always increases diversity by preventing competitive exclusion.",
+          "The formation of land bridges can create both extinction and diversification simultaneously.",
+          "North American fauna was universally superior to South American fauna in competitive fitness.",
+          "Tectonic events occur too slowly to have measurable effects on fauna at the species level.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The interchange caused both extinctions and adaptive radiations, illustrating that geographic connections can simultaneously produce losses and gains in biodiversity.",
+      },
+      {
+        id: "q-28-3",
+        type: "Inference",
+        questionText: "The reference to Gould and Lewontin's critique is used to suggest that:",
+        options: [
+          "Natural selection is an invalid mechanism for explaining evolutionary change.",
+          "Some speciation events owe more to geological accident than to adaptive advantage.",
+          "Continental drift cannot explain evolutionary phenomena without invoking natural selection.",
+          "Adaptationist explanations have been vindicated by evidence from plate tectonics.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The author invokes Gould and Lewontin to argue that continental rifting isolates populations accidentally—geography, not fitness, triggers many speciation events.",
+      },
+      {
+        id: "q-28-4",
+        type: "Detail",
+        questionText: "According to the passage, plate tectonics regulates global temperature primarily through its effects on:",
+        options: [
+          "Ocean current circulation and latitudinal positioning of landmasses.",
+          "The long-term carbon cycle involving volcanic outgassing, rock weathering, and subduction.",
+          "The reflectivity of continental surfaces and their absorption of solar radiation.",
+          "Glaciation patterns driven by the redistribution of polar landmasses.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage explicitly describes plate tectonics governing the carbon cycle through volcanic CO₂ release, silicate weathering, and subduction of carbonates.",
+      },
+      {
+        id: "q-28-5",
+        type: "Inference",
+        questionText: "The astrobiological significance of plate tectonics, as described in the passage, suggests that:",
+        options: [
+          "Extraterrestrial civilizations are unlikely to have developed geology-based sciences.",
+          "Planets lacking tectonic activity may struggle to maintain conditions suitable for complex life.",
+          "Earth's plate tectonics are irrelevant to the question of life on other planets.",
+          "The frequency of tectonic activity in the universe increases the probability of alien life.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage argues that without plate tectonics, carbon dioxide builds up, temperatures rise, and long-term habitability becomes improbable.",
+      },
+    ],
+  },
+  {
+    id: "rc-29",
+    title: "The Moral Status of Future Generations: Obligations Across Time",
+    author: "Derek Parfit",
+    source: "Aeon",
+    topic: "Philosophy",
+    difficulty: "CAT+",
+    wordCount: 840,
+    estimatedMinutes: 8,
+    genre: "Ethics / Philosophy",
+    completed: false,
+    flaggedForReview: false,
+    content: `Do we owe moral obligations to people who do not yet exist? Most ethical frameworks—consequentialism, deontology, contractarianism—have historically been anthropocentric in their scope, addressing duties among persons contemporaneously sharing the same social and political space. Yet the most consequential decisions made today—regarding climate change, nuclear waste storage, genetic modification, and artificial intelligence—will have their primary effects on generations not yet born. This temporal asymmetry creates a profound philosophical puzzle that threatens the conceptual foundations of conventional moral reasoning.
+
+The philosopher Derek Parfit, in his landmark work Reasons and Persons, identified what he called the "non-identity problem": many of the policy choices that will harm future people are also choices that will cause those very people to exist. If a different policy had been adopted, different people—millions of distinct individuals—would have been born instead. Since those who would be born under an alternative policy cannot be harmed by a choice that is a condition of their existence, it seems impossible to claim that current policies wrong the specific individuals who will be affected. Yet the intuition that recklessly harming future generations is morally impermissible remains overwhelming.
+
+This paradox challenges both person-affecting views (which hold that harm must be bad for some particular identifiable person) and impersonal views (which measure outcomes by aggregate welfare irrespective of identity). One resolution involves adopting what philosophers call "threshold deontology": the view that certain catastrophic risks are wrong regardless of their effects on identifiable persons. Under this view, leaving a planet degraded beyond a threshold of habitability wrongs future generations even if different individuals would inhabit that planet under either scenario.
+
+A second problem is "temporal discounting": the tendency in economics and policy to assign lower value to goods and harms that occur in the distant future. Standard discount rates, applied over centuries, make virtually any near-term cost unjustifiable against any future benefit, rendering long-term obligations economically invisible. Critics including Nicholas Stern have argued that discounting future welfare cannot be ethically defended—that the mere temporal distance of a harm does not reduce its moral weight.
+
+These considerations converge on a demanding conclusion: we are obligated not merely to refrain from causing obvious harms, but to actively preserve the conditions that will enable future persons to pursue flourishing lives. This positive duty—challenging in political philosophy because future persons cannot participate in the social contracts that generate political obligations—may require institutional innovation: long-term governance structures, constitutional rights for future generations, or independent governmental bodies with protective mandates.`,
+    questions: [
+      {
+        id: "q-29-1",
+        type: "Main Idea",
+        questionText: "The primary aim of the passage is to:",
+        options: [
+          "Critique Derek Parfit's non-identity problem as logically incoherent.",
+          "Explore the philosophical and ethical challenges of extending moral obligations to future generations.",
+          "Argue that consequentialism is the only viable framework for addressing intergenerational justice.",
+          "Demonstrate that temporal discounting is an appropriate tool for evaluating long-term policies.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage maps multiple philosophical challenges—non-identity, temporal discounting, positive duties—in the domain of intergenerational ethics.",
+      },
+      {
+        id: "q-29-2",
+        type: "Vocabulary",
+        questionText: "The 'non-identity problem' as described in the passage refers to the difficulty that:",
+        options: [
+          "Future generations are too diverse to be treated as a unified moral class.",
+          "Harmful policies also determine the very existence of those who would be harmed by them.",
+          "It is impossible to identify which individuals in the present bear responsibility for climate harm.",
+          "Contractarian ethics cannot identify obligations without a named social contract.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Parfit's non-identity problem holds that future people caused to exist by a policy cannot claim the policy harmed them since the alternative would have been non-existence.",
+      },
+      {
+        id: "q-29-3",
+        type: "Inference",
+        questionText: "The author's mention of Stern's critique of temporal discounting implies that:",
+        options: [
+          "Economic tools are entirely inappropriate for analyzing ethical questions about the future.",
+          "The mere passage of time does not provide a principled reason to value future welfare less than present welfare.",
+          "Long-term future goods should receive a premium over near-term goods in policy analysis.",
+          "Discounting is unproblematic when applied only to monetary rather than welfare outcomes.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Stern's critique challenges the ethical basis of discounting future welfare—arguing that temporal distance is not a morally legitimate reason to weight future harms less heavily.",
+      },
+      {
+        id: "q-29-4",
+        type: "Inference",
+        questionText: "The passage implies that conventional social contract theory struggles with intergenerational obligations because:",
+        options: [
+          "Future generations are too numerous to participate in democratic deliberation effectively.",
+          "Future persons cannot participate in the social contracts from which political obligations arise.",
+          "Contractarianism is designed exclusively for resolving disputes between nation-states.",
+          "The social contract was intended to govern property rights rather than environmental obligations.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage explicitly notes that future persons cannot participate in social contracts, making it difficult to derive political obligations toward them from contractarian frameworks.",
+      },
+      {
+        id: "q-29-5",
+        type: "Tone",
+        questionText: "The author's tone throughout the passage can best be characterized as:",
+        options: [
+          "Polemical, attacking conventional ethical theory as fundamentally bankrupt.",
+          "Analytically rigorous, mapping philosophical challenges and proposing structural solutions.",
+          "Optimistic, suggesting that intergenerational ethics has been successfully resolved.",
+          "Dismissive of economic frameworks for addressing moral obligations across time.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage is analytical and constructive—it maps the philosophical terrain, identifies paradoxes, and gestures toward institutional solutions without polemic.",
+      },
+    ],
+  },
+  {
+    id: "rc-30",
+    title: "The Grammar of Empire: Language Policy and Colonial Power in British India",
+    author: "Gauri Viswanathan",
+    source: "The Hindu",
+    topic: "History",
+    difficulty: "CAT",
+    wordCount: 805,
+    estimatedMinutes: 7,
+    genre: "Postcolonial Studies / History",
+    completed: false,
+    flaggedForReview: false,
+    content: `When Thomas Babington Macaulay composed his famous Minute on Education in 1835, arguing that a single shelf of a good European library was worth the entire literature of India and Arabia, he was not merely expressing cultural arrogance. He was articulating a systematic policy—that the English language would serve as the primary medium of colonial administration and that a class of Indians educated in English would act as intermediaries between the British government and the mass of the governed. The production of this "brown Englishman," as critics later called him, was not incidental to colonialism but integral to its administrative machinery.
+
+Gauri Viswanathan, in Masks of Conquest, argues that the introduction of English literary education in colonial India served functions that went beyond language instruction. Literature—particularly canonical British literature—was deployed as a vehicle for transmitting values of liberalism, rational governance, and Protestant Christianity that might have been more awkward to promote directly. The "civilizing mission" was thus aestheticized: the native student absorbed imperial ideology not through decree but through the imaginative experience of reading.
+
+This insight reverses a common assumption about colonial education: that it was simply an instrument of cultural erasure. Viswanathan demonstrates that English literary education in India predated its institutionalization in England itself, where classics and religious education dominated. The colonies served as a laboratory for innovations in liberal education that were subsequently exported back to the metropolis. Empire was not, in this reading, a simple extraction of value from periphery to center; it was also a site of institutional experimentation that shaped the modernizing state in both directions.
+
+The legacy of this policy is complex. English education produced generations of Indian intellectuals—Gandhi, Nehru, Ambedkar, Tagore—who mastered the language and its philosophical inheritance well enough to turn its own liberal premises against the empire. The language of rights, self-determination, and constitutional governance was appropriated by anticolonial nationalism and used to articulate demands for independence that the British could not categorically refuse without exposing the contradiction between their liberal rhetoric and their imperial practice.
+
+Today, English in India occupies a paradoxical position: it remains the language of aspiration, judicial power, and elite mobility—simultaneously a colonial imposition and an instrument of social advancement. The tension between English and vernacular languages continues to structure debates about democratic inclusion, curriculum design, and cultural authenticity, making Macaulay's Minute more than a historical artifact.`,
+    questions: [
+      {
+        id: "q-30-1",
+        type: "Main Idea",
+        questionText: "The passage primarily argues that English education in colonial India:",
+        options: [
+          "Was introduced solely to eliminate Indian languages and cultural traditions.",
+          "Served as a vehicle for transmitting imperial ideology while also generating anticolonial resistance.",
+          "Was an economic policy designed to reduce the cost of colonial administration.",
+          "Failed to produce a class of intermediaries capable of bridging British and Indian cultures.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage shows that English education transmitted colonial ideology but also equipped nationalists with liberal arguments used against the empire.",
+      },
+      {
+        id: "q-30-2",
+        type: "Inference",
+        questionText: "Viswanathan's argument that English education preceded its institutionalization in England suggests that:",
+        options: [
+          "Colonial administrators were more progressive than metropolitan British educators.",
+          "The colonies functioned as laboratories for institutional experiments later adopted by the metropolis.",
+          "The British government had no coherent educational policy outside of colonial contexts.",
+          "English literary education was primarily a response to Indian demand for European culture.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Viswanathan explicitly argues that the colonies served as experimental sites for liberal education that was later exported back to Britain.",
+      },
+      {
+        id: "q-30-3",
+        type: "Inference",
+        questionText: "The phrase 'the language of rights... was appropriated by anticolonial nationalism' implies that:",
+        options: [
+          "Indian nationalists plagiarized British philosophical texts in their independence arguments.",
+          "Colonized peoples turned the philosophical premises of their colonizers against colonial rule.",
+          "The British deliberately taught Indian students nationalist philosophy to prepare them for self-governance.",
+          "Legal and constitutional language was invented by the independence movement rather than the British.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Nationalists used liberal rhetoric—rights, self-determination—taught by the colonial educational system to argue for independence, inverting imperial logic.",
+      },
+      {
+        id: "q-30-4",
+        type: "Tone",
+        questionText: "The author's treatment of Macaulay's Minute on Education is best described as:",
+        options: [
+          "Admiring of Macaulay's foresight in establishing an effective educational infrastructure.",
+          "Analytical, placing the Minute within a broader argument about colonialism and cultural policy.",
+          "Polemically hostile, treating the Minute as purely an expression of racist arrogance.",
+          "Indifferent, citing the Minute only as historical background for the main argument.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The author contextualizes Macaulay's Minute as evidence for a systematic colonial strategy, using it analytically rather than simply condemning or celebrating it.",
+      },
+      {
+        id: "q-30-5",
+        type: "Detail",
+        questionText: "According to the passage, English today in India occupies a paradoxical position because it is simultaneously:",
+        options: [
+          "A colonial imposition and an instrument of social advancement and aspiration.",
+          "A legal language and an obstacle to democratic participation.",
+          "A vernacular language and a language of foreign policy.",
+          "A source of national pride and an instrument of cultural erasure.",
+        ],
+        correctOptionIndex: 0,
+        explanation: "The passage explicitly states that English is simultaneously 'a colonial imposition and an instrument of social advancement'.",
+      },
+    ],
+  },
+  {
+    id: "rc-31",
+    title: "The Attention Economy and the Crisis of Democratic Discourse",
+    author: "Tim Wu",
+    source: "The Atlantic",
+    topic: "Technology",
+    difficulty: "CAT Standard",
+    wordCount: 790,
+    estimatedMinutes: 7,
+    genre: "Media Studies / Politics",
+    completed: false,
+    flaggedForReview: false,
+    content: `Tim Wu coined the phrase "attention economy" to describe a structural transformation in media and commerce: the realization that human attention, rather than material resources, is the primary scarce commodity of the digital age. Where nineteenth-century industrialists competed for iron and coal, twenty-first-century platform corporations compete for the seconds of your day. The implications of this shift extend far beyond consumer behavior, reaching into the structure of democratic deliberation itself.
+
+Attention is not a neutral resource. Its capture is optimized by emotional arousal—surprise, outrage, fear, and moral indignation hold attention more effectively than nuance, qualification, and uncertainty. Algorithms designed to maximize engagement therefore systematically amplify content that triggers strong emotion, regardless of its epistemic quality. The consequence, documented in studies of social media sharing patterns, is that misinformation spreads faster than correction, divisive content outperforms unifying content, and extreme political positions achieve organic reach that moderate positions cannot match.
+
+Classical democratic theory, from Locke and Rousseau to Habermas, presupposes something like a "public sphere": a domain in which citizens deliberate over shared concerns using evidence, argument, and reasoned persuasion. The public sphere assumes that citizens have roughly equal access to information and that the most compelling arguments will prevail. The attention economy shatters these assumptions. Access to public discourse is no longer equal; it is determined by engagement metrics and advertising revenue. The most compelling argument may achieve no audience at all if it is emotionally flat.
+
+The political consequences have been widely documented. The algorithmic amplification of outrage has fragmented the shared factual environment that democratic deliberation requires: citizens inhabiting algorithmically curated information bubbles increasingly encounter incompatible versions of reality. This is not merely a problem of "filter bubbles"—the notion that people seek confirming information—but a structural feature of platforms whose revenue model depends on maximizing session time, regardless of the downstream effects on social cohesion.
+
+Wu's proposed remedies are structural: antitrust enforcement against dominant platforms, algorithmic transparency requirements, and the revival of public media institutions designed around engagement with evidence rather than engagement with emotion. These proposals are contested; critics argue that platform regulation risks censorship and that state-funded media creates its own biases. Yet the structural problem Wu identifies remains: democratic discourse requires conditions—epistemic commons, good-faith argumentation, shared reality—that the attention economy actively undermines.`,
+    questions: [
+      {
+        id: "q-31-1",
+        type: "Main Idea",
+        questionText: "The central claim of the passage is that:",
+        options: [
+          "Social media platforms should be banned to protect democratic institutions.",
+          "The attention economy's structural incentives undermine the epistemic conditions democratic deliberation requires.",
+          "Tim Wu has proposed impractical solutions to problems that do not require regulatory intervention.",
+          "Emotional content online is always misinformation and should be algorithmically suppressed.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage argues that the attention economy's structure—optimizing for emotion, not quality—undermines the public sphere democratic theory requires.",
+      },
+      {
+        id: "q-31-2",
+        type: "Inference",
+        questionText: "The passage implies that classical democratic theory's assumption about the public sphere is flawed because:",
+        options: [
+          "Citizens in modern democracies are insufficiently educated to deliberate effectively.",
+          "The attention economy creates structural inequalities in access to public discourse based on engagement metrics.",
+          "Locke and Habermas wrote before the internet existed and their theories are therefore obsolete.",
+          "Public spheres have always been dominated by emotional rather than rational discourse.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage argues that the attention economy violates the assumption of equal access—access is now determined by algorithms and revenue, not reason.",
+      },
+      {
+        id: "q-31-3",
+        type: "Vocabulary",
+        questionText: "The term 'epistemic commons' as used in the passage most closely means:",
+        options: [
+          "A publicly funded library system accessible to all citizens equally.",
+          "A shared factual environment and information base necessary for reasoned collective deliberation.",
+          "A standardized educational curriculum enforced by governmental authority.",
+          "The natural capacity of human beings to perceive truth through sensory experience.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage uses 'epistemic commons' to refer to the shared factual reality democratic deliberation requires—now fragmented by algorithmic curation.",
+      },
+      {
+        id: "q-31-4",
+        type: "Tone",
+        questionText: "The author's attitude toward Wu's proposed remedies can best be described as:",
+        options: [
+          "Enthusiastically endorsing them as the definitive solution to the problems identified.",
+          "Presenting them as reasonable responses to a genuine structural problem while acknowledging contestation.",
+          "Dismissing them as politically infeasible and therefore not worth serious consideration.",
+          "Advocating for more radical measures than Wu proposes, such as a complete ban on social media.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage presents Wu's proposals and notes that they are contested, but implies they address a real structural problem—indicating balanced rather than dismissive treatment.",
+      },
+      {
+        id: "q-31-5",
+        type: "Inference",
+        questionText: "The distinction between 'filter bubbles' and 'a structural feature of platforms' (paragraph 4) implies that:",
+        options: [
+          "The problem of misinformation is entirely caused by users' individual choices to seek confirming content.",
+          "Platform design actively creates polarization regardless of individual user preferences.",
+          "Filter bubbles are a temporary phenomenon that will disappear as users become more media-literate.",
+          "The algorithmic amplification of outrage is an unintended consequence with no relationship to revenue models.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The author distinguishes user-level filter bubbles from the platform's structural incentive to maximize session time—implying the problem is systemic, not merely individual.",
+      },
+    ],
+  },
+  {
+    id: "rc-32",
+    title: "The Economics of Biodiversity: Making Nature's Value Legible to Markets",
+    author: "Partha Dasgupta",
+    source: "The Hindu",
+    topic: "Economics",
+    difficulty: "CAT",
+    wordCount: 815,
+    estimatedMinutes: 7,
+    genre: "Environmental Economics",
+    completed: false,
+    flaggedForReview: false,
+    content: `In 2021, economist Partha Dasgupta delivered to the UK Treasury a landmark review on "The Economics of Biodiversity"—a 600-page document whose central argument was as simple as it was radical: nature should be treated as an asset, part of the portfolio of capital that generates long-term human welfare. The failure of conventional economics to account for natural capital—ecosystems, biodiversity, the regulatory services of the biosphere—is not a minor oversight but a fundamental flaw that has made the global economy structurally self-destructive.
+
+Standard national accounting frameworks measure economic activity through Gross Domestic Product, which tracks the flow of goods and services but ignores the depletion of the asset stock that generates them. A country can clear-cut its forests, deplete its fisheries, and drain its aquifers—registering these acts as positive economic activity—while systematically destroying the natural capital that underpins future production. The GDP framework renders nature financially invisible, and what cannot be measured cannot be managed.
+
+Dasgupta's proposed remedy is to extend the concept of capital to encompass three forms: produced capital (buildings, machinery, infrastructure), human capital (skills, knowledge, health), and natural capital (living ecosystems, genetic diversity, the carbon cycle, the water cycle). Economic sustainability requires that the total portfolio of capital be maintained or increased over time; extracting natural capital while accumulating produced capital creates the illusion of wealth while depleting its foundations.
+
+The empirical evidence is stark. The Dasgupta Review estimates that between 1992 and 2014, global produced capital per capita doubled and human capital per capita increased by 13%, but natural capital per capita declined by 39%. The global economy grew substantially over this period by conventional measures, while its ecological foundations were eroding. This trajectory is not merely ecologically damaging but economically irrational—a business that sells its factory equipment to fund quarterly dividends is not profitable; it is consuming itself.
+
+Incorporating natural capital into economic frameworks requires resolving the fundamental problem of pricing. Unlike marketed goods, ecosystem services—the pollination of crops, the purification of water, the regulation of floods—have no market price, because they are produced by no firm and sold to no buyer. Dasgupta proposes shadow pricing: assigning values to ecosystem services based on their opportunity cost, the cost of replacing them with engineered substitutes, or the welfare losses associated with their degradation. Critics note that shadow prices are inevitably uncertain and politically contestable; but Dasgupta's counter-argument is that the alternative—assigning ecosystem services a price of zero—is not neutral; it is a systematic distortion that guarantees over-extraction.`,
+    questions: [
+      {
+        id: "q-32-1",
+        type: "Main Idea",
+        questionText: "The central argument of the passage is that:",
+        options: [
+          "GDP is a flawed measure of economic performance that should be replaced with a purely qualitative framework.",
+          "The failure to account for natural capital in economic frameworks makes the global economy structurally self-destructive.",
+          "Biodiversity conservation is incompatible with sustained economic growth in any form.",
+          "Partha Dasgupta advocates for the privatization of natural ecosystems to allow market pricing.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Dasgupta's core argument is that ignoring natural capital creates a structurally self-destructive economy that depletes its own foundations.",
+      },
+      {
+        id: "q-32-2",
+        type: "Analogy",
+        questionText: "The analogy of 'a business that sells its factory equipment to fund quarterly dividends' is used to illustrate that:",
+        options: [
+          "Short-term profitability is always incompatible with long-term economic survival.",
+          "Consuming natural capital while reporting GDP growth is economically irrational self-destruction.",
+          "Manufacturing industries should be prioritized over agricultural and ecological sectors.",
+          "Quarterly financial reporting creates systematic incentives for corporate misconduct.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The analogy argues that economies reporting growth while depleting natural capital are self-consuming—appearing profitable while destroying their productive base.",
+      },
+      {
+        id: "q-32-3",
+        type: "Inference",
+        questionText: "From the empirical data in paragraph 4, one can infer that:",
+        options: [
+          "Between 1992 and 2014, economic growth was sustainable by all major indicators.",
+          "Conventional economic growth metrics masked a significant deterioration of the natural capital base.",
+          "Human capital growth was the primary driver of natural capital depletion during this period.",
+          "Produced capital and natural capital are interchangeable substitutes in the long run.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Despite growth in produced and human capital, natural capital per capita fell 39%—meaning conventional growth measures masked ecological deterioration.",
+      },
+      {
+        id: "q-32-4",
+        type: "Vocabulary",
+        questionText: "The term 'shadow pricing' as used in the passage refers to:",
+        options: [
+          "Secretly inflating the market price of natural resources to fund conservation programs.",
+          "Assigning estimated values to ecosystem services that are not priced in conventional markets.",
+          "The practice of discounting future environmental costs in cost-benefit analyses.",
+          "A method for calculating the historical cost of natural resource extraction.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Shadow pricing assigns values to non-marketed ecosystem services based on replacement costs or welfare losses—making them visible in economic calculations.",
+      },
+      {
+        id: "q-32-5",
+        type: "Detail",
+        questionText: "According to the passage, the fundamental problem with pricing ecosystem services is that:",
+        options: [
+          "Governments lack the political authority to impose environmental taxes without public consent.",
+          "Ecosystem services are produced by no firm and sold to no buyer, so they have no market price.",
+          "Shadow prices consistently overestimate the value of ecosystems relative to their actual contribution.",
+          "The scientific measurement of ecosystem service delivery is too imprecise for economic valuation.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage states that ecosystem services have no market price because no firm produces them and no buyer purchases them in conventional markets.",
+      },
+    ],
+  },
+  {
+    id: "rc-33",
+    title: "The Urban Heat Island Effect and the Architecture of Climate Justice",
+    author: "Eric Klinenberg",
+    source: "Aeon",
+    topic: "Environment",
+    difficulty: "CAT Standard",
+    wordCount: 790,
+    estimatedMinutes: 7,
+    genre: "Urban Studies / Climate",
+    completed: false,
+    flaggedForReview: false,
+    content: `In July 1995, a heat wave struck Chicago that killed 739 people in five days—most of them elderly, Black, and poor. Sociologist Eric Klinenberg's forensic investigation of this disaster, Heat Wave: A Social Autopsy of Disaster in Chicago, revealed that the differential death toll across neighborhoods was not random. It was a structured pattern, shaped by decades of disinvestment, social isolation, and racial segregation that left certain communities uniquely vulnerable to a meteorological event.
+
+The heat wave exposed what climate scientists call the "urban heat island effect": the phenomenon by which densely built cities, with their concrete surfaces, reduced vegetation, and waste heat from vehicles and buildings, generate temperatures significantly higher than surrounding rural areas. On the night of the catastrophe, some Chicago neighborhoods recorded temperatures eight degrees higher than the city's official weather station. The disparities were not merely meteorological. Poor and predominantly Black neighborhoods had less tree cover, less green space, fewer air-conditioned public buildings, and higher concentrations of abandoned properties—each factor amplifying heat exposure.
+
+Klinenberg's analysis shows that mortality was also shaped by social isolation. Residents who died alone were disproportionately elderly men who feared leaving their homes because of neighborhood crime—real or perceived. In neighborhoods with intact social networks, mutual aid, and active street life, mortality rates were dramatically lower even when physical conditions were similar. Social infrastructure—community centers, libraries, parks, barbershops—functioned as life-saving infrastructure during the emergency.
+
+The implication is that climate adaptation is not merely a technical problem of temperature management but a problem of social justice and urban governance. The populations most exposed to extreme heat are, systematically, those whose neighborhoods have been disinvested by capital flight, whose housing stock is inadequate, whose social ties have been frayed by poverty and insecurity, and whose political marginalization limits their access to municipal resources.
+
+This convergence of ecological and social vulnerability has been termed "compounding risk": the interaction of multiple stressors—heat, poverty, isolation, discriminatory housing—producing outcomes more severe than any single stressor would generate. As climate change intensifies heat extremes globally, the imperative to address compounding risk transforms urban planning, public health, and social policy from separate domains into an integrated challenge. The city itself becomes the primary unit of climate adaptation strategy.`,
+    questions: [
+      {
+        id: "q-33-1",
+        type: "Main Idea",
+        questionText: "The primary argument of the passage is that:",
+        options: [
+          "The 1995 Chicago heat wave was a purely meteorological event whose death toll could not have been prevented.",
+          "Climate vulnerability is structured by social inequality, and adaptation requires addressing both ecological and social conditions.",
+          "Urban heat islands are caused exclusively by industrial activity and require technological remediation.",
+          "Social isolation among elderly residents is the single most important determinant of heat mortality.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage argues that the heat wave's death toll was shaped by structural inequality—disinvestment, segregation, isolation—making climate vulnerability a social justice issue.",
+      },
+      {
+        id: "q-33-2",
+        type: "Inference",
+        questionText: "Klinenberg's finding that neighborhoods with 'intact social networks' had lower mortality rates implies that:",
+        options: [
+          "Weatherproofing buildings is less important than encouraging residents to socialize.",
+          "Social infrastructure can function as a life-saving resource during climate emergencies.",
+          "The primary cause of heat mortality is loneliness rather than excessive temperature.",
+          "Communities with stronger social ties are naturally located in cooler parts of cities.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage explicitly states that social infrastructure—libraries, parks, community centers—had measurable life-saving effects during the emergency.",
+      },
+      {
+        id: "q-33-3",
+        type: "Vocabulary",
+        questionText: "The term 'compounding risk' in the passage refers to:",
+        options: [
+          "The cumulative financial losses suffered by city governments during climate disasters.",
+          "The interaction of multiple social and environmental stressors producing outcomes more severe than any single stressor.",
+          "The long-term accumulation of carbon in urban environments due to reduced vegetation.",
+          "A statistical method for calculating the probability of simultaneous climate events.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage defines compounding risk as the interaction of multiple stressors—heat, poverty, isolation, discrimination—producing disproportionately severe outcomes.",
+      },
+      {
+        id: "q-33-4",
+        type: "Inference",
+        questionText: "The passage implies that the differential death toll across Chicago neighborhoods was primarily the result of:",
+        options: [
+          "Variations in individual health choices and personal preparation for extreme weather.",
+          "Decades of racial and economic policies that concentrated vulnerability in specific communities.",
+          "Natural geographical differences in temperature distribution across the urban landscape.",
+          "Insufficient public health messaging about the risks of extreme heat events.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Klinenberg's analysis reveals that the pattern of deaths was 'structured' by disinvestment, segregation, and political marginalization—systemic causes, not random variation.",
+      },
+      {
+        id: "q-33-5",
+        type: "Tone",
+        questionText: "The author's tone toward urban planning and public health as traditionally separate domains is best described as:",
+        options: [
+          "Dismissive, arguing that neither domain has contributed meaningfully to climate adaptation.",
+          "Critically reformist, arguing that climate change requires their integration as a single challenge.",
+          "Nostalgic for earlier urban planning models that successfully prevented climate disasters.",
+          "Neutral and descriptive, presenting the separation of domains without normative evaluation.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage argues that climate change transforms urban planning, public health, and social policy from 'separate domains into an integrated challenge'—a reformist position.",
+      },
+    ],
+  },
+  {
+    id: "rc-34",
+    title: "Rethinking Intelligence: What IQ Misses About Human Cognitive Diversity",
+    author: "Howard Gardner",
+    source: "The Atlantic",
+    topic: "Psychology",
+    difficulty: "CAT Standard",
+    wordCount: 800,
+    estimatedMinutes: 7,
+    genre: "Cognitive Science / Education",
+    completed: false,
+    flaggedForReview: false,
+    content: `When Alfred Binet developed the first intelligence test in 1905, his purpose was practical and narrow: to identify children in Paris schools who needed additional educational support. Binet explicitly cautioned against treating his test as a measure of fixed, innate intelligence. Over the following century, his caution was largely ignored. The test was adapted, standardized, and universalized into the Intelligence Quotient, a single number that came to be treated as a fundamental attribute of the person—as fixed, heritable, and morally significant as height.
+
+Howard Gardner's theory of multiple intelligences, introduced in Frames of Mind in 1983, challenged this reductive model directly. Gardner proposed that intelligence is not a single general factor (the "g" of psychometric tradition) but a family of at least eight distinct capacities: linguistic, logical-mathematical, musical, spatial, bodily-kinesthetic, interpersonal, intrapersonal, and naturalistic. Each represents a different way of processing information that has been culturally valued across human societies. The extraordinary chess player, the master sculptor, the skilled mediator, and the naturalist who reads landscapes are all exhibiting genuine intelligence—merely different varieties.
+
+Gardner's framework has been controversial among psychologists, many of whom argue that it conflates distinct abilities with "intelligences" and lacks the predictive power of traditional psychometric models. The standard IQ test, despite its cultural biases, remains the strongest single predictor of academic and professional outcomes in Western societies. Critics contend that calling musical ability or bodily skill an "intelligence" is category inflation: it stretches the concept beyond its scientific usefulness.
+
+Defenders of multiple intelligences respond that the predictive validity of IQ reflects not only cognitive capacity but the structure of educational and occupational systems that happen to reward the specific abilities IQ tests measure. In societies that prioritize a different ability mix, a different metric would predict success. The IQ test does not reveal objective intelligence; it reveals fit with a particular cultural and institutional environment.
+
+The policy stakes are significant. A narrow view of intelligence concentrates educational investment in those who score well on verbal and mathematical measures, systematically undervaluing children with strengths in music, athletics, spatial reasoning, or social intuition. A broader conception of cognitive value not only distributes opportunity more equitably but may also improve collective outcomes by preserving a more diverse repertoire of human abilities in the face of uncertain future demands.`,
+    questions: [
+      {
+        id: "q-34-1",
+        type: "Main Idea",
+        questionText: "The primary aim of the passage is to:",
+        options: [
+          "Prove that IQ tests are racist instruments that should be abolished.",
+          "Examine the limitations of IQ as a measure of intelligence and explore alternatives.",
+          "Advocate for Gardner's theory of multiple intelligences as the only valid scientific framework.",
+          "Demonstrate that academic success is entirely determined by genetic inheritance.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage examines the limits of IQ testing, presents Gardner's alternative, and explores the debate between the two frameworks.",
+      },
+      {
+        id: "q-34-2",
+        type: "Inference",
+        questionText: "The passage's description of Binet's original purpose implies that:",
+        options: [
+          "Intelligence testing was designed to rank individuals by innate cognitive worth.",
+          "The IQ framework was built on a misuse of a tool originally meant for targeted educational support.",
+          "Modern intelligence tests have successfully preserved Binet's cautious original intent.",
+          "Binet believed that intelligence was entirely determined by educational environment.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Binet's test was for identifying children needing support—not for ranking innate intelligence. Its evolution into a fixed heritable metric contradicted his explicit cautions.",
+      },
+      {
+        id: "q-34-3",
+        type: "Inference",
+        questionText: "Defenders of multiple intelligences, as described in the passage, would most likely agree that:",
+        options: [
+          "IQ tests are culturally neutral and measure cognitive capacity independent of social context.",
+          "IQ's predictive validity reflects institutional structures that reward specific ability types rather than intelligence per se.",
+          "Musical and bodily intelligence are scientifically equivalent to logical-mathematical intelligence in all predictive models.",
+          "Educational systems should abandon all standardized testing in favor of entirely qualitative assessment.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Defenders argue that IQ predicts success because society rewards what IQ measures—not because it captures something universally called 'intelligence'.",
+      },
+      {
+        id: "q-34-4",
+        type: "Tone",
+        questionText: "The author's treatment of the debate between IQ proponents and multiple intelligences advocates is best described as:",
+        options: [
+          "Definitively concluding in favor of Gardner's theory as more scientifically robust.",
+          "Balanced, presenting both the psychometric critique and the multiple intelligences defense without resolving the debate.",
+          "Dismissive of IQ testing while uncritically endorsing Gardner's framework.",
+          "Indifferent to the policy implications of how intelligence is defined and measured.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage presents both sides—IQ's predictive validity and its critics, Gardner's theory and its critics—without conclusively endorsing either position.",
+      },
+      {
+        id: "q-34-5",
+        type: "Inference",
+        questionText: "The passage implies that adopting a broader conception of cognitive value would improve collective outcomes because:",
+        options: [
+          "Multiple intelligences have been proven to be equally effective predictors of professional achievement.",
+          "Preserving a diverse set of human abilities may better prepare society for unpredictable future demands.",
+          "Standardized testing has been shown to reduce motivation and creativity in all student populations.",
+          "Musical and athletic abilities are more socially beneficial than linguistic and mathematical skills.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage argues that preserving diverse cognitive abilities—not just those IQ measures—improves collective resilience in the face of uncertain future demands.",
+      },
+    ],
+  },
+  {
+    id: "rc-35",
+    title: "Dark Matter, Dark Energy, and the Universe We Cannot See",
+    author: "Katie Mack",
+    source: "Nature",
+    topic: "Science",
+    difficulty: "CAT",
+    wordCount: 825,
+    estimatedMinutes: 7,
+    genre: "Cosmology / Astrophysics",
+    completed: false,
+    flaggedForReview: false,
+    content: `The observable universe—every star, planet, gas cloud, and galaxy we can detect through any wavelength of electromagnetic radiation—constitutes approximately 5% of the total mass-energy content of the cosmos. The remaining 95% consists of what physicists, with arresting candor, call "dark matter" (27%) and "dark energy" (68%). These are not descriptive terms for known substances; they are placeholders—names for our ignorance—applied to phenomena whose gravitational and expansionary effects are unmistakable but whose physical nature remains, after nearly a century of investigation, entirely unknown.
+
+Dark matter was first hypothesized in the 1930s by Fritz Zwicky, who noticed that galaxies within clusters were moving too fast to be held together by the gravitational pull of their visible mass alone. Something invisible must be providing additional gravitational scaffolding. The hypothesis was dramatically confirmed in the 1970s by Vera Rubin, whose measurements of galactic rotation curves showed that stars at the outer edges of galaxies orbit at nearly the same speed as those near the center—directly contradicting Newtonian predictions and implying vast halos of unseen mass surrounding every galaxy.
+
+What dark matter is remains unknown. The leading candidates—Weakly Interacting Massive Particles (WIMPs), axions, and sterile neutrinos—interact with ordinary matter only through gravity and possibly the weak nuclear force, making them exceptionally difficult to detect. Decades of increasingly sensitive underground detectors have failed to produce a definitive WIMP signal. Some physicists propose alternative theories of gravity, such as Modified Newtonian Dynamics, which eliminate dark matter by modifying the laws of physics at low accelerations. These alternatives account for some observations but fail to explain others, including the Bullet Cluster—two colliding galaxy clusters in which the X-ray-emitting gas (ordinary matter) has decoupled from the gravitational center, exactly as dark matter theory predicts.
+
+Dark energy is even more mysterious. Discovered in 1998 through observations of distant supernovae, it is the name given to whatever is causing the universe's expansion to accelerate. Einstein's cosmological constant—which he introduced and then abandoned—has been rehabilitated as its leading mathematical description. Dark energy behaves as though it is a property of space itself: a fixed energy density that does not dilute as the universe expands, driving galaxies apart at an accelerating rate. Its ultimate consequence, if it persists, is the "Big Rip"—a scenario in which space expands so rapidly that all structures, eventually down to atoms, are torn apart.
+
+The philosophical implication is significant: the universe is, in the deepest sense, largely opaque to us. Our entire scientific civilization has been built upon observations of 5% of what exists. Dark matter and dark energy represent not merely unsolved puzzles but an indictment of the limits of our observational paradigm—a reminder that the universe does not owe us legibility.`,
+    questions: [
+      {
+        id: "q-35-1",
+        type: "Main Idea",
+        questionText: "The passage primarily discusses:",
+        options: [
+          "The historical development of astrophysics from Newton to Einstein.",
+          "The nature and scientific significance of dark matter and dark energy as major unsolved problems in cosmology.",
+          "The Bullet Cluster as definitive proof that dark matter theory is correct.",
+          "Einstein's cosmological constant and its successful prediction of cosmic expansion.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage surveys dark matter and dark energy—their discovery, hypothesized nature, and the philosophical implications of their opacity.",
+      },
+      {
+        id: "q-35-2",
+        type: "Inference",
+        questionText: "The passage implies that the terms 'dark matter' and 'dark energy' are 'placeholders for our ignorance' because:",
+        options: [
+          "Scientists have deliberately kept these phenomena secret from the public.",
+          "These terms name gravitational and expansionary effects whose physical nature remains entirely unknown.",
+          "The terms were invented by Fritz Zwicky as temporary labels that physicists later forgot to update.",
+          "Dark matter and dark energy cannot be observed even in principle and therefore cannot be studied scientifically.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage explicitly states that 'dark matter' and 'dark energy' are names 'for our ignorance'—phenomena whose effects are known but whose nature is not.",
+      },
+      {
+        id: "q-35-3",
+        type: "Detail",
+        questionText: "The Bullet Cluster is significant in the context of the passage because it:",
+        options: [
+          "Provided the first observational evidence for dark energy and cosmic acceleration.",
+          "Demonstrates that ordinary matter and gravitational mass can decouple in colliding galaxy clusters, supporting dark matter.",
+          "Showed that Modified Newtonian Dynamics can explain all dark matter observations without new particles.",
+          "Contradicted Vera Rubin's galactic rotation curve measurements and forced revision of dark matter models.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The Bullet Cluster shows gas (ordinary matter) decoupled from the gravitational center during a collision—exactly as dark matter predicts, challenging alternative gravity theories.",
+      },
+      {
+        id: "q-35-4",
+        type: "Inference",
+        questionText: "The 'Big Rip' scenario described in the passage implies that dark energy:",
+        options: [
+          "Will eventually decay, allowing the universe to collapse into a Big Crunch.",
+          "Could, if it persists, ultimately destroy all cosmic structures including atomic particles.",
+          "Has already torn apart galaxies in the observable universe, as confirmed by supernovae data.",
+          "Is a mathematical construct of no physical significance beyond its use in cosmological models.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage describes the Big Rip as dark energy accelerating expansion to a point where all structures—eventually atoms—are torn apart.",
+      },
+      {
+        id: "q-35-5",
+        type: "Tone",
+        questionText: "The author's closing statement that 'the universe does not owe us legibility' conveys a tone that is:",
+        options: [
+          "Despairing, suggesting that cosmology has reached the limits of scientific progress.",
+          "Philosophically humbling, acknowledging the limits of human observational paradigms without pessimism.",
+          "Dismissive of the scientific achievements accomplished in understanding the visible universe.",
+          "Ironic, implying that scientists have made the subject of cosmology unnecessarily complicated.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The statement is philosophically reflective—acknowledging that 95% of the cosmos is unknown to us, not as a defeat but as a humbling reminder of the limits of observation.",
+      },
+    ],
+  },
 ];

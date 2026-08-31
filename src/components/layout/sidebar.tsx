@@ -18,6 +18,9 @@ import {
   FileCheck,
   Compass,
   AlertTriangle,
+  Filter,
+  Crosshair,
+  PenTool,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRc } from "@/context/rc-context";
@@ -36,6 +39,21 @@ export const navItems = [
     icon: Timer,
   },
   {
+    label: "Elimination Lab",
+    href: "/elimination-lab",
+    icon: Crosshair,
+  },
+  {
+    label: "Selection Lab",
+    href: "/selection-lab",
+    icon: Target,
+  },
+  {
+    label: "Reading Room",
+    href: "/reading-room",
+    icon: BookOpen,
+  },
+  {
     label: "Verbal Ability",
     href: "/verbal-ability",
     icon: Layers,
@@ -51,11 +69,6 @@ export const navItems = [
     icon: BookOpen,
   },
   {
-    label: "Vocabulary",
-    href: "/vocabulary",
-    icon: SpellCheck,
-  },
-  {
     label: "Mistake Journal",
     href: "/mistakes",
     icon: AlertTriangle,
@@ -66,9 +79,14 @@ export const navItems = [
     icon: TrendingUp,
   },
   {
-    label: "Strategy",
+    label: "Playbook",
     href: "/strategy",
     icon: Compass,
+  },
+  {
+    label: "Vocabulary",
+    href: "/vocabulary",
+    icon: SpellCheck,
   },
   {
     label: "Settings",
