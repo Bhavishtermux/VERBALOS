@@ -18,7 +18,6 @@ import {
   Award,
   BookOpen,
   Eye,
-  ArrowLeft,
 } from "lucide-react";
 import { useAuth } from "@/context/auth-context";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
