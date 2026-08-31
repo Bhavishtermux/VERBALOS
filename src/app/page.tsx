@@ -30,9 +30,26 @@ export default function HomePage() {
   const { user } = useAuth();
   const { settings, updateSettings } = useRc();
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [activeTab, setActiveTab] = useState<string>("manifest");
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    setActiveTab(id);
+    const element = document.getElementById(id);
+    if (element) {
+      const topOffset = element.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({
+        top: topOffset,
+        behavior: "smooth",
+      });
+      element.classList.remove("section-pulse");
+      void element.offsetWidth;
+      element.classList.add("section-pulse");
+    }
   };
 
   const isDark = settings.theme === "dark";
@@ -81,17 +98,49 @@ export default function HomePage() {
           </Link>
 
           {/* Nav Links */}
-          <nav className="hidden md:flex items-center gap-8 text-xs font-mono tracking-tight text-zinc-600 dark:text-zinc-400">
-            <a href="#manifest" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+          <nav className="hidden md:flex items-center gap-2 text-xs font-mono tracking-tight">
+            <a
+              href="#manifest"
+              onClick={(e) => scrollToSection(e, "manifest")}
+              className={`px-3 py-1.5 rounded-[4px] ios-tap ios-spring ${
+                activeTab === "manifest"
+                  ? "text-[#C83214] font-bold bg-zinc-100 dark:bg-zinc-800/80"
+                  : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-900"
+              }`}
+            >
               01. Protocol
             </a>
-            <a href="#disciplines" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+            <a
+              href="#disciplines"
+              onClick={(e) => scrollToSection(e, "disciplines")}
+              className={`px-3 py-1.5 rounded-[4px] ios-tap ios-spring ${
+                activeTab === "disciplines"
+                  ? "text-[#C83214] font-bold bg-zinc-100 dark:bg-zinc-800/80"
+                  : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-900"
+              }`}
+            >
               02. Chapters
             </a>
-            <a href="#taxonomy" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+            <a
+              href="#taxonomy"
+              onClick={(e) => scrollToSection(e, "taxonomy")}
+              className={`px-3 py-1.5 rounded-[4px] ios-tap ios-spring ${
+                activeTab === "taxonomy"
+                  ? "text-[#C83214] font-bold bg-zinc-100 dark:bg-zinc-800/80"
+                  : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-900"
+              }`}
+            >
               03. Trap Taxonomy
             </a>
-            <a href="#faq" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+            <a
+              href="#faq"
+              onClick={(e) => scrollToSection(e, "faq")}
+              className={`px-3 py-1.5 rounded-[4px] ios-tap ios-spring ${
+                activeTab === "faq"
+                  ? "text-[#C83214] font-bold bg-zinc-100 dark:bg-zinc-800/80"
+                  : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-900"
+              }`}
+            >
               04. FAQ
             </a>
           </nav>

@@ -65,7 +65,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {/* Main Content Area */}
       <div className="flex flex-1 flex-col min-w-0 pb-16 md:pb-6">
         <Header />
-        <main className="flex-1 px-4 py-6 md:px-8 md:py-8 max-w-7xl w-full mx-auto">
+        <main key={pathname} className="flex-1 px-4 py-6 md:px-8 md:py-8 max-w-7xl w-full mx-auto animate-ios-slide-up">
           {children}
         </main>
       </div>
