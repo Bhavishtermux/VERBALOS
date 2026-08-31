@@ -80,7 +80,7 @@ export const navItems = [
 export function Sidebar({ className }: { className?: string }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { stats, settings } = useRc();
+  const { stats, settings, requestNavigation } = useRc();
   const { user, profile, signOut } = useAuth();
 
   const handleSignOut = async () => {
