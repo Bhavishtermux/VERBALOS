@@ -29,12 +29,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getSourceArticleById } from "@/lib/source-discovery";
 import { saveReadingRecord } from "@/lib/source-recommendations";
-import { lookupWord, VocabularyDetail } from "@/lib/vocabulary-data";
+import { lookupWord, VocabLookupResult, saveLookedUpWord } from "@/lib/vocabulary";
 import { RealSourceArticle } from "@/lib/sources/types";
 
 interface SelectedWordState {
   word: string;
-  data: VocabularyDetail;
+  data: VocabLookupResult;
   rect: {
     top: number;
     bottom: number;
@@ -89,7 +89,6 @@ function InteractiveParagraph({
 export default function SourceArticleReadingPage() {
   const params = useParams();
   const router = useRouter();
-  const { addVocabularyWord } = useRc();
 
   const articleId = params?.id as string;
   const article: RealSourceArticle | undefined = useMemo(() => {
@@ -637,7 +636,7 @@ export default function SourceArticleReadingPage() {
             <p className="text-xs text-zinc-500 font-sans">
               Score: <strong>{correctCount * 3 - (questions.length - correctCount)}</strong> / {questions.length * 3} (+3 / -1 standard CAT marking)
             </p>
-          </div>
+          </Card>
 
           <div className="space-y-4">
             <h3 className="font-serif font-bold text-base text-zinc-900 dark:text-zinc-100">
@@ -765,7 +764,7 @@ export default function SourceArticleReadingPage() {
           <div className="pt-1.5 flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800 text-[10px] font-mono">
             <button
               onClick={() => {
-                addVocabularyWord(selectedWord.word, selectedWord.data.definition);
+                saveLookedUpWord(selectedWord.data, article.id, article.title);
                 setSavedSuccessWord(selectedWord.word);
                 setTimeout(() => setSavedSuccessWord(null), 2000);
               }}
