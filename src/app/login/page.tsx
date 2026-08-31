@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   BookOpen,
@@ -186,6 +187,17 @@ export default function LoginPage() {
         <div className="flex items-center justify-center gap-2 text-center text-[11px] text-zinc-400 font-mono">
           <ShieldCheck className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
           <span>Personal account data protected by Supabase Row Level Security</span>
+        </div>
+
+        {/* Legal & Policy Links */}
+        <div className="flex items-center justify-center gap-4 text-center text-[11px] text-zinc-400 font-mono pt-1">
+          <Link href="/privacy" className="hover:text-zinc-700 dark:hover:text-zinc-200 underline underline-offset-4">
+            Privacy Policy
+          </Link>
+          <span>•</span>
+          <Link href="/terms" className="hover:text-zinc-700 dark:hover:text-zinc-200 underline underline-offset-4">
+            Terms of Service
+          </Link>
         </div>
       </div>
     </div>

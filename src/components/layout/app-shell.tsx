@@ -15,22 +15,26 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const { settings } = useRc();
   const { user, loading } = useAuth();
 
-  const isAuthPage = pathname === "/login" || pathname?.startsWith("/auth/callback");
+  const isPublicPage =
+    pathname === "/login" ||
+    pathname?.startsWith("/auth/callback") ||
+    pathname === "/privacy" ||
+    pathname === "/terms";
 
   // Route Protection: Redirect unauthenticated users to /login
   useEffect(() => {
-    if (!loading && !user && !isAuthPage) {
+    if (!loading && !user && !isPublicPage) {
       router.push("/login");
     }
-  }, [user, loading, isAuthPage, router]);
+  }, [user, loading, isPublicPage, router]);
 
   const fontClass =
     settings.readingFont === "serif"
       ? "font-sans selection:bg-amber-100 dark:selection:bg-amber-900/30"
       : "font-sans";
 
-  // Auth pages layout (login / callback) without sidebar/header frame
-  if (isAuthPage) {
+  // Public pages layout (login / callback / privacy / terms)
+  if (isPublicPage) {
     return (
       <div className={`min-h-screen bg-[#fafafa] dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 ${fontClass}`}>
         {children}
