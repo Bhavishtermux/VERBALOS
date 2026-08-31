@@ -15,6 +15,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
 
   const isPublicPage =
+    pathname === "/" ||
     pathname === "/login" ||
     pathname?.startsWith("/auth/callback") ||
     pathname === "/privacy" ||
