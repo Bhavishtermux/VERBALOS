@@ -15,22 +15,22 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const { settings } = useRc();
   const { user, loading } = useAuth();
 
-  const isLoginPage = pathname === "/login";
+  const isAuthPage = pathname === "/login" || pathname?.startsWith("/auth/callback");
 
   // Route Protection: Redirect unauthenticated users to /login
   useEffect(() => {
-    if (!loading && !user && !isLoginPage) {
+    if (!loading && !user && !isAuthPage) {
       router.push("/login");
     }
-  }, [user, loading, isLoginPage, router]);
+  }, [user, loading, isAuthPage, router]);
 
   const fontClass =
     settings.readingFont === "serif"
       ? "font-sans selection:bg-amber-100 dark:selection:bg-amber-900/30"
       : "font-sans";
 
-  // Login page layout without sidebar/header frame
-  if (isLoginPage) {
+  // Auth pages layout (login / callback) without sidebar/header frame
+  if (isAuthPage) {
     return (
       <div className={`min-h-screen bg-[#fafafa] dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 ${fontClass}`}>
         {children}
