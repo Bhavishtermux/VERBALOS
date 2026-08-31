@@ -45,6 +45,43 @@ interface SelectedWordState {
   };
 }
 
+function InteractiveParagraph({
+  text,
+  pIdx,
+  selectedWord,
+  onWordClick,
+}: {
+  text: string;
+  pIdx: number;
+  selectedWord: SelectedWordState | null;
+  onWordClick: (word: string, e: React.MouseEvent<HTMLSpanElement>) => void;
+}) {
+  const tokens = text.split(new RegExp("(\\s+)", "g"));
+  return (
+    <p key={pIdx} className="mb-4 leading-relaxed font-serif text-base text-zinc-800 dark:text-zinc-200">
+      {tokens.map((token, tIdx) => {
+        if (!token || token.trim().length === 0) return token;
+        const clean = token.replace(new RegExp("[^a-zA-Z-]", "g"), "");
+        const isHighlighted = Boolean(selectedWord && selectedWord.word.toLowerCase() === clean.toLowerCase());
+
+        return (
+          <span
+            key={tIdx}
+            onClick={(e) => onWordClick(clean, e)}
+            className={
+              isHighlighted
+                ? "cursor-pointer rounded-[2px] transition-colors bg-amber-200 text-amber-950 dark:bg-amber-900/80 dark:text-amber-100"
+                : "cursor-pointer rounded-[2px] transition-colors hover:bg-amber-100 hover:text-amber-950 dark:hover:bg-amber-950/60 dark:hover:text-amber-200"
+            }
+          >
+            {token}
+          </span>
+        );
+      })}
+    </p>
+  );
+}
+
 export default function SourceArticleReadingPage() {
   const params = useParams();
   const router = useRouter();
@@ -123,7 +160,7 @@ export default function SourceArticleReadingPage() {
   // Handle word click for vocabulary popup
   const handleWordClick = (word: string, e: React.MouseEvent<HTMLSpanElement>) => {
     e.stopPropagation();
-    const cleanWord = word.replace(/[^a-zA-Z-]/g, "").trim();
+    const cleanWord = word.replace(new RegExp("[^a-zA-Z-]", "g"), "").trim();
     if (!cleanWord || cleanWord.length < 2) return;
 
     const data = lookupWord(cleanWord);
@@ -218,33 +255,6 @@ export default function SourceArticleReadingPage() {
         correctCount++;
       }
     });
-  }
-
-  function renderInteractiveParagraph(text: string, pIdx: number) {
-    const tokens = text.split(new RegExp("(\\s+)", "g"));
-    return (
-      <p key={pIdx} className="mb-4 leading-relaxed font-serif text-base text-zinc-800 dark:text-zinc-200">
-        {tokens.map((token, tIdx) => {
-          if (!token || token.trim().length === 0) return token;
-          const clean = token.replace(new RegExp("[^a-zA-Z-]", "g"), "");
-          const isHighlighted = Boolean(selectedWord && selectedWord.word.toLowerCase() === clean.toLowerCase());
-
-          return (
-            <span
-              key={tIdx}
-              onClick={(e) => handleWordClick(clean, e)}
-              className={
-                isHighlighted
-                  ? "cursor-pointer rounded-[2px] transition-colors bg-amber-200 text-amber-950 dark:bg-amber-900/80 dark:text-amber-100"
-                  : "cursor-pointer rounded-[2px] transition-colors hover:bg-amber-100 hover:text-amber-950 dark:hover:bg-amber-950/60 dark:hover:text-amber-200"
-              }
-            >
-              {token}
-            </span>
-          );
-        })}
-      </p>
-    );
   }
 
   return (
@@ -419,7 +429,15 @@ export default function SourceArticleReadingPage() {
           <div className="prose dark:prose-invert max-w-none text-justify">
             {(article.contentExcerpt || article.fullContent || article.description)
               .split("\n\n")
-              .map((p, pIdx) => renderInteractiveParagraph(p, pIdx))}
+              .map((p, pIdx) => (
+                <InteractiveParagraph
+                  key={pIdx}
+                  text={p}
+                  pIdx={pIdx}
+                  selectedWord={selectedWord}
+                  onWordClick={handleWordClick}
+                />
+              ))}
           </div>
 
           <div className="pt-6 border-t border-zinc-200 dark:border-zinc-800 flex justify-end">
