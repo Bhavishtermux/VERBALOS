@@ -42,17 +42,23 @@ export default function ProgressPage() {
   useEffect(() => {
     let isMounted = true;
 
+    // 1. Immediately calculate and display local analytics (0ms latency)
+    const localSessions = getAllSessions();
+    const localMistakes = getStoredMistakes();
+    const immediateCalculated = calculateAnalytics(localSessions, localMistakes);
+    setAnalytics(immediateCalculated);
+
     const loadData = async () => {
-      const localSessions = getAllSessions();
-      const localMistakes = getStoredMistakes();
-      let activeSessions = localSessions;
+      const currentLocal = getAllSessions();
+      const currentMistakes = getStoredMistakes();
+      let activeSessions = currentLocal;
 
       if (user?.id) {
         try {
           const cloudSessions = await fetchUserSessionsCloud(user.id);
           if (isMounted && cloudSessions && cloudSessions.length > 0) {
             const sessionMap = new Map<string, any>();
-            localSessions.forEach((s) => sessionMap.set(s.sessionId, s));
+            currentLocal.forEach((s) => sessionMap.set(s.sessionId, s));
             cloudSessions.forEach((s) => sessionMap.set(s.sessionId, s));
             activeSessions = Array.from(sessionMap.values());
           }
@@ -62,7 +68,7 @@ export default function ProgressPage() {
       }
 
       if (isMounted) {
-        const calculated = calculateAnalytics(activeSessions, localMistakes);
+        const calculated = calculateAnalytics(activeSessions, currentMistakes);
         setAnalytics(calculated);
       }
     };

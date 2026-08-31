@@ -23,6 +23,7 @@ import {
   BookMarked,
   Timer,
   AlertTriangle,
+  RotateCcw,
 } from "lucide-react";
 import { useRc } from "@/context/rc-context";
 import { useAuth } from "@/context/auth-context";
@@ -41,6 +42,11 @@ import {
   syncPracticeSessionCloud,
   syncVocabularyWordCloud,
 } from "@/lib/supabase/data-service";
+import {
+  getInProgressDrill,
+  saveInProgressDrill,
+  deleteInProgressDrill,
+} from "@/lib/in-progress";
 
 interface SelectedWordState {
   raw: string;
@@ -68,6 +74,7 @@ export default function RcReadingPage() {
   // Experience Stages: "preview" | "reading" | "questions"
   const [stage, setStage] = useState<"preview" | "reading" | "questions">("preview");
   const [showExitModal, setShowExitModal] = useState<boolean>(false);
+  const [restoredBanner, setRestoredBanner] = useState<string | null>(null);
 
   // 1. Reading Timer State (Independent Countdown)
   const [readingSeconds, setReadingSeconds] = useState<number>(0);
@@ -79,6 +86,27 @@ export default function RcReadingPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
 
+  // Auto-restore saved in-progress draft on mount
+  useEffect(() => {
+    if (!passageId) return;
+    const saved = getInProgressDrill(passageId);
+    if (saved) {
+      setStage(saved.stage);
+      setReadingSeconds(saved.readingSeconds || 0);
+      setCalculatedWpm(saved.calculatedWpm || 0);
+      setSelectedAnswers(saved.selectedAnswers || {});
+      setCurrentQuestionIndex(saved.currentQuestionIndex || 0);
+      if (saved.stage === "reading") {
+        setIsReadingActive(true);
+      } else if (saved.stage === "questions") {
+        setIsQuestionTimerActive(true);
+      }
+      setRestoredBanner(
+        `Resumed saved drill (${Math.floor((saved.readingSeconds || 0) / 60)}m ${(saved.readingSeconds || 0) % 60}s reading pace, ${Object.keys(saved.selectedAnswers || {}).length} questions marked)`
+      );
+    }
+  }, [passageId]);
+
   // Synchronize Active Session Guard with Global Layout (Sidebar/Mobile Nav)
   useEffect(() => {
     if (passage && (stage === "reading" || stage === "questions")) {
@@ -88,41 +116,24 @@ export default function RcReadingPage() {
         type: "rc",
         onSaveAndExit: () => {
           const effectiveWpm = calculatedWpm || Math.round((passage.wordCount / Math.max(readingSeconds, 1)) * 60);
-          const answeredIndices = Object.keys(selectedAnswers);
-          let correctCount = 0;
-          passage.questions.forEach((q, idx) => {
-            if (selectedAnswers[idx] !== undefined && selectedAnswers[idx] === q.correctOptionIndex) {
-              correctCount++;
-            }
+
+          saveInProgressDrill({
+            passageId: passage.id,
+            passageTitle: passage.title,
+            topic: passage.topic || passage.source,
+            difficulty: passage.difficulty,
+            stage: stage,
+            readingSeconds: Math.max(readingSeconds, 10),
+            calculatedWpm: effectiveWpm,
+            selectedAnswers: selectedAnswers,
+            currentQuestionIndex: currentQuestionIndex,
+            totalQuestions: passage.questions.length,
+            savedAt: new Date().toISOString(),
           });
-
-          try {
-            const partialSession = {
-              sessionId: `saved-${Date.now()}`,
-              passageId: passage.id,
-              passageTitle: passage.title,
-              genre: passage.topic || passage.source,
-              date: new Date().toISOString().slice(0, 10),
-              readingTimeSeconds: Math.max(readingSeconds, 10),
-              readingWpm: effectiveWpm,
-              score: {
-                correct: correctCount,
-                total: passage.questions.length,
-                percentage: answeredIndices.length > 0 ? Math.round((correctCount / answeredIndices.length) * 100) : 0,
-              },
-              accuracy: answeredIndices.length > 0 ? Math.round((correctCount / answeredIndices.length) * 100) : 0,
-              status: "saved_partial",
-            };
-
-            const existing = JSON.parse(localStorage.getItem("rc_lab_all_sessions") || "[]");
-            existing.unshift(partialSession);
-            localStorage.setItem("rc_lab_all_sessions", JSON.stringify(existing));
-            window.dispatchEvent(new Event("storage"));
-          } catch (e) {
-            console.warn("Could not save partial session", e);
-          }
         },
-        onDiscardAndExit: () => {},
+        onDiscardAndExit: () => {
+          deleteInProgressDrill(passage.id);
+        },
       });
     } else {
       setActiveSession(null);
@@ -131,7 +142,7 @@ export default function RcReadingPage() {
     return () => {
       setActiveSession(null);
     };
-  }, [stage, readingSeconds, calculatedWpm, selectedAnswers, passage, setActiveSession]);
+  }, [stage, readingSeconds, calculatedWpm, selectedAnswers, currentQuestionIndex, passage, setActiveSession]);
 
   // Allocated budgets
   const allocatedReadingSeconds = useMemo(() => {
@@ -463,6 +474,9 @@ export default function RcReadingPage() {
         localStorage.setItem(passagesKey, JSON.stringify(updatedList));
       }
 
+      // Clean up any in-progress draft since drill is now officially completed
+      deleteInProgressDrill(passage.id);
+
       // Sync to Supabase Cloud if user is authenticated
       if (user?.id) {
         syncPracticeSessionCloud(sessionResult, user.id);
@@ -477,52 +491,51 @@ export default function RcReadingPage() {
 
   const handleSaveProgressAndExit = () => {
     if (!passage) {
-      router.push("/practice");
+      router.push("/library");
       return;
     }
 
     const effectiveWpm = calculatedWpm || Math.round((passage.wordCount / Math.max(readingSeconds, 1)) * 60);
-    const answeredIndices = Object.keys(selectedAnswers);
-    let correctCount = 0;
-    passage.questions.forEach((q, idx) => {
-      if (selectedAnswers[idx] !== undefined && selectedAnswers[idx] === q.correctOptionIndex) {
-        correctCount++;
-      }
+
+    saveInProgressDrill({
+      passageId: passage.id,
+      passageTitle: passage.title,
+      topic: passage.topic || passage.source,
+      difficulty: passage.difficulty,
+      stage: stage,
+      readingSeconds: Math.max(readingSeconds, 10),
+      calculatedWpm: effectiveWpm,
+      selectedAnswers: selectedAnswers,
+      currentQuestionIndex: currentQuestionIndex,
+      totalQuestions: passage.questions.length,
+      savedAt: new Date().toISOString(),
     });
 
-    try {
-      const partialSession = {
-        sessionId: `saved-${Date.now()}`,
-        passageId: passage.id,
-        passageTitle: passage.title,
-        genre: passage.topic || passage.source,
-        date: new Date().toISOString().slice(0, 10),
-        readingTimeSeconds: Math.max(readingSeconds, 10),
-        readingWpm: effectiveWpm,
-        score: {
-          correct: correctCount,
-          total: passage.questions.length,
-          percentage: answeredIndices.length > 0 ? Math.round((correctCount / answeredIndices.length) * 100) : 0,
-        },
-        accuracy: answeredIndices.length > 0 ? Math.round((correctCount / answeredIndices.length) * 100) : 0,
-        status: "saved_partial",
-      };
-
-      const existing = JSON.parse(localStorage.getItem("rc_lab_all_sessions") || "[]");
-      existing.unshift(partialSession);
-      localStorage.setItem("rc_lab_all_sessions", JSON.stringify(existing));
-      window.dispatchEvent(new Event("storage"));
-    } catch (e) {
-      console.warn("Could not save partial session", e);
-    }
-
     setShowExitModal(false);
-    router.push("/practice");
+    router.push("/library");
   };
 
   const handleDiscardAndExit = () => {
+    if (passage) {
+      deleteInProgressDrill(passage.id);
+    }
     setShowExitModal(false);
-    router.push("/practice");
+    router.push("/library");
+  };
+
+  // Reset drill to start fresh
+  const handleStartFresh = () => {
+    if (passage) {
+      deleteInProgressDrill(passage.id);
+    }
+    setRestoredBanner(null);
+    setReadingSeconds(0);
+    setCalculatedWpm(0);
+    setSelectedAnswers({});
+    setCurrentQuestionIndex(0);
+    setStage("preview");
+    setIsReadingActive(false);
+    setIsQuestionTimerActive(false);
   };
 
   // If passage is not found
@@ -602,6 +615,21 @@ export default function RcReadingPage() {
             <span>{passage.flaggedForReview ? "Flagged for Review" : "Bookmark"}</span>
           </button>
         </div>
+
+        {restoredBanner && (
+          <div className="flex items-center justify-between p-3 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/60 text-xs text-blue-900 dark:text-blue-200">
+            <div className="flex items-center gap-2">
+              <RotateCcw className="h-4 w-4 text-blue-600 shrink-0" />
+              <span>{restoredBanner}</span>
+            </div>
+            <button
+              onClick={handleStartFresh}
+              className="text-[11px] font-semibold underline text-blue-700 dark:text-blue-300 hover:text-blue-900"
+            >
+              Start Fresh
+            </button>
+          </div>
+        )}
 
         {/* RC Preview Header Card */}
         <div className="rounded-xl border border-zinc-200/80 bg-white p-6 sm:p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/70 space-y-6">

@@ -1,5 +1,6 @@
 import { RCPassage } from "@/types/rc";
 import { CalculatedAnalytics } from "@/lib/analytics";
+import { initialRcPassages } from "@/data/rc-passages";
 
 export interface PracticeRecommendation {
   id: string;
@@ -23,45 +24,44 @@ export interface RecommendationSummary {
  * strictly from user analytics without AI.
  */
 export function generateRecommendations(
-  analytics: CalculatedAnalytics,
-  allPassages: RCPassage[]
-): RecommendationSummary {
+  analytics?: CalculatedAnalytics | null,
+  allPassages: RCPassage[] = []
+): RecommendationSummary | null {
+  const passagesPool = Array.isArray(allPassages) && allPassages.length > 0 ? allPassages : initialRcPassages;
+  if (!passagesPool || passagesPool.length === 0) return null;
+
   const recommendations: PracticeRecommendation[] = [];
 
   // Separate uncompleted and completed passages
-  const uncompletedPassages = allPassages.filter((p) => !p.completed);
-  const availablePassages = uncompletedPassages.length > 0 ? uncompletedPassages : allPassages;
+  const uncompletedPassages = passagesPool.filter((p) => !p?.completed);
+  const availablePassages = uncompletedPassages.length > 0 ? uncompletedPassages : passagesPool;
 
-  // Extract key metrics
-  const {
-    overallAccuracy,
-    averageWpm,
-    skillPerformance,
-    sourcePerformance,
-    difficultyPerformance,
-  } = analytics;
+  // Extract key metrics safely
+  const overallAccuracy = analytics?.overallAccuracy ?? 0;
+  const averageWpm = analytics?.averageWpm ?? 0;
+  const skillPerformance = analytics?.skillPerformance ?? [];
+  const sourcePerformance = analytics?.sourcePerformance ?? [];
 
   // Helper to find skill accuracy
   const getSkillAcc = (skillName: string) => {
     const item = skillPerformance.find(
-      (s) => s.skill.toLowerCase() === skillName.toLowerCase()
+      (s) => s?.skill?.toLowerCase() === skillName.toLowerCase()
     );
     return item && item.total > 0 ? item.accuracy : 100;
   };
 
   const inferenceAcc = getSkillAcc("Inference");
   const toneAcc = getSkillAcc("Tone");
-  const mainIdeaAcc = getSkillAcc("Main Idea");
-  const detailAcc = getSkillAcc("Detail");
 
   // RULE 1: IF inference accuracy < 65% -> Recommend inference-heavy RCs
   if (inferenceAcc < 65 || (inferenceAcc < 75 && skillPerformance.length > 0)) {
     const inferencePassage =
       availablePassages.find((p) =>
-        p.questions.some((q) => q.type === "Inference") &&
+        Array.isArray(p?.questions) &&
+        p.questions.some((q) => q?.type === "Inference") &&
         (p.topic === "Philosophy" || p.topic === "Psychology" || p.topic === "Sociology")
       ) ||
-      availablePassages.find((p) => p.questions.some((q) => q.type === "Inference")) ||
+      availablePassages.find((p) => Array.isArray(p?.questions) && p.questions.some((q) => q?.type === "Inference")) ||
       availablePassages[0];
 
     if (inferencePassage) {
@@ -82,13 +82,15 @@ export function generateRecommendations(
     const tonePassage =
       availablePassages.find(
         (p) =>
+          Array.isArray(p?.questions) &&
           p.questions.some(
-            (q) => q.type === "Tone" || q.type === "Author's Attitude" || q.type === "Tone / Attitude"
+            (q) => q?.type === "Tone" || q?.type === "Author's Attitude" || q?.type === "Tone / Attitude"
           ) && (p.source === "Aeon" || p.source === "The Atlantic")
       ) ||
       availablePassages.find((p) =>
+        Array.isArray(p?.questions) &&
         p.questions.some(
-          (q) => q.type === "Tone" || q.type === "Author's Attitude" || q.type === "Tone / Attitude"
+          (q) => q?.type === "Tone" || q?.type === "Author's Attitude" || q?.type === "Tone / Attitude"
         )
       ) ||
       availablePassages[1 % availablePassages.length];
@@ -109,8 +111,8 @@ export function generateRecommendations(
   // RULE 3: IF WPM < 220 -> Recommend timed medium-difficulty RCs
   if (averageWpm < 220 && averageWpm > 0) {
     const mediumPassage =
-      availablePassages.find((p) => p.difficulty === "Medium") ||
-      availablePassages.find((p) => p.difficulty === "Hard") ||
+      availablePassages.find((p) => p?.difficulty === "Medium" || p?.difficulty === "CAT Standard") ||
+      availablePassages.find((p) => p?.difficulty === "Hard") ||
       availablePassages[0];
 
     if (mediumPassage && !recommendations.some((r) => r.passage.id === mediumPassage.id)) {
@@ -126,83 +128,27 @@ export function generateRecommendations(
     }
   }
 
-  // RULE 4: IF accuracy < 70% -> Recommend accuracy-focused practice
-  if (overallAccuracy < 70 && overallAccuracy > 0) {
-    const accuracyPassage =
-      availablePassages.find((p) => p.difficulty === "Medium" || p.difficulty === "Hard") ||
-      availablePassages[0];
-
-    if (accuracyPassage && !recommendations.some((r) => r.passage.id === accuracyPassage.id)) {
-      recommendations.push({
-        id: `rec-acc-${accuracyPassage.id}`,
-        passage: accuracyPassage,
-        ruleTriggered: "Comprehension Baseline (< 70%)",
-        rationale: `Your overall comprehension accuracy is ${overallAccuracy}%. This drill focuses on disciplined elimination and boundary verification.`,
-        focusType: "accuracy",
-        badgeText: "Focus: Accuracy Calibration",
-        priority: 7,
-      });
-    }
-  }
-
-  // RULE 5: IF accuracy > 85% AND WPM < 250 -> Recommend speed-focused practice
-  if (overallAccuracy >= 80 && averageWpm < 260 && averageWpm > 0) {
-    const speedPassage =
-      availablePassages.find((p) => p.difficulty === "CAT" || p.difficulty === "CAT+") ||
-      availablePassages[0];
-
-    if (speedPassage && !recommendations.some((r) => r.passage.id === speedPassage.id)) {
-      recommendations.push({
-        id: `rec-speed-${speedPassage.id}`,
-        passage: speedPassage,
-        ruleTriggered: "Speed Acceleration (Accuracy > 80%, WPM < 260)",
-        rationale: `Your accuracy is high (${overallAccuracy}%), but your pacing is ${averageWpm} WPM. Practice maintaining comprehension at an accelerated tempo.`,
-        focusType: "speed",
-        badgeText: "Focus: Speed Acceleration",
-        priority: 8,
-      });
-    }
-  }
-
-  // RULE 6: Source or Genre Diversity
-  // Find source with lowest accuracy or least attempted
-  const lowestSource = [...sourcePerformance].sort((a, b) => a.accuracy - b.accuracy)[0];
-  if (lowestSource && lowestSource.accuracy < 75) {
-    const sourcePassage =
-      availablePassages.find((p) => p.source === lowestSource.source) ||
-      availablePassages[0];
-
-    if (sourcePassage && !recommendations.some((r) => r.passage.id === sourcePassage.id)) {
-      recommendations.push({
-        id: `rec-src-${sourcePassage.id}`,
-        passage: sourcePassage,
-        ruleTriggered: `Source Focus: ${lowestSource.source}`,
-        rationale: `Your accuracy on ${lowestSource.source} articles is ${lowestSource.accuracy}%. Practice with ${lowestSource.source}'s characteristic editorial style.`,
-        focusType: "source",
-        badgeText: `Focus: ${lowestSource.source} Style`,
-        priority: 6,
-      });
-    }
-  }
-
   // Fallback: If no specific rules triggered, pick highest-value uncompleted passage
   if (recommendations.length === 0) {
-    const defaultPassage = availablePassages[0] || allPassages[0];
-    recommendations.push({
-      id: `rec-default-${defaultPassage.id}`,
-      passage: defaultPassage,
-      ruleTriggered: "Standard CAT Drill",
-      rationale: `Based on your balanced accuracy (${overallAccuracy}%) and pacing (${averageWpm} WPM), this CAT-standard drill provides optimal balanced practice.`,
-      focusType: "general",
-      badgeText: "Recommended Practice",
-      priority: 5,
-    });
+    const defaultPassage = availablePassages[0] || passagesPool[0];
+    if (defaultPassage) {
+      recommendations.push({
+        id: `rec-default-${defaultPassage.id}`,
+        passage: defaultPassage,
+        ruleTriggered: "Standard CAT Drill",
+        rationale: `Based on your diagnostic profile (${overallAccuracy}% accuracy, ${averageWpm || "—"} WPM), this CAT-standard drill provides balanced sectional practice.`,
+        focusType: "general",
+        badgeText: "Recommended Practice",
+        priority: 5,
+      });
+    }
   }
 
   // Sort by priority descending
   recommendations.sort((a, b) => b.priority - a.priority);
 
   const primary = recommendations[0];
+  if (!primary) return null;
 
   return {
     primaryHeadline: primary.badgeText,

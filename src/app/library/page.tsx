@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import {
   Search,
@@ -18,6 +18,8 @@ import {
   Award,
   ChevronRight,
   TrendingUp,
+  ArrowRight,
+  RotateCcw,
 } from "lucide-react";
 import { useRc } from "@/context/rc-context";
 import { RCPassage, RCSource, RCTopic, RCDifficulty } from "@/types/rc";
@@ -26,9 +28,15 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
+import {
+  getInProgressDrills,
+  deleteInProgressDrill,
+  InProgressDrill,
+} from "@/lib/in-progress";
 
 export default function LibraryPage() {
   const { rcPassages, togglePassageFlag } = useRc();
+  const [inProgressDrills, setInProgressDrills] = useState<InProgressDrill[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSource, setSelectedSource] = useState<string>("All");
   const [selectedTopic, setSelectedTopic] = useState<string>("All");
@@ -36,6 +44,15 @@ export default function LibraryPage() {
   const [selectedStatus, setSelectedStatus] = useState<string>("All");
   const [selectedSort, setSelectedSort] = useState<string>("default");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+
+  useEffect(() => {
+    const updateDrills = () => {
+      setInProgressDrills(getInProgressDrills());
+    };
+    updateDrills();
+    window.addEventListener("storage", updateDrills);
+    return () => window.removeEventListener("storage", updateDrills);
+  }, []);
 
   const sourcesList = useMemo(() => {
     const set = new Set<string>();
@@ -166,6 +183,67 @@ export default function LibraryPage() {
           </Button>
         </div>
       </div>
+
+      {/* In-Progress Drills & Saved Drafts Section */}
+      {inProgressDrills.length > 0 && (
+        <div className="space-y-3 rounded-xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/50 dark:bg-amber-950/30 p-4 shadow-sm animate-in fade-in-50 duration-200">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 font-serif font-bold text-sm text-amber-900 dark:text-amber-300">
+              <Clock className="h-4 w-4 text-amber-600 shrink-0" />
+              <span>In-Progress Drills &amp; Saved Drafts ({inProgressDrills.length})</span>
+            </div>
+            <span className="text-[11px] font-mono text-amber-700 dark:text-amber-400 hidden sm:inline">
+              Resume your saved reading sessions where you left off
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+            {inProgressDrills.map((drill) => (
+              <Card
+                key={drill.passageId}
+                className="bg-white dark:bg-zinc-900 border-amber-200/80 dark:border-amber-900/60 p-4 flex flex-col justify-between gap-3 shadow-sm hover:border-amber-400 transition-all"
+              >
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between gap-2">
+                    <Badge variant="warning" className="text-[10px] font-mono uppercase">
+                      {drill.stage === "reading" ? "Reading Phase" : "Question Solving"}
+                    </Badge>
+                    <span className="text-[10px] font-mono text-zinc-400">
+                      {drill.topic} • {drill.difficulty}
+                    </span>
+                  </div>
+                  <h3 className="font-serif font-bold text-sm text-zinc-900 dark:text-zinc-100 leading-snug line-clamp-1">
+                    {drill.passageTitle}
+                  </h3>
+                  <div className="flex items-center gap-3 text-[11px] font-mono text-zinc-500 dark:text-zinc-400 pt-0.5">
+                    <span>Reading Pace: <strong>{Math.floor(drill.readingSeconds / 60)}m {drill.readingSeconds % 60}s</strong></span>
+                    <span>•</span>
+                    <span>Answered: <strong>{Object.keys(drill.selectedAnswers || {}).length} of {drill.totalQuestions || 5} Qs</strong></span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-2 border-t border-zinc-100 dark:border-zinc-800 text-xs">
+                  <button
+                    onClick={() => {
+                      deleteInProgressDrill(drill.passageId);
+                      setInProgressDrills(getInProgressDrills());
+                    }}
+                    className="text-xs text-rose-600 hover:text-rose-700 font-mono hover:underline"
+                  >
+                    Discard Draft
+                  </button>
+                  <Link href={`/practice/${drill.passageId}?resume=true`}>
+                    <Button size="sm" className="h-8 text-xs gap-1.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-50 dark:bg-zinc-100 dark:text-zinc-900 font-semibold shadow-sm">
+                      <span>Resume RC Drill</span>
+                      <ArrowRight className="h-3 w-3" />
+                    </Button>
+                  </Link>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Multi-Faceted Filter Toolbar */}
       <div className="space-y-3 rounded-xl border border-zinc-200/80 bg-white p-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/60">
