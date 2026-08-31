@@ -20,6 +20,7 @@ import {
   Key,
   Moon,
   Sun,
+  Trash2,
 } from "lucide-react";
 import { useRc } from "@/context/rc-context";
 import { useAuth } from "@/context/auth-context";
@@ -30,6 +31,7 @@ import { Select } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
+import { Modal } from "@/components/ui/modal";
 
 export default function SettingsPage() {
   const router = useRouter();
@@ -39,13 +41,31 @@ export default function SettingsPage() {
     updateSettings,
     stats,
     resetToDefaults,
+    resetAllProgress,
     exportDataJson,
     importDataJson,
   } = useRc();
 
   const [savedToast, setSavedToast] = useState(false);
+  const [resetToast, setResetToast] = useState(false);
+  const [isResetModalOpen, setIsResetModalOpen] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
   const [importJsonText, setImportJsonText] = useState("");
   const [importStatus, setImportStatus] = useState<string | null>(null);
+
+  const handleConfirmReset = async () => {
+    setIsResetting(true);
+    try {
+      await resetAllProgress();
+      setIsResetModalOpen(false);
+      setResetToast(true);
+      setTimeout(() => setResetToast(false), 3000);
+    } catch (e) {
+      console.error("Error resetting progress:", e);
+    } finally {
+      setIsResetting(false);
+    }
+  };
 
   const handleUpdate = (partial: any) => {
     updateSettings(partial);
@@ -107,6 +127,12 @@ export default function SettingsPage() {
       {savedToast && (
         <div className="rounded-lg bg-emerald-50 p-3 text-xs text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 flex items-center gap-2">
           <Check className="h-4 w-4" /> Preferences saved and synchronized to cloud account.
+        </div>
+      )}
+
+      {resetToast && (
+        <div className="rounded-lg bg-rose-50 p-3 text-xs text-rose-800 dark:bg-rose-950/40 dark:text-rose-300 border border-rose-200 dark:border-rose-800 flex items-center gap-2">
+          <Check className="h-4 w-4" /> All practice progress, scores, and vocabulary have been cleanly reset.
         </div>
       )}
 
@@ -378,6 +404,96 @@ export default function SettingsPage() {
           </div>
         </CardContent>
       </Card>
+
+      {/* 6. Danger Zone: Reset Practice Progress */}
+      <Card className="border-rose-200 dark:border-rose-900/50 bg-rose-50/20 dark:bg-rose-950/10">
+        <CardHeader className="pb-3 border-b border-rose-100 dark:border-rose-900/30">
+          <div className="flex items-center gap-2">
+            <Trash2 className="h-4 w-4 text-rose-600 dark:text-rose-400" />
+            <CardTitle className="text-base font-serif text-rose-950 dark:text-rose-200">
+              Reset Practice Progress
+            </CardTitle>
+          </div>
+          <CardDescription className="text-xs text-rose-800/80 dark:text-rose-300/80">
+            Permanently clear all completed RC attempts, Verbal Ability drills, mock scores, vocabulary words, and mistake diagnostics.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="pt-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 max-w-lg leading-relaxed">
+              Use this if you wish to start your CAT VARC preparation from a completely clean slate. Your Google account and settings will remain active.
+            </p>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => setIsResetModalOpen(true)}
+              className="border-rose-300 text-rose-600 hover:bg-rose-50 dark:border-rose-800 dark:text-rose-400 dark:hover:bg-rose-950/40 text-xs shrink-0 gap-1.5"
+            >
+              <Trash2 className="h-3.5 w-3.5" />
+              <span>Reset All Progress</span>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Confirmation Modal */}
+      <Modal
+        isOpen={isResetModalOpen}
+        onClose={() => setIsResetModalOpen(false)}
+        title="Reset All Practice Progress?"
+      >
+        <div className="space-y-4 pt-1">
+          <div className="rounded-lg bg-rose-50 dark:bg-rose-950/50 p-3.5 border border-rose-200 dark:border-rose-900 text-xs text-rose-900 dark:text-rose-200 space-y-2">
+            <div className="flex items-center gap-2 font-semibold font-serif">
+              <AlertTriangle className="h-4 w-4 text-rose-600 shrink-0" />
+              <span>Warning: This action is permanent!</span>
+            </div>
+            <p className="leading-relaxed">
+              This will permanently delete:
+            </p>
+            <ul className="list-disc pl-5 space-y-0.5 font-mono text-[11px]">
+              <li>All completed RC reading sessions and WPM calibration logs</li>
+              <li>All Verbal Ability drill answers (Para Summary, Jumbles, Odd Sentence)</li>
+              <li>All Sectional Mock test records and scores</li>
+              <li>All Mistake Journal entries and cognitive error rankings</li>
+              <li>All saved vocabulary words from this device and Supabase Cloud</li>
+            </ul>
+          </div>
+
+          <div className="flex items-center justify-end gap-2 pt-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              disabled={isResetting}
+              onClick={() => setIsResetModalOpen(false)}
+              className="text-xs"
+            >
+              Cancel
+            </Button>
+            <Button
+              type="button"
+              size="sm"
+              disabled={isResetting}
+              onClick={handleConfirmReset}
+              className="bg-rose-600 hover:bg-rose-700 text-white dark:bg-rose-600 dark:hover:bg-rose-700 text-xs font-semibold gap-1.5"
+            >
+              {isResetting ? (
+                <>
+                  <div className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                  <span>Resetting...</span>
+                </>
+              ) : (
+                <>
+                  <Trash2 className="h-3.5 w-3.5" />
+                  <span>Yes, Reset Progress</span>
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

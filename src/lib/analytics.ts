@@ -87,49 +87,41 @@ const ALL_SESSIONS_STORAGE_KEY = "rc_lab_all_sessions";
 const MISTAKE_HISTORY_STORAGE_KEY = "rc_lab_mistake_history";
 
 /**
- * Loads all session records from localStorage (or defaults to initial seed data)
+ * Loads all session records from localStorage
  */
 export function getAllSessions(): RCSessionResult[] {
-  if (typeof window === "undefined") return initialSeedSessions;
+  if (typeof window === "undefined") return [];
   try {
     const raw = window.localStorage.getItem(ALL_SESSIONS_STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length > 0) {
+      if (Array.isArray(parsed)) {
         return parsed;
       }
     }
   } catch (e) {
     console.warn("Could not load sessions from localStorage", e);
   }
-  // Initialize with seed data if key is empty
-  try {
-    window.localStorage.setItem(ALL_SESSIONS_STORAGE_KEY, JSON.stringify(initialSeedSessions));
-  } catch {}
-  return initialSeedSessions;
+  return [];
 }
 
 /**
- * Loads all mistake records from localStorage (or defaults to initial seed mistakes)
+ * Loads all mistake records from localStorage
  */
 export function getStoredMistakes(): MistakeLogEntry[] {
-  if (typeof window === "undefined") return initialSeedMistakes;
+  if (typeof window === "undefined") return [];
   try {
     const raw = window.localStorage.getItem(MISTAKE_HISTORY_STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length > 0) {
+      if (Array.isArray(parsed)) {
         return parsed;
       }
     }
   } catch (e) {
     console.warn("Could not load mistakes from localStorage", e);
   }
-  // Initialize with seed mistakes if empty
-  try {
-    window.localStorage.setItem(MISTAKE_HISTORY_STORAGE_KEY, JSON.stringify(initialSeedMistakes));
-  } catch {}
-  return initialSeedMistakes;
+  return [];
 }
 
 // Format seconds into mm:ss

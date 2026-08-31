@@ -1418,7 +1418,7 @@ export function saveLookedUpWord(
  * Retrieves all saved words from localStorage
  */
 export function getSavedVocabWords(): UserSavedVocabWord[] {
-  if (typeof window === "undefined") return initialUserSavedWords;
+  if (typeof window === "undefined") return [];
   try {
     const raw = window.localStorage.getItem(USER_VOCAB_STORAGE_KEY);
     if (raw) {
@@ -1428,5 +1428,5 @@ export function getSavedVocabWords(): UserSavedVocabWord[] {
   } catch (e) {
     console.warn("Error getting saved vocab words", e);
   }
-  return initialUserSavedWords;
+  return [];
 }

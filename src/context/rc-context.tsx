@@ -19,7 +19,7 @@ import {
 import { initialRcPassages } from "@/data/rc-passages";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { useAuth } from "@/context/auth-context";
-import { fetchUserSettingsCloud } from "@/lib/supabase/data-service";
+import { fetchUserSettingsCloud, resetAllCloudProgress } from "@/lib/supabase/data-service";
 
 interface RcContextType {
   stats: UserStats;
@@ -35,6 +35,7 @@ interface RcContextType {
   togglePassageFlag: (passageId: string) => void;
   toggleVocabularyMastered: (vocabId: string) => void;
   resetToDefaults: () => void;
+  resetAllProgress: () => Promise<void>;
   exportDataJson: () => string;
   importDataJson: (jsonString: string) => boolean;
 }
@@ -134,16 +135,47 @@ export function RcProvider({ children }: { children: ReactNode }) {
     );
   };
 
-  const resetToDefaults = () => {
-    setStats(initialUserStats);
-    setSettings(initialUserSettings);
-    setWeakAreas(initialWeakAreas);
-    setRcPassages(initialRcPassages);
-    setRecentAttempts(initialRecentAttempts);
-    setVocabulary(initialVocabulary);
-    if (typeof document !== "undefined") {
-      document.documentElement.classList.remove("dark");
+  const resetAllProgress = async () => {
+    // 1. Delete all practice records from Supabase cloud database
+    if (user?.id) {
+      await resetAllCloudProgress(user.id);
     }
+
+    // 2. Clear all local storage practice records
+    if (typeof window !== "undefined") {
+      window.localStorage.removeItem("rc_lab_all_sessions");
+      window.localStorage.removeItem("rc_lab_mistake_history");
+      window.localStorage.removeItem("rc_lab_saved_vocabulary");
+      window.localStorage.removeItem("rc_lab_daily_progress");
+      window.localStorage.removeItem("verbalos_mock_sessions");
+      window.localStorage.removeItem("rc_lab_pending_sync");
+      window.localStorage.removeItem("rc_lab_attempts_v2");
+      window.localStorage.removeItem("rc_lab_vocabulary_v2");
+      if (user?.id) {
+        window.localStorage.setItem(`rc_lab_migrated_user_${user.id}`, "true");
+      }
+    }
+
+    // 3. Reset in-memory stats and records
+    setStats({
+      totalPassagesRead: 0,
+      totalQuestionsSolved: 0,
+      totalCorrect: 0,
+      totalTimeSpentSeconds: 0,
+      averageWpm: 0,
+      currentStreak: 0,
+      longestStreak: 0,
+      accuracy: 0,
+      passagesToday: 0,
+      lastActiveDate: new Date().toISOString().slice(0, 10),
+    });
+    setRecentAttempts([]);
+    setVocabulary([]);
+    setWeakAreas(initialWeakAreas);
+  };
+
+  const resetToDefaults = () => {
+    resetAllProgress();
   };
 
   const exportDataJson = (): string => {
@@ -198,6 +230,7 @@ export function RcProvider({ children }: { children: ReactNode }) {
         togglePassageFlag,
         toggleVocabularyMastered,
         resetToDefaults,
+        resetAllProgress,
         exportDataJson,
         importDataJson,
       }}

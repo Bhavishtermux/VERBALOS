@@ -427,3 +427,36 @@ export async function fetchUserSettingsCloud(userId: string): Promise<Partial<Us
     return null;
   }
 }
+
+/**
+ * Deletes all user practice progress from Supabase cloud database
+ */
+export async function resetAllCloudProgress(userId: string): Promise<boolean> {
+  if (!isSupabaseConfigured || !userId) return true;
+  const client = getSupabaseClient();
+  if (!client) return true;
+
+  try {
+    // 1. Delete practice sessions & answers
+    await client.from("answers").delete().eq("user_id", userId);
+    await client.from("practice_sessions").delete().eq("user_id", userId);
+    
+    // 2. Delete mock tests & mock answers
+    await client.from("mock_answers").delete().eq("user_id", userId);
+    await client.from("mocks").delete().eq("user_id", userId);
+    
+    // 3. Delete mistake journal
+    await client.from("mistakes").delete().eq("user_id", userId);
+    
+    // 4. Delete daily progress
+    await client.from("daily_progress").delete().eq("user_id", userId);
+    
+    // 5. Delete saved vocabulary
+    await client.from("vocabulary").delete().eq("user_id", userId);
+
+    return true;
+  } catch (err) {
+    console.error("Failed to reset cloud progress:", err);
+    return false;
+  }
+}
