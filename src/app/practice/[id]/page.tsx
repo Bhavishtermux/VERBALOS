@@ -59,7 +59,7 @@ interface SelectedWordState {
 export default function RcReadingPage() {
   const params = useParams();
   const router = useRouter();
-  const { rcPassages, settings, togglePassageFlag } = useRc();
+  const { rcPassages, settings, togglePassageFlag, setActiveSession } = useRc();
   const { user } = useAuth();
 
   const passageId = params?.id as string;
@@ -74,6 +74,64 @@ export default function RcReadingPage() {
   const [isReadingActive, setIsReadingActive] = useState<boolean>(false);
   const [finalReadingDuration, setFinalReadingDuration] = useState<number>(0);
   const [calculatedWpm, setCalculatedWpm] = useState<number>(0);
+
+  // Question solving state (One question at a time)
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
+  const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
+
+  // Synchronize Active Session Guard with Global Layout (Sidebar/Mobile Nav)
+  useEffect(() => {
+    if (passage && (stage === "reading" || stage === "questions")) {
+      setActiveSession({
+        isActive: true,
+        title: passage.title,
+        type: "rc",
+        onSaveAndExit: () => {
+          const effectiveWpm = calculatedWpm || Math.round((passage.wordCount / Math.max(readingSeconds, 1)) * 60);
+          const answeredIndices = Object.keys(selectedAnswers);
+          let correctCount = 0;
+          passage.questions.forEach((q, idx) => {
+            if (selectedAnswers[idx] !== undefined && selectedAnswers[idx] === q.correctOptionIndex) {
+              correctCount++;
+            }
+          });
+
+          try {
+            const partialSession = {
+              sessionId: `saved-${Date.now()}`,
+              passageId: passage.id,
+              passageTitle: passage.title,
+              genre: passage.topic || passage.source,
+              date: new Date().toISOString().slice(0, 10),
+              readingTimeSeconds: Math.max(readingSeconds, 10),
+              readingWpm: effectiveWpm,
+              score: {
+                correct: correctCount,
+                total: passage.questions.length,
+                percentage: answeredIndices.length > 0 ? Math.round((correctCount / answeredIndices.length) * 100) : 0,
+              },
+              accuracy: answeredIndices.length > 0 ? Math.round((correctCount / answeredIndices.length) * 100) : 0,
+              status: "saved_partial",
+            };
+
+            const existing = JSON.parse(localStorage.getItem("rc_lab_all_sessions") || "[]");
+            existing.unshift(partialSession);
+            localStorage.setItem("rc_lab_all_sessions", JSON.stringify(existing));
+            window.dispatchEvent(new Event("storage"));
+          } catch (e) {
+            console.warn("Could not save partial session", e);
+          }
+        },
+        onDiscardAndExit: () => {},
+      });
+    } else {
+      setActiveSession(null);
+    }
+
+    return () => {
+      setActiveSession(null);
+    };
+  }, [stage, readingSeconds, calculatedWpm, selectedAnswers, passage, setActiveSession]);
 
   // Allocated budgets
   const allocatedReadingSeconds = useMemo(() => {
@@ -93,10 +151,6 @@ export default function RcReadingPage() {
   const [selectedWord, setSelectedWord] = useState<SelectedWordState | null>(null);
   const [isDetailedVocabOpen, setIsDetailedVocabOpen] = useState<boolean>(false);
   const [isMobileScreen, setIsMobileScreen] = useState<boolean>(false);
-
-  // Question solving state (One question at a time)
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
   const [showPassageInQuestions, setShowPassageInQuestions] = useState<boolean>(false);
 
   // Timer interval refs & popup ref

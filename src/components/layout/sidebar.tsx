@@ -80,7 +80,7 @@ export const navItems = [
 export function Sidebar({ className }: { className?: string }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { stats, settings } = useRc();
+  const { stats, settings, activeSession, setPendingNavUrl } = useRc();
   const { user, profile, signOut } = useAuth();
 
   const handleSignOut = async () => {
@@ -97,7 +97,16 @@ export function Sidebar({ className }: { className?: string }) {
     >
       {/* Brand / Logo */}
       <div className="flex h-16 items-center px-6 border-b border-zinc-200/60 dark:border-zinc-800/60">
-        <Link href="/dashboard" className="flex items-center gap-2.5">
+        <Link
+          href="/dashboard"
+          onClick={(e) => {
+            if (activeSession?.isActive) {
+              e.preventDefault();
+              setPendingNavUrl("/dashboard");
+            }
+          }}
+          className="flex items-center gap-2.5"
+        >
           <div className="flex h-9 w-9 items-center justify-center rounded-lg overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-sm shrink-0">
             <img src="/logo.png" alt="VerbalOS Logo" className="h-full w-full object-contain p-0.5" />
           </div>
@@ -124,6 +133,12 @@ export function Sidebar({ className }: { className?: string }) {
             <Link
               key={item.href}
               href={item.href}
+              onClick={(e) => {
+                if (activeSession?.isActive) {
+                  e.preventDefault();
+                  setPendingNavUrl(item.href);
+                }
+              }}
               className={cn(
                 "group flex items-center gap-3 rounded-lg px-3 py-2 text-xs font-medium transition-all",
                 isActive

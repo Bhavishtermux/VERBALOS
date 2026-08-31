@@ -1,6 +1,8 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, ReactNode } from "react";
+import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { useRouter } from "next/navigation";
+import { AlertTriangle } from "lucide-react";
 import {
   DrillAttempt,
   WeakAreaStat,
@@ -20,6 +22,16 @@ import { initialRcPassages } from "@/data/rc-passages";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { useAuth } from "@/context/auth-context";
 import { fetchUserSettingsCloud, resetAllCloudProgress } from "@/lib/supabase/data-service";
+import { Modal } from "@/components/ui/modal";
+import { Button } from "@/components/ui/button";
+
+export interface ActiveSessionData {
+  isActive: boolean;
+  title: string;
+  type?: "rc" | "mock" | "va";
+  onSaveAndExit?: (targetHref: string) => void;
+  onDiscardAndExit?: (targetHref: string) => void;
+}
 
 interface RcContextType {
   stats: UserStats;
@@ -30,6 +42,10 @@ interface RcContextType {
   recentAttempts: DrillAttempt[];
   vocabulary: VocabularyItem[];
   isHydrated: boolean;
+  activeSession: ActiveSessionData | null;
+  setActiveSession: (data: ActiveSessionData | null) => void;
+  pendingNavUrl: string | null;
+  setPendingNavUrl: (url: string | null) => void;
   getPassageById: (id: string) => RCPassage | undefined;
   updateSettings: (newSettings: Partial<UserSettings>) => void;
   togglePassageFlag: (passageId: string) => void;
@@ -43,6 +59,7 @@ interface RcContextType {
 const RcContext = createContext<RcContextType | undefined>(undefined);
 
 export function RcProvider({ children }: { children: ReactNode }) {
+  const router = useRouter();
   const { user } = useAuth();
   const [stats, setStats, statsHydrated] = useLocalStorage<UserStats>(
     "rc_lab_stats_v2",
@@ -68,6 +85,10 @@ export function RcProvider({ children }: { children: ReactNode }) {
     "rc_lab_vocabulary_v2",
     initialVocabulary
   );
+
+  // Active Session Navigation Guard State
+  const [activeSession, setActiveSession] = useState<ActiveSessionData | null>(null);
+  const [pendingNavUrl, setPendingNavUrl] = useState<string | null>(null);
 
   // Synchronize dark mode class on document.documentElement
   useEffect(() => {
@@ -231,6 +252,10 @@ export function RcProvider({ children }: { children: ReactNode }) {
         recentAttempts,
         vocabulary,
         isHydrated,
+        activeSession,
+        setActiveSession,
+        pendingNavUrl,
+        setPendingNavUrl,
         getPassageById,
         updateSettings,
         togglePassageFlag,
@@ -242,6 +267,72 @@ export function RcProvider({ children }: { children: ReactNode }) {
       }}
     >
       {children}
+
+      {/* Universal Notice Dialog when navigating away during active session */}
+      {pendingNavUrl && activeSession && (
+        <Modal
+          isOpen={true}
+          onClose={() => setPendingNavUrl(null)}
+          title={`Leave Active ${activeSession.type === "mock" ? "Mock Exam" : "RC Practice"}?`}
+          maxWidth="md"
+        >
+          <div className="space-y-4 pt-1">
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/40 p-4 border border-amber-200 dark:border-amber-900/60 text-xs text-amber-900 dark:text-amber-200 space-y-2">
+              <div className="flex items-center gap-2 font-bold font-serif text-sm text-amber-800 dark:text-amber-300">
+                <AlertTriangle className="h-4 w-4 text-amber-600 shrink-0" />
+                <span>Active Timed Session in Progress</span>
+              </div>
+              <p className="leading-relaxed font-sans text-xs">
+                You are currently in an active session on <strong>&ldquo;{activeSession.title}&rdquo;</strong>.
+                Would you like to save your reading pace &amp; answers so far, discard this session, or stay and continue?
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 text-xs">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setPendingNavUrl(null)}
+                className="text-xs order-3 sm:order-1"
+              >
+                Stay &amp; Continue
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  const target = pendingNavUrl;
+                  const onDiscard = activeSession.onDiscardAndExit;
+                  setPendingNavUrl(null);
+                  setActiveSession(null);
+                  if (onDiscard) onDiscard(target);
+                  router.push(target);
+                }}
+                className="text-xs text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:text-rose-700 order-2"
+              >
+                Discard &amp; Exit
+              </Button>
+              <Button
+                type="button"
+                size="sm"
+                onClick={() => {
+                  const target = pendingNavUrl;
+                  const onSave = activeSession.onSaveAndExit;
+                  setPendingNavUrl(null);
+                  setActiveSession(null);
+                  if (onSave) onSave(target);
+                  router.push(target);
+                }}
+                className="text-xs bg-zinc-900 text-zinc-50 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 font-semibold shadow-sm order-1 sm:order-3"
+              >
+                Save Progress &amp; Exit
+              </Button>
+            </div>
+          </div>
+        </Modal>
+      )}
     </RcContext.Provider>
   );
 }

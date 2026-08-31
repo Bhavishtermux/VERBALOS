@@ -12,13 +12,22 @@ import { Button } from "@/components/ui/button";
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const { stats, settings } = useRc();
+  const { stats, settings, activeSession, setPendingNavUrl } = useRc();
 
   return (
     <>
       {/* Mobile Top Header */}
       <div className="flex md:hidden h-14 items-center justify-between border-b border-zinc-200/80 bg-white px-4 dark:border-zinc-800 dark:bg-zinc-950">
-        <Link href="/dashboard" className="flex items-center gap-2">
+        <Link
+          href="/dashboard"
+          onClick={(e) => {
+            if (activeSession?.isActive) {
+              e.preventDefault();
+              setPendingNavUrl("/dashboard");
+            }
+          }}
+          className="flex items-center gap-2"
+        >
           <div className="flex h-7 w-7 items-center justify-center rounded-md overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-sm shrink-0">
             <img src="/logo.png" alt="VerbalOS Logo" className="h-full w-full object-contain p-0.5" />
           </div>
@@ -77,7 +86,15 @@ export function MobileNav() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => {
+                    if (activeSession?.isActive) {
+                      e.preventDefault();
+                      setIsOpen(false);
+                      setPendingNavUrl(item.href);
+                    } else {
+                      setIsOpen(false);
+                    }
+                  }}
                   className={cn(
                     "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
                     isActive
@@ -115,6 +132,12 @@ export function MobileNav() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={(e) => {
+                if (activeSession?.isActive) {
+                  e.preventDefault();
+                  setPendingNavUrl(item.href);
+                }
+              }}
               className={cn(
                 "flex flex-col items-center justify-center py-1 px-2 text-[10px] font-medium transition-colors",
                 isActive

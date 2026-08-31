@@ -20,6 +20,7 @@ import {
   Eye,
 } from "lucide-react";
 import { useAuth } from "@/context/auth-context";
+import { useRc } from "@/context/rc-context";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -52,12 +53,38 @@ interface FlatMockQuestion {
 
 export default function VARCMocksPage() {
   const { user } = useAuth();
+  const { setActiveSession } = useRc();
 
   const [activeMock, setActiveMock] = useState<VARCMockConfig | null>(null);
   const [isTestActive, setIsTestActive] = useState(false);
   const [showExitModal, setShowExitModal] = useState(false);
   const [flatQuestions, setFlatQuestions] = useState<FlatMockQuestion[]>([]);
   const [currentQIndex, setCurrentQIndex] = useState(0);
+
+  // Synchronize Active Session Guard with Global Layout (Sidebar/Mobile Nav)
+  useEffect(() => {
+    if (isTestActive && activeMock) {
+      setActiveSession({
+        isActive: true,
+        title: activeMock.title,
+        type: "mock",
+        onSaveAndExit: () => {
+          handleFinalSubmit();
+        },
+        onDiscardAndExit: () => {
+          setIsTestActive(false);
+          if (timerRef.current) clearInterval(timerRef.current);
+          setActiveMock(null);
+        },
+      });
+    } else {
+      setActiveSession(null);
+    }
+
+    return () => {
+      setActiveSession(null);
+    };
+  }, [isTestActive, activeMock, setActiveSession]);
 
   // Per-question state array
   const [questionStates, setQuestionStates] = useState<Record<number, MockQuestionState>>({});
