@@ -94,7 +94,7 @@ export default function DashboardPage() {
 
   // Personalized Rule-Based Recommendations
   const recommendations: PracticeRecommendation[] = analytics
-    ? generateRecommendations(analytics, rcPassages).recommendations
+    ? generateRecommendations(analytics, rcPassages)?.recommendations || []
     : [];
 
   const displayName = profile?.displayName || user?.email?.split("@")[0] || "Aspirant";
