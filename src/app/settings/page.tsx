@@ -442,6 +442,7 @@ export default function SettingsPage() {
         isOpen={isResetModalOpen}
         onClose={() => setIsResetModalOpen(false)}
         title="Reset All Practice Progress?"
+        maxWidth="md"
       >
         <div className="space-y-4 pt-1">
           <div className="rounded-lg bg-rose-50 dark:bg-rose-950/50 p-3.5 border border-rose-200 dark:border-rose-900 text-xs text-rose-900 dark:text-rose-200 space-y-2">

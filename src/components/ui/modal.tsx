@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
@@ -24,6 +25,12 @@ export function Modal({
   className,
   maxWidth = "lg",
 }: ModalProps) {
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -38,7 +45,7 @@ export function Modal({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
   const maxWidthClasses = {
     sm: "max-w-sm",
@@ -50,26 +57,26 @@ export function Modal({
     "4xl": "max-w-4xl",
   }[maxWidth];
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+  const modalContent = (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 animate-ios-slide-up">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/40 backdrop-blur-[2px] transition-opacity"
+        className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       />
 
       {/* Modal Dialog Box */}
       <div
         className={cn(
-          "relative z-50 w-full overflow-hidden rounded-xl border border-zinc-200/80 bg-white p-6 text-zinc-950 shadow-xl dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-50 max-h-[90vh] flex flex-col",
+          "relative z-[101] w-full overflow-hidden rounded-[8px] border border-zinc-200 bg-white p-5 sm:p-6 text-zinc-950 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-50 max-h-[85vh] flex flex-col my-auto",
           maxWidthClasses,
           className
         )}
       >
-        <div className="flex items-start justify-between pb-4 border-b border-zinc-100 dark:border-zinc-800">
+        <div className="flex items-start justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800">
           <div>
             {title && (
-              <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+              <h2 className="text-base sm:text-lg font-serif font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
                 {title}
               </h2>
             )}
@@ -83,7 +90,7 @@ export function Modal({
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="h-7 w-7 rounded-full text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+            className="h-7 w-7 rounded-[4px] text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 shrink-0"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -93,4 +100,6 @@ export function Modal({
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 }
