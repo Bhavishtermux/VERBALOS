@@ -219,20 +219,20 @@ export default function HomePage() {
                 A rigorous, distraction-free environment engineered exclusively for CAT aspirants. Dense philosophical, economic, and sociopolitical prose from <strong>Aeon Essays</strong>, <strong>The Atlantic</strong>, and <strong>The Hindu</strong> — coupled with real-time WPM calibration and cognitive trap taxonomy.
               </p>
 
-              {/* Action Buttons */}
+              {/* Action Buttons (User POV) */}
               <div className="pt-2 flex flex-wrap items-center gap-3 font-mono text-xs">
                 <Link
                   href={user ? "/dashboard" : "/login"}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[4px] font-semibold bg-zinc-900 text-zinc-50 hover:bg-[#C83214] dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-[#C83214] dark:hover:text-white ios-tap shadow-sm"
                 >
-                  <span>{user ? "OPEN DASHBOARD" : "LAUNCH PRACTICE OS →"}</span>
+                  <span>{user ? "CONTINUE PRACTICE →" : "START FREE VARC DRILL →"}</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
                   href={user ? "/library" : "/login"}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[4px] border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:border-zinc-900 dark:hover:border-zinc-100 ios-tap"
                 >
-                  <span>EXPLORE RC LIBRARY</span>
+                  <span>EXPLORE PASSAGE LIBRARY</span>
                   <ArrowUpRight className="h-3.5 w-3.5" />
                 </Link>
               </div>
@@ -738,7 +738,7 @@ export default function HomePage() {
               href={user ? "/dashboard" : "/login"}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-[4px] font-mono text-xs font-bold bg-[#C83214] text-white hover:bg-[#b02c12] ios-tap shadow-md"
             >
-              <span>{user ? "GO TO DASHBOARD" : "START PRACTICING NOW"}</span>
+              <span>{user ? "CONTINUE PRACTICE →" : "BEGIN FREE VARC PREPARATION →"}</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
