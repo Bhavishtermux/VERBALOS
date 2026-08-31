@@ -975,4 +975,1103 @@ Authentic ecological art in the Anthropocene cannot offer easy catharsis or harm
       },
     ],
   },
+  {
+    id: "rc-11",
+    title: "Marine Symbiosis and the Durusdinium Dilemma",
+    source: "OptimaLearn / Nature Ecology",
+    author: "Ed Yong & Andrew Baker",
+    topic: "Science",
+    difficulty: "CAT Standard",
+    wordCount: 780,
+    estimatedMinutes: 8,
+    completed: false,
+    flaggedForReview: false,
+    content: `In 1879, the German botanist Anton de Bary coined the term symbiosis. People usually think of symbiosis in terms of mutually beneficial relationships, but scientifically it's a catch-all for any relationship—harmonious or antagonistic, parasitic or neighborly—between two different organisms. The details are left unclear.
+
+Just two years later, while studying marine creatures under a microscope, de Bary’s compatriot Karl Andreas Heinrich Brandt realized that the small amber orbs lining their digestive tissues were not part of them, but a type of symbiotic algae. Brandt gave the cells the name “zooxanthellae,” which roughly means “little yellow cell in an animal.” Among the creatures in whom zooxanthellae live are coral, and in the ensuing century scientists discovered that those little yellow cells donate a whopping 90 percent of the sugar they make from photosynthesis to their coral hosts. That energy is why coral colonies—which themselves are aggregations of pencil-eraser-sized polyps—can build reefs so immense they can be seen from outer space.
+
+Because zooxanthellae lack physical characteristics that distinguish them from one another, there was no visible way to tell if they were different species, even at high magnification. Rowan realized that their DNA had the power to reveal what microscopes could not. Experiments showed that juvenile coral hosting Durusdinium grew two to three times slower than their siblings hosting other symbionts. Subsequent work found that corals receive only about half as much sugar from Durusdinium as from other species of zooxanthellae.
+
+Some researchers suggested that Durusdinium were, as one paper put it, “selfish opportunists” taking advantage of compromised coral to replace their more-beneficial competitors. Yet Andrew Baker, a coral biologist at the University of Miami, believes that people have been maybe too willing to label Durusdinium as being selfish. There are many competing ideas. One hypothesis suggests that because Durusdinium abundance is comparatively low—a coral hosting them may contain several hundred, whereas thousands of Breviolum or Cladocopium dwell within each of their coral hosts—they give the impression of selfishness, but on a per-cell basis supply just as much sugar. “It could be that Durusdinium are doing the best they can, you know?” Baker says.
+
+Then there’s the so-called Tenacious D hypothesis, which proposes that Durusdinium isn’t necessarily heat-tolerant. Rather, they evade notice by coral immune systems, which play a role in the bleaching process and may become more reactive during periods of heat-induced stress.
+
+If Durusdinium were selfish, they would act like parasites, feeding their host just barely enough to keep it alive. There’s some evidence for this: Baker and his colleagues followed the fates of more than 100 corals around the central Pacific island of Kiribati during a severe, 10-month-long heat wave. As expected, corals already hosting Durusdinium didn’t bleach—but few survived. Perhaps they were too weakened by Durusdinium’s sparse rations to withstand the stress. However, the study also followed colonies that hosted Cladocopium before the heatwave. As expected, they bleached, but then shifted to Durusdinium and more of these colonies survived. Selfishness is a complicated thing; it depends a lot on context.`,
+    questions: [
+      {
+        id: "q-11-1",
+        type: "Cannot Be Inferred",
+        questionText: "All of the following reflect the scientific meaning of Symbiosis as defined in the passage, EXCEPT:",
+        options: [
+          "A squirrel living in a tree hollow and feeding on its acorns.",
+          "A hawk pursuing and preying upon a field mouse.",
+          "A remora fish attaching itself to a shark and scavenging its leftover scraps.",
+          "Barnacles anchoring themselves to the skin of migrating whales.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Symbiosis requires a sustained relationship (parasitic, mutualistic, or commensal) between two organisms. A brief predator-prey interaction (hawk preying on a mouse) does not constitute a symbiotic association.",
+      },
+      {
+        id: "q-11-2",
+        type: "Inference",
+        questionText: "The author of the passage would agree that all of the following inferences are FALSE, EXCEPT:",
+        options: [
+          "Zooxanthellae are solely responsible for constructing coral reefs visible from space without polyp contribution.",
+          "Coral reefs are the macro-scale structural outcome of coral polyps metabolically powered by algal photosynthetic donations.",
+          "Zooxanthellae cells line exclusively the external outer skin of marine polyps rather than digestive tissues.",
+          "Durusdinium always acts as an obligate, fatal parasite under all oceanic environmental conditions.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 2 explains that zooxanthellae donate up to 90% of photosynthetic sugar to coral polyps, enabling pencil-eraser-sized polyps to construct colossal reef aggregations.",
+      },
+      {
+        id: "q-11-3",
+        type: "Main Idea",
+        questionText: "What explains the primary divergence between the researchers who label Durusdinium as 'selfish opportunists' and Andrew Baker's perspective?",
+        options: [
+          "Researchers believe Durusdinium provides more total sugar than Breviolum, whereas Baker disputes this.",
+          "Researchers emphasize the lower overall sugar received by the host coral, while Baker suggests the low cell abundance distorts perceived per-cell efficiency.",
+          "Baker argues that Durusdinium causes coral bleaching, whereas previous researchers believed it prevented it.",
+          "Researchers maintain that zooxanthellae are physically indistinguishable, while Baker discovered visible differences under microscopy.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 4 states researchers view Durusdinium as selfish due to lower host sugar, while Baker hypothesizes that lower absolute population density gives a false impression of individual cell selfishness.",
+      },
+      {
+        id: "q-11-4",
+        type: "Detail",
+        questionText: "According to the passage, what does the 'Tenacious D' hypothesis specifically propose regarding Durusdinium?",
+        options: [
+          "Durusdinium survives extreme heat by producing heat-shock proteins that insulate the coral genome.",
+          "Durusdinium avoids triggering heightened host immune reactions during thermal stress rather than possessing inherent thermal immunity.",
+          "Durusdinium actively attacks competing Cladocopium colonies during oceanic cold snaps.",
+          "Durusdinium multiplies faster in juvenile corals than in mature adult colonies.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 5 specifies that under the Tenacious D hypothesis, Durusdinium 'evade notice by coral immune systems, which play a role in the bleaching process and may become more reactive during periods of heat-induced stress.'",
+      },
+    ],
+  },
+  {
+    id: "rc-12",
+    title: "The World Color Survey: Universalism and Linguistic Relativism",
+    source: "OptimaLearn / The Atlantic",
+    author: "Brent Berlin & Paul Kay",
+    topic: "Philosophy",
+    difficulty: "CAT",
+    wordCount: 810,
+    estimatedMinutes: 8,
+    completed: false,
+    flaggedForReview: false,
+    content: `A debate sits at the center of an ongoing war in the world of color research. On the one side stand “universalists,” including the authors of The World Color Survey and their colleagues, who believe in a conformity of human perceptual experience: that all people see and name colors in a somewhat consistent way. On the other side are “relativists,” who believe in a spectrum of experience and who are often offended by the very notion that a Westerner's sense of color might be imposed on the interpretation of other cultures and languages. Many researchers, like Alexandre Surrallés, say they stand in the middle: While there are some universals in human perception, Surrallés argues, color terms don’t seem to be among them.
+
+It is almost incomprehensible at first to imagine that the rainbow is not viewed similarly by all people, that there might be more, or fewer, colors in the world than we thought, or that someone might not bother to give colors a name. And yet once one gets beyond the initial, startling blow of these ideas, they begin to seem obvious. There are, after all, no actual lines in a real rainbow. There’s no reason to think that orange is any more or less a legitimate color than, say, cyan, or that one culture’s list of colors is more “real” than another’s.
+
+In the early 1960s, Paul Kay met Brent Berlin. Both were anthropologists, and they each had done fieldwork for their graduate research with two totally different and unrelated peoples: Kay with Tahitians in the South Pacific and Berlin with the Tzeltal of the Mexican highlands. In comparing notes, they realized a strange coincidence. Both researchers had assumed that it would be very hard to learn the local words for colors, since the textbooks at that time said that different cultures would divide up the color spectrum essentially “on a whim,” says Kay. A given culture might have any number of words for different kinds of red, for example, or not distinguish red from yellow, without much rhyme or reason. Yet both researchers had found most of the colors in the languages of the peoples they were studying to be roughly the same as in English, with one major exception: Each language had only a single word for green and blue (a category linguists now refer to as 'grue'). 'We were just chatting one day and discovered we had the same experience, and we just thought, “Wow, everything we were taught was wrong,”' remembers Kay.
+
+When looking for evidence of a universal experience of color, one might wonder if there’s something hard-wired in the human eye that shapes our color perception. There doesn’t seem to be a simple connection. Most of us have three types of cones, or light receptors, that are optimized to detect different wavelengths of light. With these, most people can distinguish millions of distinct shades, though of course we don’t have names for them all, and whether we see exactly the same things as each other remains deeply debatable.`,
+    questions: [
+      {
+        id: "q-12-1",
+        type: "Inference",
+        questionText: "Which of the following statements can be most logically inferred from the passage's discussion of color research?",
+        options: [
+          "The human retina is physiologically incapable of perceiving millions of distinct color gradations without formal linguistic categories.",
+          "Linguistic color terminology does not strictly map onto the physical continuity of the electromagnetic spectrum in an identical fashion across all cultures.",
+          "Universalists have successfully proven that all languages share exactly eleven basic color terms.",
+          "Relativists contend that physiological differences in retinal cones account for cultural variations in color vocabulary.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The author points out that rainbows have no discrete boundaries, and cultures partition this continuous sensory spectrum differently, even while sharing core neurobiological equipment.",
+      },
+      {
+        id: "q-12-2",
+        type: "Detail",
+        questionText: "Why did Paul Kay recall that 'everything we were taught was wrong' after comparing notes with Brent Berlin?",
+        options: [
+          "Because Tahitians and the Tzeltal possessed dozens of unpredictable words for every minor shade of red.",
+          "Because textbooks predicted random, whimsical divisions of color across cultures, yet both languages showed structured similarities with English.",
+          "Because both cultures completely lacked any concept of color or visual categorization.",
+          "Because the Tzeltal language distinguished more colors than modern English.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 3 notes textbooks taught that cultures divide color 'on a whim,' yet Kay and Berlin discovered systematic, structured patterns across vastly distant cultures.",
+      },
+      {
+        id: "q-12-3",
+        type: "Main Idea",
+        questionText: "Which of the following best summarizes the difference between universalists and relativists as presented in the text?",
+        options: [
+          "Universalists believe color perception is governed by shared perceptual conformity, while relativists argue color categorization is shaped by culture and language.",
+          "Universalists argue that Western color terms are flawed, while relativists defend Western terminology.",
+          "Universalists focus on physical rainbow lines, while relativists analyze human retinal cones.",
+          "Universalists claim color is an illusion, while relativists argue color is an objective physical reality.",
+        ],
+        correctOptionIndex: 0,
+        explanation: "Paragraph 1 contrasts universalists (conformity of perceptual experience) with relativists (spectrum of experience mediated by cultural and linguistic contexts).",
+      },
+      {
+        id: "q-12-4",
+        type: "Purpose",
+        questionText: "What is the primary rhetorical purpose of using the example of a rainbow in paragraph 2?",
+        options: [
+          "To demonstrate that color terms correspond to precise, measurable physical dividers in atmospheric optics.",
+          "To illustrate that the natural continuous spectrum does not contain intrinsic boundaries, making cultural category-drawing arbitrary.",
+          "To prove that optical illusions prevent human beings from agreeing on aesthetic judgements.",
+          "To refute the existence of secondary colors like cyan and orange.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 2 uses the rainbow ('no actual lines in a real rainbow') to show that discrete color categories are cognitive and cultural impositions on continuous physical reality.",
+      },
+    ],
+  },
+  {
+    id: "rc-13",
+    title: "The Folly of Technological Solutionism and Internet-Centrism",
+    source: "OptimaLearn / Aeon",
+    author: "Evgeny Morozov",
+    topic: "Technology",
+    difficulty: "CAT+",
+    wordCount: 840,
+    estimatedMinutes: 9,
+    completed: false,
+    flaggedForReview: false,
+    content: `Evgeny Morozov gained notoriety as a skeptic of Silicon Valley's messianic rhetoric with his book The Net Delusion, in which he argued that technology enthusiasts or “cyber-utopians” had oversold the liberatory potential of the Internet. In To Save Everything, Click Here: The Folly of Technological Solutionism, he presents a polemical critique of those who too readily embrace digital technology as an all-purpose solvent for complex human predicaments.
+
+Morozov writes against what he calls “technological solutionism”—an endemic ideology that recasts complex social phenomena like politics, public health, education, and law enforcement as “neatly defined problems with definite, computable solutions or as transparent and self-evident processes that can be easily optimized—if only the right algorithms are in place!”
+
+While human problem-solving has always utilized tools, Morozov argues that contemporary solutionism is fundamentally distinct due to the proliferation of ubiquitous sensors, mobile tracking, and pervasive algorithmic infrastructure. Inefficiency, ambiguity, and opacity—qualities that often serve vital democratic functions by allowing room for political negotiation, privacy, and civic friction—are suddenly re-diagnosed as structural flaws that must be eradicated. The motivation to intervene stems not from profound insights in political philosophy or jurisprudence, but from the mere availability of problem-solving gadgets: because we can monitor and optimize every micro-behavior, we feel an urge to govern through code rather than democratic deliberation.
+
+Furthermore, Morozov targets “Internet-centrism”—the tendency to collapse disparate computing tools, networking protocols, and commercial platforms under the monolithic banner of 'the Internet' and ascribe to it an autonomous, uniform governing dynamic. Pundits and cyber-theorists speak of 'what the Internet wants' or 'how the Internet changes society,' ignoring the historically contingent, commercially motivated, and politically contested nature of digital architectures.`,
+    questions: [
+      {
+        id: "q-13-1",
+        type: "Main Idea",
+        questionText: "According to the passage, what is Morozov's primary critique of 'technological solutionism'?",
+        options: [
+          "It fails to deploy sufficient computational power to resolve macroeconomic volatility.",
+          "It inappropriately recasts nuanced political and social dilemmas into simplistic, algorithmic optimization tasks.",
+          "It underestimates the economic profitability of mobile apps and wearable sensors.",
+          "It relies on outdated pre-digital hardware to solve modern legal dilemmas.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 2 defines solutionism as recasting complex social and political phenomena as neatly computable problems easily optimized by algorithms.",
+      },
+      {
+        id: "q-13-2",
+        type: "Inference",
+        questionText: "Based on the text, why does Morozov consider 'inefficiency, ambiguity, and opacity' potentially valuable in a democracy?",
+        options: [
+          "Because they prevent computers from consuming excessive electrical power.",
+          "Because they provide necessary space for civic friction, political compromise, and individual privacy.",
+          "Because they force citizens to buy more software products.",
+          "Because they eliminate all technological progress in governance.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 3 notes that inefficiency, ambiguity, and opacity serve vital democratic functions by allowing room for political negotiation, privacy, and civic friction.",
+      },
+      {
+        id: "q-13-3",
+        type: "Detail",
+        questionText: "In Morozov's view, what is the core fallacy of 'Internet-centrism'?",
+        options: [
+          "Assuming that smartphones are faster than desktop computing terminals.",
+          "Treating diverse digital technologies as a single monolithic entity with an inherent, inevitable developmental destiny.",
+          "Refusing to invest enough venture capital into Silicon Valley startups.",
+          "Overestimating the speed of optical fiber broadband networks.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 4 explains Internet-centrism as collapsing disparate technologies under the monolithic 'Internet' and attributing to it an autonomous, uniform dynamic.",
+      },
+      {
+        id: "q-13-4",
+        type: "Tone",
+        questionText: "The author's tone toward cyber-utopians who claim algorithms can resolve all social friction can best be described as:",
+        options: [
+          "Vigorously critical and skeptical of reductionist claims.",
+          "Whimsical and mildly supportive of Silicon Valley venture initiatives.",
+          "Resigned to the inevitable triumph of automated governance.",
+          "Apathetic regarding the intersection of code and civic life.",
+        ],
+        correctOptionIndex: 0,
+        explanation: "The passage presents a sharp critique of 'technological solutionism' and 'folly,' characterizing cyber-utopian claims as reductionist and intellectually flawed.",
+      },
+    ],
+  },
+  {
+    id: "rc-14",
+    title: "Evolutionary Priors and Gravity Predisposition in Newborn Cognition",
+    source: "OptimaLearn / Cognitive Science",
+    author: "Dr. Elisa Raffaella Ferrè",
+    topic: "Psychology",
+    difficulty: "CAT",
+    wordCount: 760,
+    estimatedMinutes: 7,
+    completed: false,
+    flaggedForReview: false,
+    content: `In a laboratory in London, newborn chicks took the first steps of their lives and unwittingly helped illuminate one of cognitive neuroscience's fundamental questions: How much of our understanding of the physical world is hardwired from birth? In a controlled experiment, researchers placed chicks, hatched in complete darkness with zero prior visual experience, into a testing apparatus with two opposing screens. One screen displayed an orange ball moving upward (against gravity), while the opposite screen displayed a ball moving downward. Tracking software revealed that over 20 minutes, the chicks consistently approached and lingered near the screen displaying upward movement.
+
+Biologists call the neural mechanisms that guide animals in their earliest moments “evolutionary predispositions” or “priors.” These neural templates are encoded into the genome through natural selection, providing perceptual biases before any individual lived experience can occur.
+
+Dr. Elisa Raffaella Ferrè, a cognitive neuroscientist investigating how brains adapt to gravitational fields, selected newborn chicks precisely because human infants develop motor and perceptual skills gradually. By the time a human infant can reach for or orient toward stimuli, extensive postnatal learning has already contaminated the observation of pure innate predispositions. Chicks, by contrast, are precocial: they emerge ready to walk and forage almost immediately.
+
+Why should a newborn organism exhibit an innate preference for objects moving against gravity? The researchers hypothesize that in the natural ecological niche, inanimate physical matter (waterfalls, falling stones, tumbling fruit) almost universally moves downward in accordance with gravity. Consistent, sustained motion upward against gravity is overwhelmingly the hallmark of self-propelled, living biological agents—potential mothers, conspecifics, predators, or prey. An innate prior directing visual attention toward anti-gravitational movement thus provides a vital survival heuristic.`,
+    questions: [
+      {
+        id: "q-14-1",
+        type: "Main Idea",
+        questionText: "What is the primary conclusion established by the chick experiment described in the passage?",
+        options: [
+          "Animals require extensive visual training in infancy before they can distinguish vertical motion.",
+          "Newborn organisms possess innate evolutionary priors that direct attention toward anti-gravitational movement without prior learning.",
+          "Chicks are more cognitively sophisticated than human infants across all developmental domains.",
+          "Gravitational acceleration on Earth has altered the genetic code of domestic fowl over the past century.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 1 and 2 summarize the core finding: naive chicks hatched in total darkness innately prefer upward motion, proving the existence of hardwired evolutionary priors.",
+      },
+      {
+        id: "q-14-2",
+        type: "Detail",
+        questionText: "Why were newly hatched chicks chosen as experimental subjects over human infants?",
+        options: [
+          "Human infants are unable to distinguish colors like orange and blue.",
+          "Chicks are precocial and capable of independent motion before postnatal environmental learning occurs.",
+          "Chicks possess larger cerebral cortices relative to their body weight than human infants.",
+          "Human infants have no evolutionary priors regarding physical forces.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 3 explains that human infants take months to move and learn, contaminating tests for pure innateness, whereas precocial chicks walk immediately with zero prior experience.",
+      },
+      {
+        id: "q-14-3",
+        type: "Inference",
+        questionText: "According to the ecological hypothesis presented in the final paragraph, why is motion against gravity associated with living creatures?",
+        options: [
+          "Living creatures possess lighter biological tissue that defies Newtonian mechanics.",
+          "Inanimate objects invariably follow passive gravitational paths downward, whereas autonomous biological agents self-propel upward.",
+          "Predators only attack prey when moving down sloping terrain.",
+          "Gravity affects only inanimate stones and waterfalls.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 4 explains that inanimate objects fall with gravity, so self-propelled upward movement is an ecological indicator of an animate, living organism.",
+      },
+      {
+        id: "q-14-4",
+        type: "Author's Purpose",
+        questionText: "The primary purpose of the passage is to:",
+        options: [
+          "Critique Dr. Ferrè's methodology in avian neurological testing.",
+          "Explain an empirical discovery demonstrating innate gravitational priors in newborn cognition and its evolutionary logic.",
+          "Advocate for the abolition of behavioral research on domesticated birds.",
+          "Argue that human cognition is entirely derived from postnatal sensory empiricism.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The author explains the setup, results, methodological rationale, and evolutionary significance of the London chick experiment.",
+      },
+    ],
+  },
+  {
+    id: "rc-15",
+    title: "The Iron Cage: Rationalization and the Bureaucratic Leviathan",
+    source: "The Hindu / Sociology",
+    author: "Max Weber (Annotated by Raymond Aron)",
+    topic: "Sociology",
+    difficulty: "CAT+",
+    wordCount: 860,
+    estimatedMinutes: 9,
+    completed: false,
+    flaggedForReview: false,
+    content: `For Max Weber, the defining trajectory of Western modernity was not the expansion of democratic enfranchisement or the triumph of technological mastery, but the inexorable process of rationalization—the systematic reorganization of social life according to principles of calculability, efficiency, and formal rule-bound procedure. This transformation swept away traditional modes of legitimacy (grounded in ancestral sanctity) and charismatic authority (vested in the magnetic grace of exceptional leaders), replacing them with the cool, impersonal machinery of rational-legal bureaucracy.
+
+Weber recognized that bureaucracy represents the technically most efficient form of human administration. Just as machine production outclasses handicraft in material output, so too does bureaucratic organization surpass traditional patrimonial governance in precision, speed, unambiguity, continuity, and cost reduction. Its hallmark is formal impersonality: officials execute tasks sine ira et studio—without passion or resentment, treating individuals as standardized cases rather than unique human beings.
+
+Yet Weber was profoundly ambivalent about this triumph. He warned of the 'disenchantment of the world' (Entzauberung)—the eradication of myth, mystery, and transcendent meaning from public life as all phenomena are subordinated to quantitative calculation. More perilously, Weber distinguished between formal rationality (the optimization of means toward any given end) and substantive rationality (the evaluation of ends themselves according to ultimate human values like justice, freedom, or dignity).
+
+When formal rationality eclipses substantive rationality, bureaucracy ceases to be a servant of human flourishing and becomes an autonomous institutional prison—what Weber famously characterized as the 'iron cage' (stahlhartes Gehäuse). In this mechanized order, individuals are reduced to specialized cogs in administrative apparatuses, stripped of genuine ethical autonomy. Society produces 'specialists without spirit, sensualists without heart,' trapped inside institutional architectures that perpetuate themselves regardless of human need.`,
+    questions: [
+      {
+        id: "q-15-1",
+        type: "Central Argument",
+        questionText: "Which of the following best articulates Weber's central thesis regarding bureaucracy as described in the passage?",
+        options: [
+          "Bureaucracy is technically superior to traditional administration yet risks becoming an dehumanizing iron cage when formal calculability overrides substantive human values.",
+          "Charismatic leadership is ultimately more cost-effective and precise than rational-legal administrative machinery.",
+          "Modern democracy must immediately dismantle all bureaucratic organizations to restore ancestral sanctity.",
+          "Technological innovation has successfully preserved human ethical autonomy within modern institutions.",
+        ],
+        correctOptionIndex: 0,
+        explanation: "Paragraphs 2 to 4 emphasize that while bureaucracy is technically efficient, its formal rationality divorces means from human ends, trapping society in an iron cage.",
+      },
+      {
+        id: "q-15-2",
+        type: "Inference",
+        questionText: "Based on the distinction between 'formal rationality' and 'substantive rationality', which scenario best exemplifies formal rationality divorced from substantive rationality?",
+        options: [
+          "A medical board reallocating emergency funds specifically to eliminate preventable infant mortality.",
+          "An immigration department flawlessly executing deportations according to quotas while ignoring grave humanitarian consequences.",
+          "A community council convening a town hall to debate municipal educational philosophy.",
+          "A charismatic leader delivering an impassioned speech on spiritual rebirth.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Flawlessly optimizing bureaucratic procedural output (quotas/means) while completely disregarding human ethics (humanitarian crises/ends) is the textbook definition of formal rationality without substantive rationality.",
+      },
+      {
+        id: "q-15-3",
+        type: "Detail",
+        questionText: "What does the Latin phrase 'sine ira et studio' signify in Weber's model of bureaucratic functioning?",
+        options: [
+          "Administration characterized by intense personal loyalty and emotional passion.",
+          "Execution of official duties with strict formal impersonality, devoid of personal animosity or favoritism.",
+          "Governance based entirely on artistic intuition and philosophical debate.",
+          "The complete elimination of written records in public office.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 2 states: 'officials execute tasks sine ira et studio—without passion or resentment, treating individuals as standardized cases rather than unique human beings.'",
+      },
+      {
+        id: "q-15-4",
+        type: "Tone",
+        questionText: "The author's depiction of the modern 'iron cage' can best be described as:",
+        options: [
+          "Triumphalist regarding the inevitable perfection of administrative science.",
+          "Deeply elegiac and critical of the loss of human agency and spiritual meaning.",
+          "Indifferent to the psychological well-being of specialized workers.",
+          "Sarcastic toward those who value efficiency in institutional governance.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The text speaks with profound gravity about 'disenchantment,' 'autonomous institutional prison,' and 'specialists without spirit,' conveying an elegiac and critical tone.",
+      },
+    ],
+  },
+  {
+    id: "rc-16",
+    title: "The Structure of Scientific Revolutions and Paradigm Incommensurability",
+    source: "Aeon",
+    author: "Thomas S. Kuhn (Reflections by Ian Hacking)",
+    topic: "Philosophy",
+    difficulty: "CAT+",
+    wordCount: 840,
+    estimatedMinutes: 8,
+    completed: false,
+    flaggedForReview: false,
+    content: `Before Thomas Kuhn published The Structure of Scientific Revolutions in 1962, the dominant view of science was cumulative and positivist: science was understood as a steady, incremental accumulation of objective facts, steadily illuminating nature like a lamp progressively pushing back darkness. Kuhn shattered this linear narrative by arguing that scientific progress is punctuated by revolutionary ruptures that fundamentally rewrite how reality is perceived.
+
+Kuhn divided scientific history into two alternating phases: 'normal science' and 'revolutionary science.' During normal science, a research community works within an established 'paradigm'—a shared constellation of theoretical assumptions, experimental exemplars, and methodological rules. Normal science does not aim at novel discoveries; it is an enterprise of 'puzzle-solving,' fitting anomalous observations into the existing conceptual framework.
+
+Eventually, however, recalcitrant anomalies emerge that resist assimilation within the paradigm. When anomalies multiply and persist, the discipline enters a state of crisis. Confidence in the old paradigm crumbles, fostering unorthodox speculations until a new paradigm crystallizes.
+
+The transition from one paradigm to another is not a cumulative addition of facts, but a gestalt shift—a revolutionary conversion experience. Crucially, Kuhn asserted that competing paradigms are 'incommensurable': they cannot be directly compared against a neutral, objective observational standard. Because scientists operating in different paradigms work in different conceptual worlds, utilizing terms with subtly altered meanings and prioritizing different problems, there is no paradigm-independent algorithm for choosing between them. Science does not converge toward absolute ontological truth; rather, it evolves away from previous frameworks through periodic conceptual reorganizations.`,
+    questions: [
+      {
+        id: "q-16-1",
+        type: "Main Idea",
+        questionText: "Which of the following best summarizes Kuhn's thesis regarding scientific progress?",
+        options: [
+          "Scientific progress is a strictly linear accumulation of empirical facts governed by neutral mathematical verification.",
+          "Science advances through normal puzzle-solving punctuated by revolutionary paradigm shifts that are mutually incommensurable.",
+          "Anomalies in experimental data are always errors caused by inadequate laboratory instrumentation.",
+          "Theoretical physics has eliminated the need for paradigms in modern research.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 1 and 2 define Kuhn's core thesis: science is non-linear, operating through normal puzzle-solving punctuated by incommensurable revolutionary paradigm shifts.",
+      },
+      {
+        id: "q-16-2",
+        type: "Detail",
+        questionText: "According to Kuhn, what is the primary activity of researchers during periods of 'normal science'?",
+        options: [
+          "Attempting to falsify and overthrow reigning theoretical axioms.",
+          "Engaging in puzzle-solving to assimilate observations into the prevailing paradigm.",
+          "Debating fundamental philosophical definitions of truth and reality.",
+          "Constructing paradigm-neutral observational algorithms.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 2 explicitly states: 'Normal science does not aim at novel discoveries; it is an enterprise of “puzzle-solving,” fitting anomalous observations into the existing conceptual framework.'",
+      },
+      {
+        id: "q-16-3",
+        type: "Inference",
+        questionText: "Why did Kuhn argue that competing paradigms are 'incommensurable'?",
+        options: [
+          "Because scientists refuse to publish their laboratory findings in peer-reviewed journals.",
+          "Because there is no paradigm-independent observational language or neutral standard to objectively compare them.",
+          "Because older paradigms always have more mathematical equations than newer ones.",
+          "Because different scientific paradigms utilize completely different monetary currencies.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 4 explains incommensurability: competing paradigms cannot be directly compared because there is no neutral observational standard outside of all paradigms.",
+      },
+      {
+        id: "q-16-4",
+        type: "Author's Purpose",
+        questionText: "The primary purpose of the passage is to:",
+        options: [
+          "Defend 19th-century positivism against Kuhn's historical errors.",
+          "Explain Kuhn's revolutionary framework for understanding scientific transitions and paradigm incommensurability.",
+          "Prove that natural science is incapable of discovering technological applications.",
+          "Argue that revolutionary science is financially wasteful compared to normal science.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage articulates Kuhn's critique of positivism and breaks down his concepts of normal science, crisis, and incommensurable paradigm shifts.",
+      },
+    ],
+  },
+  {
+    id: "rc-17",
+    title: "The Structural Engine of Inequality: Capital vs Economic Growth",
+    source: "The Atlantic / Economics",
+    author: "Thomas Piketty & Paul Krugman",
+    topic: "Economics",
+    difficulty: "CAT",
+    wordCount: 820,
+    estimatedMinutes: 8,
+    completed: false,
+    flaggedForReview: false,
+    content: `In Capital in the Twenty-First Century, Thomas Piketty reoriented modern economics by deploying centuries of historical tax data to challenge the comforting postwar assumption that market capitalism naturally drives toward income equality. For decades, neoclassical economists clung to Simon Kuznets’ hypothesis: that while industrialization initially widens inequality, mature economic growth inevitably narrows the wealth gap as education spreads and technological productivity rises.
+
+Piketty demonstrated that the mid-twentieth-century compression of inequality was not an intrinsic structural feature of capitalism, but a historical anomaly engineered by the catastrophic wealth destruction of two World Wars, hyperinflation, and confiscatory top tax rates. Once those extraordinary disruptions subsided, capitalism naturally reverted to its baseline structural dynamic, encapsulated in the mathematical expression: r > g.
+
+Here, r represents the annual rate of return on capital (profits, dividends, real estate rents, financial yields), while g represents the overall economic growth rate (output and wage increases). When the rate of return on capital significantly outstrips the growth rate of the economy over prolonged periods, inherited and accumulated wealth multiplies faster than wages and output. Those who rely solely on wage labor fall inexorably behind those who own capital assets.
+
+The societal consequence is the resurgence of patrimonial capitalism—a social order reminiscent of nineteenth-century Belle Époque Europe or Gilded Age America, where dynastic inheritance eclipses meritocratic talent. When wealth concentration reaches extremes, it threatens the foundational legitimacy of democratic governance by converting financial dominance into political capture.`,
+    questions: [
+      {
+        id: "q-17-1",
+        type: "Main Idea",
+        questionText: "Which of the following best summarizes Piketty's central argument regarding wealth inequality?",
+        options: [
+          "Free markets automatically narrow inequality as technological education diffuses through the workforce.",
+          "When the rate of return on capital exceeds overall economic growth (r > g), accumulated wealth compounds faster than wages, driving structural inequality.",
+          "The mid-twentieth century proved that capitalism will permanently eradicate poverty without tax intervention.",
+          "Wage growth has permanently surpassed the financial returns generated by real estate and equity assets.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 2 and 3 state the core thesis: when r > g, capital yields outstrip wage growth, causing inherited wealth to compound and concentrating inequality.",
+      },
+      {
+        id: "q-17-2",
+        type: "Detail",
+        questionText: "According to Piketty, why did wealth inequality decrease significantly during the mid-twentieth century?",
+        options: [
+          "Due to natural market equilibrium predicted by Simon Kuznets.",
+          "Due to catastrophic war destruction, hyperinflation, and aggressive progressive taxation.",
+          "Because workers refused to accept wages lower than corporate executive compensation.",
+          "Because the rate of return on capital rose to unprecedented heights.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 2 explains that inequality compressed due to historical disruptions: destruction of capital in World Wars, inflation, and high postwar tax rates.",
+      },
+      {
+        id: "q-17-3",
+        type: "Inference",
+        questionText: "What is the primary sociopolitical danger of 'patrimonial capitalism' identified in the passage?",
+        options: [
+          "It forces corporations to invest too heavily in employee training programs.",
+          "It elevates dynastic inheritance above meritocratic talent and threatens democratic legitimacy through political capture.",
+          "It causes hyperinflation that destroys paper currency.",
+          "It eliminates all financial yields from stock markets and sovereign bonds.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 4 warns that patrimonial capitalism allows dynastic inheritance to eclipse meritocracy and enables extreme wealth to capture political governance.",
+      },
+      {
+        id: "q-17-4",
+        type: "Author's Purpose",
+        questionText: "The primary purpose of the text is to:",
+        options: [
+          "Celebrate the historical accuracy of Simon Kuznets' economic forecasting.",
+          "Explain Piketty's thesis on the structural divergence between capital returns and economic growth.",
+          "Advocate for the complete abolition of private property in mature economies.",
+          "Argue that wage labor is economically unnecessary in industrial societies.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage explains Piketty's critique of the Kuznets curve, his r > g formula, and the macroeconomic dynamics of wealth concentration.",
+      },
+    ],
+  },
+  {
+    id: "rc-18",
+    title: "Decolonising the Mind: The Politics of Language in African Literature",
+    source: "London Review of Books",
+    author: "Ngũgĩ wa Thiong'o",
+    topic: "Culture",
+    difficulty: "CAT",
+    wordCount: 810,
+    estimatedMinutes: 8,
+    completed: false,
+    flaggedForReview: false,
+    content: `Language is not merely a transparent conduit for the transmission of conceptual data; it is the collective memory bank of a people's historical experience, the living vessel of their cultural values, and the architecture through which they conceive of their ontological place in the universe. In Decolonising the Mind, Ngũgĩ wa Thiong'o argues that the most devastating weapon deployed by European imperialism was not the military Maxim gun or administrative subjugation, but the cultural bomb of linguistic alienation.
+
+The cultural bomb annihilates a colonized people's belief in their names, in their languages, in their environment, in their heritage of struggle, in their unity, in their capacities and ultimately in themselves. It makes them see their past as one wasteland of non-achievement and it makes them want to distance themselves from that wasteland. It makes them want to identify with that which is furthest removed from themselves; for instance, with other people's languages.
+
+In colonial Kenya, the imposition of English operated through a deliberate dual strategy: the elevation of the colonizer's tongue to the sole currency of prestige, intellect, and civic advancement, coupled with the systematic penalization of indigenous tongues like Gikuyu. Children caught speaking their mother tongue in schoolyards were publicly humiliated—forced to wear placards announcing their 'barbarism' or subjected to corporal punishment.
+
+Through this trauma, language was severed from lived experience. The child learned to associate harmony, literature, and intellect with an alien linguistic universe, while consigning their own ancestral heritage to inferiority. Ngũgĩ’s radical decision to cease writing novels in English and return to Gikuyu was not an act of narrow chauvinism, but a vital reclamation of epistemic sovereignty: an insistence that African literature must converse directly with the people whose labor sustains the continent.`,
+    questions: [
+      {
+        id: "q-18-1",
+        type: "Main Idea",
+        questionText: "Which of the following best expresses Ngũgĩ wa Thiong'o's central thesis as presented in the text?",
+        options: [
+          "English is the only language capable of conveying modern scientific and economic ideas in Africa.",
+          "Colonial linguistic imposition alienates colonized peoples from their cultural memory, making indigenous language reclamation essential for psychological liberation.",
+          "Military conquest was far more culturally destructive in Kenya than educational language policies.",
+          "European literature should be translated into indigenous languages without altering its themes.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 1 and 2 describe linguistic imposition as a 'cultural bomb' that alienates people from their memory, requiring decolonization through indigenous linguistic reclamation.",
+      },
+      {
+        id: "q-18-2",
+        type: "Detail",
+        questionText: "According to the passage, how was linguistic alienation enforced in colonial Kenyan schools?",
+        options: [
+          "By banning books written by European authors.",
+          "By rewarding students who translated Gikuyu poetry into English.",
+          "By publicly humiliating and punishing children caught speaking their native mother tongues.",
+          "By eliminating all English language instruction in primary grades.",
+        ],
+        correctOptionIndex: 2,
+        explanation: "Paragraph 3 details that children caught speaking their mother tongue were humiliated with placards and subjected to corporal punishment.",
+      },
+      {
+        id: "q-18-3",
+        type: "Inference",
+        questionText: "Why did Ngũgĩ decide to write his literary works in Gikuyu rather than English?",
+        options: [
+          "Because English publishing houses refused to distribute African novels.",
+          "To reclaim epistemic sovereignty and engage in direct cultural dialogue with indigenous communities.",
+          "Because Gikuyu grammar is simpler than English grammar.",
+          "To prevent European readers from accessing African historical narratives.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 4 explains his decision as 'a vital reclamation of epistemic sovereignty: an insistence that African literature must converse directly with the people.'",
+      },
+      {
+        id: "q-18-4",
+        type: "Tone",
+        questionText: "The author's tone in analyzing the 'cultural bomb' of linguistic colonization can best be described as:",
+        options: [
+          "Passionate, uncompromising, and deeply empathetic to the psychological trauma of the colonized.",
+          "Detached, clinical, and indifferent to postcolonial cultural politics.",
+          "Nostalgic for colonial administrative efficiency in Kenya.",
+          "Skeptical regarding the literary capacity of indigenous African tongues.",
+        ],
+        correctOptionIndex: 0,
+        explanation: "The language is evocative and resolute ('cultural bomb,' 'annihilates,' 'reclamation of epistemic sovereignty'), reflecting an uncompromising and empathetic tone.",
+      },
+    ],
+  },
+  {
+    id: "rc-19",
+    title: "The Asymmetry of Time: Quantum Decoherence and the Low-Entropy Origin",
+    source: "Nature / Physics",
+    author: "Sean Carroll",
+    topic: "Science",
+    difficulty: "CAT+",
+    wordCount: 850,
+    estimatedMinutes: 9,
+    completed: false,
+    flaggedForReview: false,
+    content: `Every fundamental law of microscopic physics—from Newton’s mechanics and Maxwell’s electrodynamics to Schrödinger’s wave equation and Einstein’s general relativity—is time-symmetric. If you film an elastic collision between two electrons and run the video in reverse, the reversed motion conforms precisely to the equations of physics. Yet in our macroscopic experience, time possesses a relentless, unidirectional arrow: eggs shatter but never reassemble, coffee cools to room temperature but never spontaneously absorbs ambient heat to boil, and we remember the past but remain ignorant of the future.
+
+This macroscopic asymmetry is explained by the Second Law of Thermodynamics: the total entropy of an isolated system never decreases over time. Ludwig Boltzmann demonstrated that entropy is a statistical measure of probability: there are vastly more microscopic configurations (microstates) that correspond to a disordered, high-entropy macroscopic state than to an ordered, low-entropy one. When an ice cube melts in warm water, the molecules are simply exploring phase space and naturally stumbling into the overwhelmingly most probable configurations.
+
+However, Boltzmann’s statistical formulation raises a profound cosmological riddle: Why was the universe in a state of extraordinarily low entropy in the first place? If maximum entropy is natural, our cosmos should have begun in thermal equilibrium—a featureless, lukewarm soup where no stars, galaxies, or living organisms could ever form. Physicists refer to the necessary boundary condition as the 'Past Hypothesis': the universe began in an exquisitely ordered, low-entropy state near the Big Bang.
+
+Contemporary quantum mechanics adds another layer to this mystery through the phenomenon of quantum decoherence. When a quantum system interacts with its macroscopic environment, its pure superpositions entangle with countless environmental degrees of freedom. This entanglement radiates quantum phase information irreversibly into the surrounding cosmos, producing the illusion of classical collapse and cementing the macroscopic arrow of time.`,
+    questions: [
+      {
+        id: "q-19-1",
+        type: "Main Idea",
+        questionText: "Which of the following best captures the central paradox of time discussed in the passage?",
+        options: [
+          "Quantum mechanics is time-asymmetric, while thermodynamics allows time to run backwards.",
+          "Microscopic laws of physics are time-symmetric, yet macroscopic reality exhibits an irreversible arrow of time driven by entropy and the Past Hypothesis.",
+          "The universe began in maximum thermal equilibrium and has steadily decreased in entropy ever since.",
+          "Ludwig Boltzmann proved that eggs can spontaneously reassemble if given sufficient time.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 1 and 2 contrast the time-symmetry of microscopic physical laws with the macroscopic arrow of time governed by entropy and initial cosmological conditions.",
+      },
+      {
+        id: "q-19-2",
+        type: "Detail",
+        questionText: "According to the passage, what is the 'Past Hypothesis' required by modern cosmology?",
+        options: [
+          "The assumption that physical laws were completely different before the 19th century.",
+          "The proposition that the universe began in an exquisitely ordered, low-entropy state near the Big Bang.",
+          "The theory that quantum decoherence only occurs in artificial laboratory environments.",
+          "The hypothesis that time will reverse its direction when galaxies collide.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 3 explicitly defines the Past Hypothesis: 'the universe began in an exquisitely ordered, low-entropy state near the Big Bang.'",
+      },
+      {
+        id: "q-19-3",
+        type: "Inference",
+        questionText: "How does quantum decoherence contribute to the macroscopic appearance of classical irreversibility?",
+        options: [
+          "By destroying environmental degrees of freedom in the vacuum of space.",
+          "By entangling quantum superpositions with the environment, dispersing phase information irreversibly.",
+          "By reversing the statistical probability calculations established by Boltzmann.",
+          "By converting thermal energy back into mechanical momentum.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 4 explains that quantum decoherence entangles superpositions with the environment and irreversibly disperses phase information, creating classical irreversibility.",
+      },
+      {
+        id: "q-19-4",
+        type: "Tone",
+        questionText: "The author's tone across the passage is best characterized as:",
+        options: [
+          "Rigorous, intellectually curious, and lucidly explanatory.",
+          "Dogmatic and dismissive of unresolved cosmological riddles.",
+          "Satirical toward thermodynamic models of entropy.",
+          "Confused and contradictory regarding Newtonian mechanics.",
+        ],
+        correctOptionIndex: 0,
+        explanation: "The writing is clear, analytically precise, and engagingly explores the profound mystery of the thermodynamic and quantum arrow of time.",
+      },
+    ],
+  },
+  {
+    id: "rc-20",
+    title: "Decentralized Urban Planning and Hydraulic Wisdom of the Harappans",
+    source: "Smithsonian / Archaeology",
+    author: "Jonathan Mark Kenoyer",
+    topic: "History",
+    difficulty: "CAT",
+    wordCount: 800,
+    estimatedMinutes: 8,
+    completed: false,
+    flaggedForReview: false,
+    content: `When twentieth-century archaeologists excavated the Bronze Age ruins of the Indus Valley civilization (c. 2600–1900 BCE) at Mohenjo-daro and Harappa, they anticipated uncovering the standard imperial monuments of the ancient world: opulent royal palaces, colossal militaristic citadels, and aggrandizing burial tombs celebrating divine god-kings, akin to those of pharaonic Egypt or dynastic Mesopotamia. Instead, they encountered an urban civilization that defied every conventional paradigm of ancient statehood.
+
+The hallmark of the Harappan civilization was not monumental grandeur, but civic egalitarianism, standardized urban infrastructure, and unparalleled hydraulic engineering. Across hundreds of settlements spanning modern Pakistan and northwestern India, Harappan cities adhered to a consistent grid layout oriented along cardinal directions. Houses were built with standardized baked bricks adhering to a precise 1:2:4 dimensional ratio—a degree of metrological uniformity spanning thousands of square kilometers.
+
+More extraordinary was their mastery of water. Harappan settlements possessed the ancient world's most sophisticated subterranean municipal drainage networks. Every private residence, regardless of scale, had a dedicated bathing room connected via terracotta conduits to covered street drains equipped with inspection sumps for sediment removal. In arid outposts like Dholavira in the Rann of Kutch, engineers excavated colossal rock-cut reservoirs interconnected by stone sluices to harvest and conserve seasonal monsoon torrents.
+
+Equally striking is the absence of evidence for a centralized, autocratic monarchy or a predatory standing army. Archaeological strata reveal no royal iconography, no mass weaponry, and no signs of warfare. Power appears to have been decentralized—governed perhaps by merchant guilds, civic councils, or shared socio-religious norms that prioritized public health, trade logistics, and civic equity over autocratic self-aggrandizement.`,
+    questions: [
+      {
+        id: "q-20-1",
+        type: "Main Idea",
+        questionText: "Which of the following best articulates the primary uniqueness of Harappan civilization discussed in the passage?",
+        options: [
+          "They built the largest military fortresses and royal pyramids in the Bronze Age world.",
+          "They achieved sophisticated metrological uniformity and hydraulic urban planning without centralized royal autocracy or militarism.",
+          "They relied entirely on seasonal rainfall without developing drainage or storage technologies.",
+          "Their civilization collapsed due to continuous warfare with Mesopotamian kings.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The passage emphasizes that Harappans prioritized standardized urban infrastructure, water engineering, and civic egalitarianism rather than royal palaces or militaristic despotism.",
+      },
+      {
+        id: "q-20-2",
+        type: "Detail",
+        questionText: "What specific hydraulic engineering innovation was discovered at the settlement of Dholavira?",
+        options: [
+          "Massive rock-cut reservoirs connected by stone sluices to harvest seasonal monsoon water.",
+          "Wooden aqueducts importing water from the Himalayan glaciers.",
+          "Steam-powered water pumps lining the city's perimeter.",
+          "Deep underground gold mines converted into ceremonial baths.",
+        ],
+        correctOptionIndex: 0,
+        explanation: "Paragraph 3 highlights Dholavira's colossal rock-cut reservoirs interconnected by stone sluices to harvest and conserve seasonal monsoon torrents.",
+      },
+      {
+        id: "q-20-3",
+        type: "Inference",
+        questionText: "Based on the archaeological evidence presented, what can be inferred about the social organization of Harappan cities?",
+        options: [
+          "They were governed by absolute monarchs who commanded slave armies to build royal mausoleums.",
+          "Civic governance was likely decentralized and cooperative, prioritizing public sanitation and commerce over royal display.",
+          "Citizens lived in complete anarchy with no standardized measurements or municipal laws.",
+          "Religious priests sacrificed merchants to appease water deities.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 4 infers that the absence of palaces/weapons and presence of universal drainage points to decentralized civic councils or merchant guilds prioritizing public health.",
+      },
+      {
+        id: "q-20-4",
+        type: "Author's Purpose",
+        questionText: "The primary purpose of the text is to:",
+        options: [
+          "Critique 20th-century archaeologists for failing to find Harappan gold.",
+          "Illustrate how Harappan urbanism challenged traditional models of Bronze Age autocratic statehood through civic infrastructure.",
+          "Prove that Mesopotamian engineers constructed the city of Mohenjo-daro.",
+          "Argue that ancient civilizations were technologically superior to modern urban centers in every way.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The author demonstrates how Harappan standardization, sanitation, and lack of despotic monuments revolutionized archaeological concepts of ancient civilizations.",
+      },
+    ],
+  },
+  {
+    id: "rc-21",
+    title: "Choice Architecture and the Ethics of Libertarian Paternalism",
+    source: "The Atlantic / Behavioral Economics",
+    author: "Richard Thaler & Cass Sunstein",
+    topic: "Economics",
+    difficulty: "CAT",
+    wordCount: 810,
+    estimatedMinutes: 8,
+    completed: false,
+    flaggedForReview: false,
+    content: `Standard neoclassical economics is predicated on the fictitious figure of Homo economicus—the rational decision-maker who possesses infinite cognitive bandwidth, unyielding willpower, and an encyclopedic capacity to compute probabilities, consistently choosing options that maximize personal utility. Behavioral economists, however, have thoroughly dismantled this portrait, demonstrating that actual human beings are boundedly rational creatures governed by cognitive shortcuts, emotional heuristics, and profound inertia.
+
+Recognizing that human decision-making is systematically vulnerable to framing and default bias, Richard Thaler and Cass Sunstein introduced the paradigm of 'libertarian paternalism' and its primary policy instrument: the 'nudge.' A nudge alters the 'choice architecture'—the physical or digital environment in which choices are presented—in a way that predictably steers behavior toward outcomes beneficial to the individual or society, without forbidding any options or altering their economic incentives.
+
+The quintessential example is default enrollment in retirement savings plans. Under an opt-in system, where employees must complete arduous paperwork to join, participation rates often languish below 40%, despite employer matching funds. When companies switch the default to automatic enrollment (with an effortless option to opt out), participation surges above 90%. The economic choices remain identical, but shifting the default overcomes human procrastination and status-quo bias.
+
+Yet libertarian paternalism navigates a treacherous ethical tightrope. Critics argue that when choice architects possess asymmetric information and power, nudges can mutate into manipulative 'dark patterns'—design tricks that steer users toward choices beneficial to corporate profit rather than consumer welfare. Determining where benevolent guidance ends and insidious behavioral manipulation begins remains one of contemporary governance's most contentious challenges.`,
+    questions: [
+      {
+        id: "q-21-1",
+        type: "Main Idea",
+        questionText: "Which of the following best summarizes the core concept of 'libertarian paternalism' as described in the passage?",
+        options: [
+          "Banning all harmful financial products and mandating state-controlled consumption quotas.",
+          "Designing choice architecture to gently steer human behavior toward beneficial outcomes without eliminating freedom of choice.",
+          "Assuming all individuals act as perfectly rational utility-maximizing agents in free markets.",
+          "Eliminating all default options to force consumers into prolonged cognitive deliberation.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 2 defines libertarian paternalism as altering choice architecture to predictably steer behavior toward beneficial outcomes while preserving open options.",
+      },
+      {
+        id: "q-21-2",
+        type: "Detail",
+        questionText: "What occurs when companies shift retirement savings plans from an opt-in structure to an automatic enrollment default?",
+        options: [
+          "Employee participation rates plummet due to resentment against corporate interference.",
+          "Participation rates dramatically increase because the default overcomes human procrastination and inertia.",
+          "Companies are legally required to double employee salaries.",
+          "Employees lose the freedom to opt out of the savings program.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 3 explains that switching to auto-enrollment increases participation from below 40% to above 90% by neutralizing inertia and status-quo bias.",
+      },
+      {
+        id: "q-21-3",
+        type: "Inference",
+        questionText: "What transforms a benevolent nudge into an unethical 'dark pattern'?",
+        options: [
+          "When the design choice exploits behavioral biases to serve corporate profit at the expense of consumer welfare.",
+          "When governments publish public health recommendations in national newspapers.",
+          "When retirement programs offer matching funds to employees.",
+          "When consumers actively seek out educational resources on personal finance.",
+        ],
+        correctOptionIndex: 0,
+        explanation: "Paragraph 4 defines dark patterns as design tricks where asymmetric power is used to steer users toward choices beneficial to corporate profit rather than consumer welfare.",
+      },
+      {
+        id: "q-21-4",
+        type: "Tone",
+        questionText: "The author's tone toward libertarian paternalism can best be described as:",
+        options: [
+          "Uncritically enthusiastic about government behavioral control.",
+          "Analytically appreciative of its efficacy while circumspect about its ethical risks.",
+          "Completely dismissive of behavioral economics as unscientific.",
+          "Hostile toward any intervention that alters default settings.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The author illustrates the practical power of nudging (retirement savings) while thoughtfully outlining the ethical dilemma of manipulative dark patterns.",
+      },
+    ],
+  },
+  {
+    id: "rc-22",
+    title: "The Malleability of Memory: Synaptic Reconsolidation and Fabrication",
+    source: "Aeon / Neuroscience",
+    author: "Elizabeth Loftus & Eric Kandel",
+    topic: "Psychology",
+    difficulty: "CAT",
+    wordCount: 820,
+    estimatedMinutes: 8,
+    completed: false,
+    flaggedForReview: false,
+    content: `For centuries, common sense conceived of human memory as a pristine biological video archive: an event occurs, is recorded in high fidelity upon cerebral circuits, deposited into a neural vault, and retrieved intact whenever we choose to revisit the past. Contemporary neuroscience and cognitive psychology have decisively shattered this archival myth. Memory is not a static recording, but a dynamic, fragile, and generative act of reconstruction.
+
+Pioneering experiments by psychologist Elizabeth Loftus demonstrated the alarming ease with which memory can be contaminated by post-event information. In landmark studies, subjects who viewed a simulated automobile collision were asked how fast the cars were going when they either 'smashed into' or 'hit' each other. Those exposed to the verb 'smashed' not only estimated significantly higher speeds, but a week later falsely recalled seeing shattered glass on the roadway—despite no broken glass existing in the film. The subtle phrasing of a question had retroactively rewritten the perceptual memory.
+
+Neurobiologists like Eric Kandel have uncovered the cellular basis for this vulnerability through the mechanism of 'synaptic reconsolidation.' When a memory is initially formed, protein synthesis consolidates fragile short-term synaptic connections into stable long-term engrams. However, whenever a long-term memory is subsequently retrieved into conscious awareness, that engram reverts to a transiently labile, plastic state.
+
+During this retrieval window, the original trace is vulnerable to modification, erasure, or the incorporation of newly presented misinformation before protein synthesis reconsolidates it once again. Every time we remember an episode from our past, we are not viewing the original event; we are viewing the memory of our last retrieval, subtly edited by our present emotional state and expectations.`,
+    questions: [
+      {
+        id: "q-22-1",
+        type: "Main Idea",
+        questionText: "Which of the following best summarizes the central neuroscientific insight of the passage?",
+        options: [
+          "Human memory operates as a permanent neural recording that cannot be modified once consolidated.",
+          "Memory is a reconstructive, dynamic process whose neural traces become plastic and vulnerable to alteration every time they are retrieved.",
+          "Eyewitness testimony is infallible in judicial proceedings because visual memories never degrade.",
+          "Protein synthesis occurs only during childhood memory formation.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 1 and 4 explain that memory is generative and reconstructive, and reconsolidation renders retrieved memories labile and prone to editing.",
+      },
+      {
+        id: "q-22-2",
+        type: "Detail",
+        questionText: "What was the critical finding of Elizabeth Loftus's automobile collision experiment?",
+        options: [
+          "Participants refused to estimate vehicular speed without a radar detector.",
+          "Changing a single descriptive verb ('smashed' vs 'hit') altered speed estimates and induced false memories of non-existent shattered glass.",
+          "Subjects remembered every detail of the accident with perfect photographic accuracy.",
+          "Video recordings are unable to capture automobile momentum.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 2 details how subtle verbal phrasing ('smashed' vs 'hit') retroactively altered participants' speed estimates and generated false memories of broken glass.",
+      },
+      {
+        id: "q-22-3",
+        type: "Inference",
+        questionText: "According to the mechanism of synaptic reconsolidation, what happens when a long-term memory is retrieved into conscious awareness?",
+        options: [
+          "The neural circuit is permanently erased and cannot be stored again.",
+          "The engram becomes temporarily plastic and labile, requiring fresh protein synthesis to re-stabilize.",
+          "The brain immediately converts qualitative memories into mathematical symbols.",
+          "The memory becomes completely immune to post-event misinformation.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 3 and 4 explain that upon retrieval, the consolidated engram reverts to a labile, plastic state that can be modified before new protein synthesis reconsolidates it.",
+      },
+      {
+        id: "q-22-4",
+        type: "Author's Purpose",
+        questionText: "The primary purpose of the author in this passage is to:",
+        options: [
+          "Debunk the archival myth of memory by detailing psychological misinformation effects and cellular reconsolidation.",
+          "Prove that no human being can ever remember anything accurately under any circumstances.",
+          "Argue that criminal court trials should entirely ban all witness testimony.",
+          "Advocate for chemical memory-erasing drugs in psychotherapy.",
+        ],
+        correctOptionIndex: 0,
+        explanation: "The author replaces the video-archive myth with a scientific explanation of memory's reconstructive nature, citing Loftus's experiments and Kandel's cellular findings.",
+      },
+    ],
+  },
+  {
+    id: "rc-23",
+    title: "Planetary Agency: The Human as a Geological Force in the Anthropocene",
+    source: "The Hindu / Environment",
+    author: "Dipesh Chakrabarty",
+    topic: "Environment",
+    difficulty: "CAT+",
+    wordCount: 830,
+    estimatedMinutes: 8,
+    completed: false,
+    flaggedForReview: false,
+    content: `For centuries, the discipline of history rested upon a fundamental philosophical demarcation first articulated by thinkers like Giambattista Vico and R.G. Collingwood: the strict separation between human history and natural history. Human history was the realm of conscious moral agency, contingency, political struggle, and cultural institutions; natural history was the indifferent, cyclical backdrop of geological epochs, tectonic shifts, and biological evolution against which the human drama unfolded.
+
+In his seminal essay 'The Climate of History: Four Theses,' historian Dipesh Chakrabarty argued that the advent of the Anthropocene has collapsed this age-old epistemic divide. Humankind has ceased to be merely biological agents interacting within a stable ecological environment; through the massive combustion of fossil fuels, deforestation, and industrial agriculture, human civilization has mutated into a geological force capable of altering the planetary carbon cycle, ocean chemistry, and atmospheric thermodynamics.
+
+This transformation creates a profound conceptual crisis for modern political thought. Traditional humanist ideas of freedom, justice, and enlightenment were born in the fossil-fuel-powered industrial era and premised on the assumption of infinite planetary resilience. The paradox of the Anthropocene is that the very technologies and energy systems that enabled human emancipation from material scarcity are precisely those driving planetary instability.
+
+Furthermore, Chakrabarty emphasizes that thinking about humans as a geological species does not erase historical inequalities. While the affluent nations of the Global North are disproportionately responsible for historical greenhouse gas emissions, the catastrophic disruptions of the Earth system—sea-level rise, desertification, extreme weather—fall earliest and most devastatingly upon vulnerable populations in the Global South. Addressing the crisis requires grappling simultaneously with global capitalist inequality and species-level planetary agency.`,
+    questions: [
+      {
+        id: "q-23-1",
+        type: "Main Idea",
+        questionText: "Which of the following best captures Chakrabarty's central thesis as outlined in the text?",
+        options: [
+          "Human history and natural history must remain strictly separated to protect academic historical integrity.",
+          "The Anthropocene has collapsed the boundary between human and natural history as human activity has transformed into a planetary geological force.",
+          "Technological innovation has permanently insulated human civilization from atmospheric thermodynamics.",
+          "The combustion of fossil fuels has successfully eradicated poverty and inequality across the Global South.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 2 states that the Anthropocene collapses the historical divide between human and natural history because humanity now acts as a geological force altering Earth systems.",
+      },
+      {
+        id: "q-23-2",
+        type: "Detail",
+        questionText: "According to the passage, what philosophical premise underpinned traditional humanist conceptions of freedom in the industrial era?",
+        options: [
+          "The assumption of infinite planetary resilience and unconstrained energetic expansion.",
+          "The belief that geological epochs change every fifty years.",
+          "The insistence that fossil fuels should be reserved exclusively for artistic creation.",
+          "The rejection of all mechanical energy sources in favor of human muscle labor.",
+        ],
+        correctOptionIndex: 0,
+        explanation: "Paragraph 3 notes that traditional humanist ideas of freedom were born in the fossil-fuel era and premised on the assumption of infinite planetary resilience.",
+      },
+      {
+        id: "q-23-3",
+        type: "Inference",
+        questionText: "Why does the author argue that conceptualizing humanity as a geological force does not erase socioeconomic inequality?",
+        options: [
+          "Because affluent nations suffer the worst consequences of global warming while poor nations benefit.",
+          "Because historical emissions were driven primarily by the Global North, whereas climate catastrophe disproportionately harms vulnerable populations in the Global South.",
+          "Because all human beings produce identical carbon footprints regardless of income.",
+          "Because geological forces affect only wealthy industrial infrastructure.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 4 explains that viewing humans as a species-level force must be balanced with the reality that emissions originated in the North while climate fallout punishes the South.",
+      },
+      {
+        id: "q-23-4",
+        type: "Tone",
+        questionText: "The author's tone toward the intersection of human history and planetary ecology can best be described as:",
+        options: [
+          "Philosophically urgent, incisive, and acutely conscious of systemic contradictions.",
+          "Dismissive of ecological science in favor of traditional political theory.",
+          "Complacent about the capacity of market forces to automatically reverse global warming.",
+          "Hostile toward the intellectual heritage of the Enlightenment.",
+        ],
+        correctOptionIndex: 0,
+        explanation: "The writing engages deeply with philosophical dilemmas ('conceptual crisis,' 'paradox,' 'species-level agency'), reflecting an urgent and incisive tone.",
+      },
+    ],
+  },
+  {
+    id: "rc-24",
+    title: "The Decay of the Aura: Artistic Authenticity in the Age of Generative AI",
+    source: "Aeon / Art",
+    author: "Walter Benjamin (Revisited by Boris Groys)",
+    topic: "Art",
+    difficulty: "CAT+",
+    wordCount: 840,
+    estimatedMinutes: 8,
+    completed: false,
+    flaggedForReview: false,
+    content: `In his 1935 essay 'The Work of Art in the Age of Its Technological Reproducibility,' cultural theorist Walter Benjamin introduced one of modern aesthetics' most enduring concepts: the 'aura.' For Benjamin, the aura of a traditional work of art—be it an ancient Greek statue, a Renaissance canvas by Leonardo, or an indigenous ceremonial mask—consisted in its 'unique presence in time and space, its unique existence at the place where it happens to be.' The aura was tethered to historical authenticity, the physical patina of aging, and its ritual embeddedness within a particular cultural tradition.
+
+Benjamin argued that modern mechanical reproduction (photography and cinema) stripped the artwork of its aura by substituting a plural mass of copies for a unique original. While Benjamin recognized the democratic potential of this decay—art was liberated from aristocratic ritual and made accessible to the masses—he warned that reproduction severed art from its historical anchoring.
+
+In the twenty-first century, the proliferation of generative artificial intelligence and latent diffusion models has radicalized Benjamin’s thesis beyond his wildest imagination. Mechanical reproduction still required a physical original to photograph or print; generative AI synthesizes images, prose, and musical scores ex nihilo by computing statistical probabilities across billions of training parameters. The concept of an 'original' has evaporated entirely into algorithmic latent space.
+
+When a diffusion model generates a photorealistic portrait in seconds, where does artistic authenticity reside? Philosopher Boris Groys suggests that in the digital era, authenticity is no longer a property of the object, but of the curated curation. The spectator ceases to contemplate a singular material artifact imbued with historical aura; instead, art becomes an ephemeral performative event within a computational flow.`,
+    questions: [
+      {
+        id: "q-24-1",
+        type: "Main Idea",
+        questionText: "Which of the following best summarizes the primary argument of the passage?",
+        options: [
+          "Generative AI has successfully restored the historical aura of Renaissance painting by replicating brushstrokes perfectly.",
+          "Benjamin's concept of the aura explains how technological and generative reproduction separates art from unique physical presence, shifting authenticity to curation.",
+          "Photography is superior to oil painting because it preserves the spiritual ritual of the aristocracy.",
+          "Artists should refuse to use digital tools to preserve commercial art market prices.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 1, 2, and 4 trace Benjamin's concept of the aura from physical reproduction to generative AI, showing how algorithmic creation dissolves originals and redefines authenticity.",
+      },
+      {
+        id: "q-24-2",
+        type: "Detail",
+        questionText: "According to Walter Benjamin, what constituted the 'aura' of a traditional work of art?",
+        options: [
+          "Its high monetary appraisal at auction houses.",
+          "Its unique presence in time and space, physical authenticity, and ritual embeddedness.",
+          "Its ability to be mass-produced in millions of identical copies.",
+          "Its inclusion of mathematical geometric ratios.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 1 defines aura as 'its unique presence in time and space, its unique existence at the place where it happens to be,' rooted in authenticity and ritual.",
+      },
+      {
+        id: "q-24-3",
+        type: "Inference",
+        questionText: "How does generative AI fundamentally differ from the mechanical reproduction analyzed by Benjamin in 1935?",
+        options: [
+          "Mechanical reproduction was much faster than digital diffusion models.",
+          "Mechanical reproduction still required a physical original to replicate, whereas generative AI synthesizes artifacts statistically without an original.",
+          "Generative AI creates only physical sculptures, while photography produced digital files.",
+          "Mechanical reproduction was completely rejected by mass audiences.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 3 clarifies that mechanical reproduction copied an existing physical original, while generative AI synthesizes artifacts ex nihilo from statistical parameter space.",
+      },
+      {
+        id: "q-24-4",
+        type: "Author's Purpose",
+        questionText: "The primary purpose of the text is to:",
+        options: [
+          "Condemn all computer scientists who develop machine learning models.",
+          "Examine the evolving philosophical concept of artistic aura from photography to generative artificial intelligence.",
+          "Prove that Walter Benjamin was mistaken about photography.",
+          "Advocate for the destruction of modern art galleries in favor of virtual reality.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The author uses Benjamin's aesthetic theory to interrogate how generative AI transforms notions of originality, aura, and artistic authenticity.",
+      },
+    ],
+  },
+  {
+    id: "rc-25",
+    title: "Surveillance Capitalism and the Extraction of Behavioral Surplus",
+    source: "London Review of Books / Technology",
+    author: "Shoshana Zuboff",
+    topic: "Technology",
+    difficulty: "CAT+",
+    wordCount: 860,
+    estimatedMinutes: 9,
+    completed: false,
+    flaggedForReview: false,
+    content: `In The Age of Surveillance Capitalism, social philosopher Shoshana Zuboff charts the mutation of modern market capitalism from an order that manufactured material commodities to an economic architecture predicated on the unilateral extraction, monetization, and control of human experience. Zuboff names this logic 'surveillance capitalism.'
+
+Early digital capitalism utilized user data to improve services—optimizing search engine algorithms or personalizing email filters. The surplus behavioral data not immediately required for service improvement was treated as digital exhaust. The decisive breakthrough of surveillance capitalism occurred when tech conglomerates realized that this 'behavioral surplus' could be processed through machine learning architectures to manufacture 'prediction products' that forecast what users will feel, think, and do next.
+
+These prediction products are traded in lucrative 'behavioral futures markets' where corporate buyers purchase certainty about human behavior. The economic imperative is no longer merely to predict human action, but to actively modify it at scale—a process Zuboff terms 'the means of behavioral modification.' Through algorithmic recommendations, subliminal cues, and gamified reward loops, digital platforms herd human choices toward commercial objectives.
+
+Unlike historical totalitarian regimes that demanded internal terror and ideological conformity, surveillance capitalism operates through radical indifference. It does not care what you believe, so long as your behavior yields extractable data streams. By privatizing the digital public square and claiming human experience as free raw material, surveillance capitalism poses an unprecedented threat to individual autonomy and democratic sovereignty.`,
+    questions: [
+      {
+        id: "q-25-1",
+        type: "Main Idea",
+        questionText: "Which of the following best articulates Zuboff's core critique of surveillance capitalism?",
+        options: [
+          "It fails to generate sufficient profits for Silicon Valley technology investors.",
+          "It unilaterally expropriates human experience as behavioral surplus to manufacture prediction products that nudge and control human action.",
+          "It relies exclusively on government subsidies rather than private market competition.",
+          "It forces users to pay high monetary subscription fees for search engines.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 1, 2, and 3 define surveillance capitalism as the extraction of behavioral surplus to create prediction products traded in futures markets to modify human behavior.",
+      },
+      {
+        id: "q-25-2",
+        type: "Detail",
+        questionText: "According to the passage, what are 'behavioral futures markets'?",
+        options: [
+          "Financial exchanges where investors trade agricultural commodity contracts.",
+          "Markets where prediction products forecasting human behavior are bought and sold by businesses seeking commercial certainty.",
+          "Government platforms that regulate privacy compliance in social media.",
+          "Cryptocurrency networks designed to anonymize consumer purchases.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 3 explains that prediction products are sold in behavioral futures markets to corporate buyers purchasing certainty regarding human actions.",
+      },
+      {
+        id: "q-25-3",
+        type: "Inference",
+        questionText: "How does surveillance capitalism differ from historical totalitarian regimes according to Zuboff?",
+        options: [
+          "Totalitarianism relied on digital sensors, whereas surveillance capitalism uses print media.",
+          "Totalitarianism demanded ideological conformity through terror, whereas surveillance capitalism operates with radical indifference to belief, prioritizing behavioral extraction.",
+          "Totalitarianism permitted complete personal privacy in private residences.",
+          "Surveillance capitalism operates only in non-democratic countries.",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Paragraph 4 states that unlike totalitarianism's demand for ideological conformity and terror, surveillance capitalism exhibits 'radical indifference,' caring only for data streams.",
+      },
+      {
+        id: "q-25-4",
+        type: "Tone",
+        questionText: "The author's tone toward the behavioral surplus extraction of surveillance capitalism is best characterized as:",
+        options: [
+          "Alarmed, analytically incisive, and unsparingly critical of corporate overreach.",
+          "Optimistic regarding the economic efficiency of targeted marketing algorithms.",
+          "Indifferent to the erosion of democratic sovereignty in the digital era.",
+          "Facetious and mocking toward internet users who share personal data.",
+        ],
+        correctOptionIndex: 0,
+        explanation: "The author uses urgent, rigorous, and critical language ('unilateral extraction,' 'means of behavioral modification,' 'unprecedented threat to individual autonomy').",
+      },
+    ],
+  },
 ];

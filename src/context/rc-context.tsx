@@ -74,7 +74,7 @@ export function RcProvider({ children }: { children: ReactNode }) {
     initialWeakAreas
   );
   const [rcPassages, setRcPassages, passagesHydrated] = useLocalStorage<RCPassage[]>(
-    "rc_lab_rc_passages_v2",
+    "rc_lab_rc_passages_v3",
     initialRcPassages
   );
   const [recentAttempts, setRecentAttempts, attemptsHydrated] = useLocalStorage<DrillAttempt[]>(
@@ -173,6 +173,7 @@ export function RcProvider({ children }: { children: ReactNode }) {
       window.localStorage.removeItem("rc_lab_stats_v2");
       window.localStorage.removeItem("rc_lab_weak_areas_v2");
       window.localStorage.removeItem("rc_lab_rc_passages_v2");
+      window.localStorage.removeItem("rc_lab_rc_passages_v3");
       if (user?.id) {
         window.localStorage.setItem(`rc_lab_migrated_user_${user.id}`, "true");
       }

@@ -37,23 +37,23 @@ export default function LibraryPage() {
   const [selectedSort, setSelectedSort] = useState<string>("default");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
-  const sourcesList: RCSource[] = ["Aeon", "The Atlantic", "The Hindu"];
+  const sourcesList = useMemo(() => {
+    const set = new Set<string>();
+    rcPassages.forEach((p) => {
+      if (p.source) set.add(p.source);
+    });
+    return Array.from(set);
+  }, [rcPassages]);
 
-  const topicsList: RCTopic[] = [
-    "Philosophy",
-    "Economics",
-    "Psychology",
-    "Sociology",
-    "Science",
-    "Technology",
-    "History",
-    "Business",
-    "Politics",
-    "Culture",
-    "Environment",
-  ];
+  const topicsList = useMemo(() => {
+    const set = new Set<string>();
+    rcPassages.forEach((p) => {
+      if (p.topic) set.add(p.topic);
+    });
+    return Array.from(set);
+  }, [rcPassages]);
 
-  const difficultiesList: RCDifficulty[] = ["Medium", "Hard", "CAT", "CAT+"];
+  const difficultiesList: RCDifficulty[] = ["Medium", "Hard", "CAT", "CAT+", "CAT Standard"];
 
   // Filtered and sorted passages
   const filteredPassages = useMemo(() => {
