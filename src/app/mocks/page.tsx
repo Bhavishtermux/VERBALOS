@@ -18,12 +18,13 @@ import {
   Award,
   BookOpen,
   Eye,
+  ArrowLeft,
 } from "lucide-react";
 import { useAuth } from "@/context/auth-context";
-import { useRc } from "@/context/rc-context";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Modal } from "@/components/ui/modal";
 import { initialMockTests } from "@/data/mock-tests";
 import { initialRcPassages } from "@/data/rc-passages";
 import {
@@ -52,28 +53,12 @@ interface FlatMockQuestion {
 
 export default function VARCMocksPage() {
   const { user } = useAuth();
-  const { registerActiveSession, unregisterActiveSession } = useRc();
 
   const [activeMock, setActiveMock] = useState<VARCMockConfig | null>(null);
   const [isTestActive, setIsTestActive] = useState(false);
+  const [showExitModal, setShowExitModal] = useState(false);
   const [flatQuestions, setFlatQuestions] = useState<FlatMockQuestion[]>([]);
   const [currentQIndex, setCurrentQIndex] = useState(0);
-
-  // Register Navigation Guard when 40m mock exam is active
-  useEffect(() => {
-    if (isTestActive) {
-      registerActiveSession({
-        title: "Exit 40-Minute Sectional Mock?",
-        message: "Your simulated 40-minute CAT exam is currently running. Leaving this page will terminate the exam and discard your answers.",
-      });
-    } else {
-      unregisterActiveSession();
-    }
-
-    return () => {
-      unregisterActiveSession();
-    };
-  }, [isTestActive, registerActiveSession, unregisterActiveSession]);
 
   // Per-question state array
   const [questionStates, setQuestionStates] = useState<Record<number, MockQuestionState>>({});
@@ -537,6 +522,14 @@ export default function VARCMocksPage() {
           {/* Sticky Prominent Section Timer Bar */}
           <div className="sticky top-0 z-40 -mx-4 md:-mx-8 -mt-6 md:-mt-8 px-4 md:px-8 py-3 bg-white/95 backdrop-blur-md border-b border-zinc-200/80 dark:bg-zinc-950/95 dark:border-zinc-800 shadow-sm flex items-center justify-between gap-4">
             <div className="flex items-center gap-2.5 truncate">
+              <button
+                onClick={() => setShowExitModal(true)}
+                title="Exit Sectional Mock"
+                className="flex items-center gap-1 text-xs text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 font-mono px-2.5 py-1 rounded-md border border-zinc-200/80 dark:border-zinc-800 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-900 dark:hover:bg-zinc-800 transition-colors shrink-0"
+              >
+                <ArrowLeft className="h-3.5 w-3.5" />
+                <span>Exit Mock</span>
+              </button>
               <span className="font-serif font-bold text-sm text-zinc-900 dark:text-zinc-100 truncate">
                 {activeMock?.title}
               </span>
@@ -882,6 +875,66 @@ export default function VARCMocksPage() {
             </CardContent>
           </Card>
         </div>
+      )}
+
+      {/* Exit Mock Exam Confirmation Modal */}
+      {showExitModal && (
+        <Modal
+          isOpen={showExitModal}
+          onClose={() => setShowExitModal(false)}
+          title="Exit 40-Minute Sectional Mock?"
+          maxWidth="md"
+        >
+          <div className="space-y-4 pt-1">
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/40 p-4 border border-amber-200 dark:border-amber-900/60 text-xs text-amber-900 dark:text-amber-200 space-y-2">
+              <div className="flex items-center gap-2 font-bold font-serif text-sm text-amber-800 dark:text-amber-300">
+                <Clock className="h-4 w-4 text-amber-600 shrink-0" />
+                <span>Exam Clock Running ({formatTimer(remainingSeconds)} Remaining)</span>
+              </div>
+              <p className="leading-relaxed font-sans text-xs">
+                You are currently taking <strong>{activeMock?.title}</strong>.
+                Would you like to submit your answers recorded so far, discard this exam attempt, or continue the test?
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 text-xs">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setShowExitModal(false)}
+                className="text-xs order-3 sm:order-1"
+              >
+                Continue Exam
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setShowExitModal(false);
+                  setIsTestActive(false);
+                  if (timerRef.current) clearInterval(timerRef.current);
+                  setActiveMock(null);
+                }}
+                className="text-xs text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:text-rose-700 order-2"
+              >
+                Discard &amp; Exit
+              </Button>
+              <Button
+                type="button"
+                size="sm"
+                onClick={() => {
+                  setShowExitModal(false);
+                  handleFinalSubmit();
+                }}
+                className="text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-sm order-1 sm:order-3"
+              >
+                Submit &amp; Finish Mock
+              </Button>
+            </div>
+          </div>
+        </Modal>
       )}
     </div>
   );

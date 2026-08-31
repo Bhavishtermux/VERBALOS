@@ -58,7 +58,7 @@ interface SelectedWordState {
 export default function RcReadingPage() {
   const params = useParams();
   const router = useRouter();
-  const { rcPassages, settings, togglePassageFlag, registerActiveSession, unregisterActiveSession } = useRc();
+  const { rcPassages, settings, togglePassageFlag } = useRc();
   const { user } = useAuth();
 
   const passageId = params?.id as string;
@@ -66,27 +66,7 @@ export default function RcReadingPage() {
 
   // Experience Stages: "preview" | "reading" | "questions"
   const [stage, setStage] = useState<"preview" | "reading" | "questions">("preview");
-
-  // Register Navigation Guard when reading or answering questions
-  useEffect(() => {
-    if (stage === "reading") {
-      registerActiveSession({
-        title: "Exit RC Reading Session?",
-        message: "You are currently reading a timed RC passage. Leaving this page will stop the WPM calibration timer and discard your attempt.",
-      });
-    } else if (stage === "questions") {
-      registerActiveSession({
-        title: "Exit RC Question Solving?",
-        message: "You are solving comprehension questions. Leaving this page will discard your unsubmitted answers.",
-      });
-    } else {
-      unregisterActiveSession();
-    }
-
-    return () => {
-      unregisterActiveSession();
-    };
-  }, [stage, registerActiveSession, unregisterActiveSession]);
+  const [showExitModal, setShowExitModal] = useState<boolean>(false);
 
   // 1. Reading Timer State (Independent Countdown)
   const [readingSeconds, setReadingSeconds] = useState<number>(0);
@@ -436,9 +416,58 @@ export default function RcReadingPage() {
       console.warn("Could not save session result to localStorage", err);
     }
 
-    // 5. Unregister session guard and navigate immediately to /results/[sessionId]
-    unregisterActiveSession();
+    // 5. Navigate immediately to /results/[sessionId]
     router.push(`/results/${sessionId}`);
+  };
+
+  const handleSaveProgressAndExit = () => {
+    if (!passage) {
+      router.push("/practice");
+      return;
+    }
+
+    const effectiveWpm = calculatedWpm || Math.round((passage.wordCount / Math.max(readingSeconds, 1)) * 60);
+    const answeredIndices = Object.keys(selectedAnswers);
+    let correctCount = 0;
+    passage.questions.forEach((q, idx) => {
+      if (selectedAnswers[idx] !== undefined && selectedAnswers[idx] === q.correctOptionIndex) {
+        correctCount++;
+      }
+    });
+
+    try {
+      const partialSession = {
+        sessionId: `saved-${Date.now()}`,
+        passageId: passage.id,
+        passageTitle: passage.title,
+        genre: passage.topic || passage.source,
+        date: new Date().toISOString().slice(0, 10),
+        readingTimeSeconds: Math.max(readingSeconds, 10),
+        readingWpm: effectiveWpm,
+        score: {
+          correct: correctCount,
+          total: passage.questions.length,
+          percentage: answeredIndices.length > 0 ? Math.round((correctCount / answeredIndices.length) * 100) : 0,
+        },
+        accuracy: answeredIndices.length > 0 ? Math.round((correctCount / answeredIndices.length) * 100) : 0,
+        status: "saved_partial",
+      };
+
+      const existing = JSON.parse(localStorage.getItem("rc_lab_all_sessions") || "[]");
+      existing.unshift(partialSession);
+      localStorage.setItem("rc_lab_all_sessions", JSON.stringify(existing));
+      window.dispatchEvent(new Event("storage"));
+    } catch (e) {
+      console.warn("Could not save partial session", e);
+    }
+
+    setShowExitModal(false);
+    router.push("/practice");
+  };
+
+  const handleDiscardAndExit = () => {
+    setShowExitModal(false);
+    router.push("/practice");
   };
 
   // If passage is not found
@@ -636,8 +665,16 @@ export default function RcReadingPage() {
         {/* Sticky Prominent Timer & Header Bar */}
         <div className="sticky top-0 z-40 -mx-4 md:-mx-8 -mt-6 md:-mt-8 px-4 md:px-8 py-3 bg-white/95 backdrop-blur-md border-b border-zinc-200/80 dark:bg-zinc-950/95 dark:border-zinc-800 shadow-sm transition-all">
           <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
-            {/* Left: Passage Title & Topic */}
-            <div className="flex items-center gap-2.5 truncate">
+            {/* Left: Exit Button, Passage Title & Topic */}
+            <div className="flex items-center gap-2 truncate">
+              <button
+                onClick={() => setShowExitModal(true)}
+                title="Exit or Save RC Practice"
+                className="flex items-center gap-1 text-xs text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 font-mono px-2.5 py-1 rounded-md border border-zinc-200/80 dark:border-zinc-800 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-900 dark:hover:bg-zinc-800 transition-colors shrink-0"
+              >
+                <ArrowLeft className="h-3.5 w-3.5" />
+                <span>Exit RC</span>
+              </button>
               <Badge variant="neutral" className="text-[10px] hidden sm:inline-flex font-mono">
                 {passage.topic}
               </Badge>
@@ -968,6 +1005,58 @@ export default function RcReadingPage() {
             </div>
           </Modal>
         )}
+
+        {/* Exit RC Practice Confirmation Modal */}
+        {showExitModal && (
+          <Modal
+            isOpen={showExitModal}
+            onClose={() => setShowExitModal(false)}
+            title="Leave Active Reading Session?"
+            maxWidth="md"
+          >
+            <div className="space-y-4 pt-1">
+              <div className="rounded-lg bg-amber-50 dark:bg-amber-950/40 p-4 border border-amber-200 dark:border-amber-900/60 text-xs text-amber-900 dark:text-amber-200 space-y-2">
+                <div className="flex items-center gap-2 font-bold font-serif text-sm text-amber-800 dark:text-amber-300">
+                  <AlertTriangle className="h-4 w-4 text-amber-600 shrink-0" />
+                  <span>Active RC Reading Drill</span>
+                </div>
+                <p className="leading-relaxed font-sans text-xs">
+                  You have read for <strong>{formatTimer(readingSeconds)}</strong> on <em>&ldquo;{passage.title}&rdquo;</em>.
+                  Would you like to save your reading pace &amp; progress before leaving, or discard this session?
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 text-xs">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowExitModal(false)}
+                  className="text-xs order-3 sm:order-1"
+                >
+                  Continue Reading
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleDiscardAndExit}
+                  className="text-xs text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:text-rose-700 order-2"
+                >
+                  Discard &amp; Exit
+                </Button>
+                <Button
+                  type="button"
+                  size="sm"
+                  onClick={handleSaveProgressAndExit}
+                  className="text-xs bg-zinc-900 text-zinc-50 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 font-semibold shadow-sm order-1 sm:order-3"
+                >
+                  Save Progress &amp; Exit
+                </Button>
+              </div>
+            </div>
+          </Modal>
+        )}
       </div>
     );
   }
@@ -985,8 +1074,16 @@ export default function RcReadingPage() {
       {/* Top Banner: Reading Stats & Question Solving Countdown Timer */}
       <div className="rounded-xl border border-zinc-200/80 bg-white p-4 sm:p-5 dark:border-zinc-800 dark:bg-zinc-900/80 shadow-sm text-xs">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          {/* Left: Calibrated Reading Pace Badge */}
+          {/* Left: Exit RC button & Calibrated Reading Pace Badge */}
           <div className="flex items-center gap-2.5">
+            <button
+              onClick={() => setShowExitModal(true)}
+              title="Exit or Save RC Practice"
+              className="flex items-center gap-1 text-xs text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 font-mono px-2.5 py-1 rounded-md border border-zinc-200/80 dark:border-zinc-800 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-900 dark:hover:bg-zinc-800 transition-colors shrink-0"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" />
+              <span>Exit RC</span>
+            </button>
             <div className="rounded-md bg-zinc-100 p-1.5 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
               <Zap className="h-4 w-4" />
             </div>
@@ -1159,6 +1256,58 @@ export default function RcReadingPage() {
           )}
         </div>
       </div>
+
+      {/* Exit RC Practice Confirmation Modal */}
+      {showExitModal && (
+        <Modal
+          isOpen={showExitModal}
+          onClose={() => setShowExitModal(false)}
+          title="Exit Reading Comprehension Practice?"
+          maxWidth="md"
+        >
+          <div className="space-y-4 pt-1">
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/40 p-4 border border-amber-200 dark:border-amber-900/60 text-xs text-amber-900 dark:text-amber-200 space-y-2">
+              <div className="flex items-center gap-2 font-bold font-serif text-sm text-amber-800 dark:text-amber-300">
+                <AlertTriangle className="h-4 w-4 text-amber-600 shrink-0" />
+                <span>Active RC Practice Session</span>
+              </div>
+              <p className="leading-relaxed font-sans text-xs">
+                You have answered <strong>{Object.keys(selectedAnswers).length} of {totalQuestions} questions</strong> on <em>&ldquo;{passage.title}&rdquo;</em>.
+                Would you like to save your reading pace &amp; answers so far, discard this attempt, or continue practicing?
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 text-xs">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setShowExitModal(false)}
+                className="text-xs order-3 sm:order-1"
+              >
+                Continue Practice
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={handleDiscardAndExit}
+                className="text-xs text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:text-rose-700 order-2"
+              >
+                Discard &amp; Exit
+              </Button>
+              <Button
+                type="button"
+                size="sm"
+                onClick={handleSaveProgressAndExit}
+                className="text-xs bg-zinc-900 text-zinc-50 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 font-semibold shadow-sm order-1 sm:order-3"
+              >
+                Save Progress &amp; Exit
+              </Button>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }

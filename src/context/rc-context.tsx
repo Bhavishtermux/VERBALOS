@@ -1,8 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { useRouter } from "next/navigation";
-import { AlertTriangle } from "lucide-react";
+import React, { createContext, useContext, useEffect, ReactNode } from "react";
 import {
   DrillAttempt,
   WeakAreaStat,
@@ -22,15 +20,6 @@ import { initialRcPassages } from "@/data/rc-passages";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { useAuth } from "@/context/auth-context";
 import { fetchUserSettingsCloud, resetAllCloudProgress } from "@/lib/supabase/data-service";
-import { Modal } from "@/components/ui/modal";
-import { Button } from "@/components/ui/button";
-
-export interface ActiveSessionInfo {
-  isActive: boolean;
-  title: string;
-  message: string;
-  onConfirmExit?: () => void;
-}
 
 interface RcContextType {
   stats: UserStats;
@@ -41,10 +30,6 @@ interface RcContextType {
   recentAttempts: DrillAttempt[];
   vocabulary: VocabularyItem[];
   isHydrated: boolean;
-  activeSession: ActiveSessionInfo | null;
-  registerActiveSession: (info: { title: string; message: string; onConfirmExit?: () => void }) => void;
-  unregisterActiveSession: () => void;
-  requestNavigation: (targetHref: string) => void;
   getPassageById: (id: string) => RCPassage | undefined;
   updateSettings: (newSettings: Partial<UserSettings>) => void;
   togglePassageFlag: (passageId: string) => void;
@@ -58,7 +43,6 @@ interface RcContextType {
 const RcContext = createContext<RcContextType | undefined>(undefined);
 
 export function RcProvider({ children }: { children: ReactNode }) {
-  const router = useRouter();
   const { user } = useAuth();
   const [stats, setStats, statsHydrated] = useLocalStorage<UserStats>(
     "rc_lab_stats_v2",
@@ -84,54 +68,6 @@ export function RcProvider({ children }: { children: ReactNode }) {
     "rc_lab_vocabulary_v2",
     initialVocabulary
   );
-
-  // Active Session Navigation Guard State
-  const [activeSession, setActiveSession] = useState<ActiveSessionInfo | null>(null);
-  const [pendingTargetHref, setPendingTargetHref] = useState<string | null>(null);
-
-  const registerActiveSession = (info: { title: string; message: string; onConfirmExit?: () => void }) => {
-    setActiveSession({ isActive: true, ...info });
-  };
-
-  const unregisterActiveSession = () => {
-    setActiveSession(null);
-    setPendingTargetHref(null);
-  };
-
-  const requestNavigation = (targetHref: string) => {
-    if (activeSession?.isActive) {
-      setPendingTargetHref(targetHref);
-    } else {
-      router.push(targetHref);
-    }
-  };
-
-  const handleConfirmExitSession = () => {
-    const target = pendingTargetHref;
-    const onExit = activeSession?.onConfirmExit;
-    setActiveSession(null);
-    setPendingTargetHref(null);
-    if (onExit) onExit();
-    if (target) {
-      router.push(target);
-    }
-  };
-
-  const handleCancelExitSession = () => {
-    setPendingTargetHref(null);
-  };
-
-  // Prevent browser tab close or refresh while active session is running
-  useEffect(() => {
-    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      if (activeSession?.isActive) {
-        e.preventDefault();
-        e.returnValue = "";
-      }
-    };
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-  }, [activeSession?.isActive]);
 
   // Synchronize dark mode class on document.documentElement
   useEffect(() => {
@@ -295,10 +231,6 @@ export function RcProvider({ children }: { children: ReactNode }) {
         recentAttempts,
         vocabulary,
         isHydrated,
-        activeSession,
-        registerActiveSession,
-        unregisterActiveSession,
-        requestNavigation,
         getPassageById,
         updateSettings,
         togglePassageFlag,
@@ -310,48 +242,6 @@ export function RcProvider({ children }: { children: ReactNode }) {
       }}
     >
       {children}
-
-      {/* Global Navigation Guard Confirmation Modal */}
-      {pendingTargetHref && activeSession && (
-        <Modal
-          isOpen={true}
-          onClose={handleCancelExitSession}
-          title={activeSession.title || "Exit Active Test / Reading Session?"}
-          maxWidth="md"
-        >
-          <div className="space-y-4 pt-1">
-            <div className="rounded-[6px] bg-amber-50 dark:bg-amber-950/50 p-4 border border-amber-200 dark:border-amber-900 text-xs text-amber-900 dark:text-amber-200 space-y-2">
-              <div className="flex items-center gap-2 font-bold font-serif text-sm text-amber-800 dark:text-amber-300">
-                <AlertTriangle className="h-4 w-4 text-amber-600 shrink-0" />
-                <span>Active Timed Session in Progress</span>
-              </div>
-              <p className="leading-relaxed font-sans">
-                {activeSession.message || "You are currently in an active timed session. Navigating away will end your attempt and unsaved progress will be lost."}
-              </p>
-            </div>
-
-            <div className="flex items-center justify-end gap-2 pt-2 font-mono text-xs">
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={handleCancelExitSession}
-                className="text-xs"
-              >
-                Continue Practice
-              </Button>
-              <Button
-                type="button"
-                size="sm"
-                onClick={handleConfirmExitSession}
-                className="bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs gap-1.5 shadow-sm"
-              >
-                Exit Session
-              </Button>
-            </div>
-          </div>
-        </Modal>
-      )}
     </RcContext.Provider>
   );
 }

@@ -22,7 +22,6 @@ import {
   Target,
 } from "lucide-react";
 import { useAuth } from "@/context/auth-context";
-import { useRc } from "@/context/rc-context";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -42,28 +41,11 @@ import { syncPracticeSessionCloud } from "@/lib/supabase/data-service";
 
 export default function VerbalAbilityPage() {
   const { user } = useAuth();
-  const { registerActiveSession, unregisterActiveSession } = useRc();
 
   // Active Drill State
   const [selectedType, setSelectedType] = useState<VAType>("para-summary");
   const [activeDrillIndex, setActiveDrillIndex] = useState(0);
   const [drillStage, setDrillStage] = useState<"catalog" | "practice" | "review">("catalog");
-
-  // Register Navigation Guard when solving active drill
-  useEffect(() => {
-    if (drillStage === "practice") {
-      registerActiveSession({
-        title: "Exit Verbal Ability Drill?",
-        message: "You are currently solving a timed Verbal Ability question. Navigating away will discard your unsaved progress.",
-      });
-    } else {
-      unregisterActiveSession();
-    }
-
-    return () => {
-      unregisterActiveSession();
-    };
-  }, [drillStage, registerActiveSession, unregisterActiveSession]);
 
   // Timer State
   const [solvingSeconds, setSolvingSeconds] = useState(0);
