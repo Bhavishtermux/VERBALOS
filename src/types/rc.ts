@@ -38,7 +38,10 @@ export type RCQuestionType =
   | "Tone / Attitude"
   | "Main Idea / Central Theme"
   | "Detail / Fact-based"
-  | "Purpose / Organization";
+  | "Purpose / Organization"
+  | "Vocabulary"
+  | "Contextual Vocabulary"
+  | (string & {});
 
 export interface RCQuestion {
   id: string;
