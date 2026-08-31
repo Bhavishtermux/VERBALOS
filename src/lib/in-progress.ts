@@ -3,7 +3,7 @@ export interface InProgressDrill {
   passageTitle: string;
   topic: string;
   difficulty: string;
-  stage: "reading" | "questions";
+  stage: "preview" | "reading" | "questions";
   readingSeconds: number;
   calculatedWpm: number;
   selectedAnswers: Record<number, number>;
