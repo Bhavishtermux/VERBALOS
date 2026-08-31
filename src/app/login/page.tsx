@@ -77,12 +77,6 @@ export default function LoginPage() {
     }
   };
 
-  // Instant Demo Access (for previewing cloud sync functionality if keys in setup mode)
-  const handleInstantDemoAccess = () => {
-    demoLogin("CAT Aspirant", "aspirant@verbalos.app");
-    router.push("/dashboard");
-  };
-
   return (
     <div className="min-h-[85vh] flex items-center justify-center p-4 sm:p-6">
       <div className="max-w-md w-full space-y-6">
@@ -169,17 +163,6 @@ export default function LoginPage() {
                 </>
               )}
             </Button>
-
-            {/* Quick Demo Preview fallback */}
-            <div className="pt-2 text-center">
-              <button
-                type="button"
-                onClick={handleInstantDemoAccess}
-                className="text-[11px] font-mono text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors underline underline-offset-4"
-              >
-                Instant Access Demo Account →
-              </button>
-            </div>
           </CardContent>
         </Card>
 
