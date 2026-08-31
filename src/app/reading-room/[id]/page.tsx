@@ -27,7 +27,6 @@ import { useRc } from "@/context/rc-context";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Modal } from "@/components/ui/modal";
 import { getSourceArticleById } from "@/lib/source-discovery";
 import { saveReadingRecord } from "@/lib/source-recommendations";
 import { lookupWord, VocabularyDetail } from "@/lib/vocabulary-data";
@@ -49,7 +48,7 @@ interface SelectedWordState {
 export default function SourceArticleReadingPage() {
   const params = useParams();
   const router = useRouter();
-  const { addVocabularyWord, vocabulary } = useRc();
+  const { addVocabularyWord } = useRc();
 
   const articleId = params?.id as string;
   const article: RealSourceArticle | undefined = useMemo(() => {
@@ -78,7 +77,6 @@ export default function SourceArticleReadingPage() {
 
   // Vocabulary Lookup State
   const [selectedWord, setSelectedWord] = useState<SelectedWordState | null>(null);
-  const [isDetailedVocabOpen, setIsDetailedVocabOpen] = useState<boolean>(false);
   const [isMobileScreen, setIsMobileScreen] = useState<boolean>(false);
   const [savedSuccessWord, setSavedSuccessWord] = useState<string | null>(null);
 
@@ -122,25 +120,6 @@ export default function SourceArticleReadingPage() {
     };
   }, []);
 
-  if (!article) {
-    return (
-      <div className="max-w-2xl mx-auto py-16 text-center space-y-4">
-        <AlertTriangle className="h-10 w-10 mx-auto text-amber-500" />
-        <h2 className="text-xl font-bold font-serif text-zinc-900 dark:text-zinc-100">
-          Article Not Found
-        </h2>
-        <p className="text-xs text-zinc-500 font-sans">
-          The requested essay could not be located in the real-world source library.
-        </p>
-        <Link href="/reading-room">
-          <Button size="sm" variant="outline">
-            Return to Reading Room
-          </Button>
-        </Link>
-      </div>
-    );
-  }
-
   // Handle word click for vocabulary popup
   const handleWordClick = (word: string, e: React.MouseEvent<HTMLSpanElement>) => {
     e.stopPropagation();
@@ -173,20 +152,21 @@ export default function SourceArticleReadingPage() {
   const handleFinishReading = () => {
     setIsReadingTimerActive(false);
     setFinalReadingDuration(readingSeconds);
-    const wpm = Math.round((article.wordCount / Math.max(readingSeconds, 1)) * 60);
+    const wpm = article ? Math.round((article.wordCount / Math.max(readingSeconds, 1)) * 60) : 250;
     setCalculatedWpm(wpm);
 
-    // Save reading record
-    saveReadingRecord({
-      articleId: article.id,
-      source: article.source,
-      topic: article.topic,
-      startedAt: new Date(Date.now() - readingSeconds * 1000).toISOString(),
-      completedAt: new Date().toISOString(),
-      readingDurationSeconds: readingSeconds,
-      calculatedWpm: wpm,
-      modeUsed: article.practiceQuestions && article.practiceQuestions.length > 0 ? "Read + Practice" : "Read Only",
-    });
+    if (article) {
+      saveReadingRecord({
+        articleId: article.id,
+        source: article.source,
+        topic: article.topic,
+        startedAt: new Date(Date.now() - readingSeconds * 1000).toISOString(),
+        completedAt: new Date().toISOString(),
+        readingDurationSeconds: readingSeconds,
+        calculatedWpm: wpm,
+        modeUsed: article.practiceQuestions && article.practiceQuestions.length > 0 ? "Read + Practice" : "Read Only",
+      });
+    }
 
     setStage("reflection");
   };
@@ -208,7 +188,38 @@ export default function SourceArticleReadingPage() {
     setShowExplanations(true);
   };
 
-  // Render clickable paragraph words
+  if (!article) {
+    return (
+      <div className="max-w-2xl mx-auto py-16 text-center space-y-4">
+        <AlertTriangle className="h-10 w-10 mx-auto text-amber-500" />
+        <h2 className="text-xl font-bold font-serif text-zinc-900 dark:text-zinc-100">
+          Article Not Found
+        </h2>
+        <p className="text-xs text-zinc-500 font-sans">
+          The requested essay could not be located in the real-world source library.
+        </p>
+        <Link href="/reading-room">
+          <Button size="sm" variant="outline">
+            Return to Reading Room
+          </Button>
+        </Link>
+      </div>
+    );
+  }
+
+  const questions = article.practiceQuestions || [];
+  const totalQuestions = questions.length;
+  const answeredCount = Object.keys(selectedAnswers).length;
+
+  let correctCount = 0;
+  if (stage === "results") {
+    questions.forEach((q, idx) => {
+      if (selectedAnswers[idx] === q.correctOptionIndex) {
+        correctCount++;
+      }
+    });
+  }
+
   const renderInteractiveParagraph = (text: string, pIdx: number) => {
     const tokens = text.split(/(\s+)/);
     return (
@@ -233,19 +244,6 @@ export default function SourceArticleReadingPage() {
       </p>
     );
   };
-
-  const questions = article.practiceQuestions || [];
-  const totalQuestions = questions.length;
-  const answeredCount = Object.keys(selectedAnswers).length;
-
-  let correctCount = 0;
-  if (stage === "results") {
-    questions.forEach((q, idx) => {
-      if (selectedAnswers[idx] === q.correctOptionIndex) {
-        correctCount++;
-      }
-    });
-  }
 
   return (
     <div className="max-w-3xl mx-auto py-6 space-y-6">
@@ -277,9 +275,7 @@ export default function SourceArticleReadingPage() {
         </div>
       </div>
 
-      {/* ===================================================================== */}
       {/* STAGE 1: PREVIEW & ATTRIBUTION */}
-      {/* ===================================================================== */}
       {stage === "preview" && (
         <div className="space-y-6 animate-in fade-in duration-200">
           <div className="space-y-2">
@@ -307,7 +303,6 @@ export default function SourceArticleReadingPage() {
             </div>
           </div>
 
-          {/* Article Highlights & Argument Blueprint Card */}
           <Card className="p-5 bg-white dark:bg-zinc-900 border-zinc-200/80 dark:border-zinc-800 space-y-4 shadow-sm">
             <div>
               <span className="font-mono text-[10px] uppercase text-zinc-400 block font-bold">
@@ -390,12 +385,9 @@ export default function SourceArticleReadingPage() {
         </div>
       )}
 
-      {/* ===================================================================== */}
       {/* STAGE 2: ACTIVE READING MODE */}
-      {/* ===================================================================== */}
       {stage === "reading" && (
         <div className="space-y-6 animate-in fade-in duration-200">
-          {/* Floating Sticky Timer Strip */}
           <div className="sticky top-2 z-20 flex items-center justify-between rounded-xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur border border-zinc-200/80 dark:border-zinc-800 px-4 py-2.5 shadow-sm text-xs font-mono">
             <div className="flex items-center gap-2">
               <Clock className="h-4 w-4 text-emerald-600 animate-pulse" />
@@ -422,7 +414,6 @@ export default function SourceArticleReadingPage() {
             </p>
           </div>
 
-          {/* Interactive Text Body */}
           <div className="prose dark:prose-invert max-w-none text-justify">
             {(article.contentExcerpt || article.fullContent || article.description)
               .split("\n\n")
@@ -442,9 +433,7 @@ export default function SourceArticleReadingPage() {
         </div>
       )}
 
-      {/* ===================================================================== */}
       {/* STAGE 3: ACTIVE REFLECTION & MENTAL MAPPING */}
-      {/* ===================================================================== */}
       {stage === "reflection" && (
         <div className="space-y-6 animate-in fade-in duration-200">
           <Card className="p-6 bg-white dark:bg-zinc-900 border-zinc-200/80 dark:border-zinc-800 shadow-sm space-y-5">
@@ -533,9 +522,7 @@ export default function SourceArticleReadingPage() {
         </div>
       )}
 
-      {/* ===================================================================== */}
       {/* STAGE 4: CAT QUESTIONS PRACTICE */}
-      {/* ===================================================================== */}
       {stage === "questions" && questions.length > 0 && (
         <div className="space-y-6 animate-in fade-in duration-200">
           <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3">
@@ -613,9 +600,7 @@ export default function SourceArticleReadingPage() {
         </div>
       )}
 
-      {/* ===================================================================== */}
       {/* STAGE 5: RESULTS & 6-PART EXPLANATIONS */}
-      {/* ===================================================================== */}
       {stage === "results" && (
         <div className="space-y-6 animate-in fade-in duration-200">
           <Card className="p-6 bg-white dark:bg-zinc-900 border-zinc-200/80 dark:border-zinc-800 shadow-sm space-y-4 text-center">
@@ -690,7 +675,6 @@ export default function SourceArticleReadingPage() {
                     })}
                   </div>
 
-                  {/* 6-Part Explanation Box */}
                   <div className="p-3.5 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200/60 dark:border-zinc-800 text-xs space-y-1.5">
                     <span className="font-mono font-bold text-[10px] uppercase text-zinc-500 block">
                       Curriculum Explanation &amp; Distractor Audit:
@@ -765,13 +749,6 @@ export default function SourceArticleReadingPage() {
             >
               <Bookmark className="h-3 w-3" />
               <span>{savedSuccessWord === selectedWord.word ? "Saved to Vocab!" : "+ Save Word"}</span>
-            </button>
-
-            <button
-              onClick={() => setIsDetailedVocabOpen(true)}
-              className="text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 underline"
-            >
-              Full Details
             </button>
           </div>
         </div>
