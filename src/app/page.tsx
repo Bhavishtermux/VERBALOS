@@ -130,9 +130,11 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
             {/* Left Main Column (7 cols) */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-[2px] bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-[11px] font-mono text-[#C83214] dark:text-[#E04B2F] font-semibold uppercase tracking-wider">
-                <Terminal className="h-3 w-3" />
-                <span>VARC Cognitive Engine</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[3px] bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-[11px] font-mono text-zinc-700 dark:text-zinc-300">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#C83214] animate-pulse" />
+                <span className="font-semibold text-[#C83214] dark:text-[#E04B2F]">CAT 2026</span>
+                <span className="text-zinc-300 dark:text-zinc-700">/</span>
+                <span className="font-medium tracking-tight">DEDICATED VARC OPERATING SYSTEM</span>
               </div>
 
               <h1 className="text-3xl sm:text-5xl font-serif font-bold tracking-tight text-zinc-900 dark:text-zinc-50 leading-[1.12]">
@@ -149,11 +151,11 @@ export default function HomePage() {
                   href={user ? "/dashboard" : "/login"}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[4px] font-semibold bg-zinc-900 text-zinc-50 hover:bg-[#C83214] dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-[#C83214] dark:hover:text-white transition-colors"
                 >
-                  <span>LAUNCH PRACTICE OS</span>
+                  <span>{user ? "OPEN DASHBOARD" : "LAUNCH PRACTICE OS →"}</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
-                  href="/library"
+                  href={user ? "/library" : "/login"}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[4px] border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:border-zinc-900 dark:hover:border-zinc-100 transition-colors"
                 >
                   <span>EXPLORE RC LIBRARY</span>
@@ -282,7 +284,7 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Discipline 1: Reading Comprehension */}
           <Link
-            href="/practice"
+            href={user ? "/practice" : "/login"}
             className="group border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-[4px] p-6 flex flex-col justify-between hover:border-[#C83214] dark:hover:border-[#C83214] transition-colors"
           >
             <div className="space-y-4">
@@ -307,14 +309,14 @@ export default function HomePage() {
             <div className="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between font-mono text-xs text-zinc-500">
               <span>WPM + Vocab Lookup</span>
               <span className="group-hover:translate-x-1 transition-transform text-zinc-900 dark:text-zinc-100 font-semibold">
-                PRACTICE →
+                {user ? "PRACTICE →" : "SIGN IN TO START →"}
               </span>
             </div>
           </Link>
 
           {/* Discipline 2: Para Summary */}
           <Link
-            href="/verbal-ability"
+            href={user ? "/verbal-ability" : "/login"}
             className="group border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-[4px] p-6 flex flex-col justify-between hover:border-[#C83214] dark:hover:border-[#C83214] transition-colors"
           >
             <div className="space-y-4">
@@ -339,14 +341,14 @@ export default function HomePage() {
             <div className="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between font-mono text-xs text-zinc-500">
               <span>5-Trap Elimination</span>
               <span className="group-hover:translate-x-1 transition-transform text-zinc-900 dark:text-zinc-100 font-semibold">
-                PRACTICE →
+                {user ? "PRACTICE →" : "SIGN IN TO START →"}
               </span>
             </div>
           </Link>
 
           {/* Discipline 3: Para Jumbles */}
           <Link
-            href="/verbal-ability"
+            href={user ? "/verbal-ability" : "/login"}
             className="group border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-[4px] p-6 flex flex-col justify-between hover:border-[#C83214] dark:hover:border-[#C83214] transition-colors"
           >
             <div className="space-y-4">
@@ -371,14 +373,14 @@ export default function HomePage() {
             <div className="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between font-mono text-xs text-zinc-500">
               <span>Mandatory Pairs</span>
               <span className="group-hover:translate-x-1 transition-transform text-zinc-900 dark:text-zinc-100 font-semibold">
-                PRACTICE →
+                {user ? "PRACTICE →" : "SIGN IN TO START →"}
               </span>
             </div>
           </Link>
 
           {/* Discipline 4: Odd Sentence Out */}
           <Link
-            href="/verbal-ability"
+            href={user ? "/verbal-ability" : "/login"}
             className="group border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-[4px] p-6 flex flex-col justify-between hover:border-[#C83214] dark:hover:border-[#C83214] transition-colors"
           >
             <div className="space-y-4">
@@ -403,14 +405,14 @@ export default function HomePage() {
             <div className="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between font-mono text-xs text-zinc-500">
               <span>Tone Analysis</span>
               <span className="group-hover:translate-x-1 transition-transform text-zinc-900 dark:text-zinc-100 font-semibold">
-                PRACTICE →
+                {user ? "PRACTICE →" : "SIGN IN TO START →"}
               </span>
             </div>
           </Link>
 
           {/* Discipline 5: 40-Min Sectional Mocks */}
           <Link
-            href="/mocks"
+            href={user ? "/mocks" : "/login"}
             className="group border-2 border-zinc-900 dark:border-zinc-100 bg-zinc-900 dark:bg-zinc-100 text-zinc-50 dark:text-zinc-900 rounded-[4px] p-6 flex flex-col justify-between hover:bg-[#C83214] hover:border-[#C83214] dark:hover:bg-[#C83214] dark:hover:border-[#C83214] dark:hover:text-white transition-colors"
           >
             <div className="space-y-4">
@@ -434,13 +436,13 @@ export default function HomePage() {
 
             <div className="mt-6 pt-4 border-t border-zinc-800 dark:border-zinc-300 flex items-center justify-between font-mono text-xs">
               <span>CAT Test Environment</span>
-              <span className="font-semibold">START MOCK →</span>
+              <span className="font-semibold">{user ? "START MOCK →" : "SIGN IN TO START →"}</span>
             </div>
           </Link>
 
           {/* Discipline 6: Mistake Journal */}
           <Link
-            href="/mistakes"
+            href={user ? "/mistakes" : "/login"}
             className="group border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-[4px] p-6 flex flex-col justify-between hover:border-[#C83214] dark:hover:border-[#C83214] transition-colors"
           >
             <div className="space-y-4">
