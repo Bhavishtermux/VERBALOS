@@ -7,7 +7,6 @@ import { Header } from "./header";
 import { MobileNav } from "./mobile-nav";
 import { useRc } from "@/context/rc-context";
 import { useAuth } from "@/context/auth-context";
-import { MigrationDialog } from "@/components/auth/migration-dialog";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -69,9 +68,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div>
-
-      {/* First-Login LocalStorage Data Migration Dialog */}
-      <MigrationDialog />
     </div>
   );
 }
