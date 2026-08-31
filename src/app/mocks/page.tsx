@@ -20,6 +20,7 @@ import {
   Eye,
 } from "lucide-react";
 import { useAuth } from "@/context/auth-context";
+import { useRc } from "@/context/rc-context";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -51,11 +52,28 @@ interface FlatMockQuestion {
 
 export default function VARCMocksPage() {
   const { user } = useAuth();
+  const { registerActiveSession, unregisterActiveSession } = useRc();
 
   const [activeMock, setActiveMock] = useState<VARCMockConfig | null>(null);
   const [isTestActive, setIsTestActive] = useState(false);
   const [flatQuestions, setFlatQuestions] = useState<FlatMockQuestion[]>([]);
   const [currentQIndex, setCurrentQIndex] = useState(0);
+
+  // Register Navigation Guard when 40m mock exam is active
+  useEffect(() => {
+    if (isTestActive) {
+      registerActiveSession({
+        title: "Exit 40-Minute Sectional Mock?",
+        message: "Your simulated 40-minute CAT exam is currently running. Leaving this page will terminate the exam and discard your answers.",
+      });
+    } else {
+      unregisterActiveSession();
+    }
+
+    return () => {
+      unregisterActiveSession();
+    };
+  }, [isTestActive, registerActiveSession, unregisterActiveSession]);
 
   // Per-question state array
   const [questionStates, setQuestionStates] = useState<Record<number, MockQuestionState>>({});

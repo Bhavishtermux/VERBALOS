@@ -58,7 +58,7 @@ interface SelectedWordState {
 export default function RcReadingPage() {
   const params = useParams();
   const router = useRouter();
-  const { rcPassages, settings, togglePassageFlag } = useRc();
+  const { rcPassages, settings, togglePassageFlag, registerActiveSession, unregisterActiveSession } = useRc();
   const { user } = useAuth();
 
   const passageId = params?.id as string;
@@ -66,6 +66,27 @@ export default function RcReadingPage() {
 
   // Experience Stages: "preview" | "reading" | "questions"
   const [stage, setStage] = useState<"preview" | "reading" | "questions">("preview");
+
+  // Register Navigation Guard when reading or answering questions
+  useEffect(() => {
+    if (stage === "reading") {
+      registerActiveSession({
+        title: "Exit RC Reading Session?",
+        message: "You are currently reading a timed RC passage. Leaving this page will stop the WPM calibration timer and discard your attempt.",
+      });
+    } else if (stage === "questions") {
+      registerActiveSession({
+        title: "Exit RC Question Solving?",
+        message: "You are solving comprehension questions. Leaving this page will discard your unsubmitted answers.",
+      });
+    } else {
+      unregisterActiveSession();
+    }
+
+    return () => {
+      unregisterActiveSession();
+    };
+  }, [stage, registerActiveSession, unregisterActiveSession]);
 
   // 1. Reading Timer State (Independent Countdown)
   const [readingSeconds, setReadingSeconds] = useState<number>(0);
@@ -415,7 +436,8 @@ export default function RcReadingPage() {
       console.warn("Could not save session result to localStorage", err);
     }
 
-    // 5. Navigate immediately to /results/[sessionId]
+    // 5. Unregister session guard and navigate immediately to /results/[sessionId]
+    unregisterActiveSession();
     router.push(`/results/${sessionId}`);
   };
 

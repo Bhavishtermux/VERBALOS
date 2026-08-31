@@ -97,7 +97,14 @@ export function Sidebar({ className }: { className?: string }) {
     >
       {/* Brand / Logo */}
       <div className="flex h-16 items-center px-6 border-b border-zinc-200/60 dark:border-zinc-800/60">
-        <Link href="/dashboard" className="flex items-center gap-2.5">
+        <Link
+          href="/dashboard"
+          onClick={(e) => {
+            e.preventDefault();
+            requestNavigation("/dashboard");
+          }}
+          className="flex items-center gap-2.5"
+        >
           <div className="flex h-9 w-9 items-center justify-center rounded-lg overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-sm shrink-0">
             <img src="/logo.png" alt="VerbalOS Logo" className="h-full w-full object-contain p-0.5" />
           </div>
@@ -124,6 +131,10 @@ export function Sidebar({ className }: { className?: string }) {
             <Link
               key={item.href}
               href={item.href}
+              onClick={(e) => {
+                e.preventDefault();
+                requestNavigation(item.href);
+              }}
               className={cn(
                 "group flex items-center gap-3 rounded-lg px-3 py-2 text-xs font-medium transition-all",
                 isActive
