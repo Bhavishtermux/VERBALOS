@@ -75,3 +75,50 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground) / 0.4);
 }
+
+/* iOS Fluid Spring Physics & Micro-Interactions */
+.ios-spring {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ios-spring-fast {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ios-tap {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.ios-tap:active {
+  transform: scale(0.975);
+}
+
+@keyframes iosSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-ios-slide-up {
+  animation: iosSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes tickerDrift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: tickerDrift 45s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
