@@ -19,8 +19,8 @@ export function MobileNav() {
       {/* Mobile Top Header */}
       <div className="flex md:hidden h-14 items-center justify-between border-b border-zinc-200/80 bg-white px-4 dark:border-zinc-800 dark:bg-zinc-950">
         <Link href="/dashboard" className="flex items-center gap-2">
-          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-zinc-900 text-zinc-50 font-serif font-bold text-xs dark:bg-zinc-100 dark:text-zinc-900">
-            VOS
+          <div className="flex h-7 w-7 items-center justify-center rounded-md overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-sm shrink-0">
+            <img src="/logo.png" alt="VerbalOS Logo" className="h-full w-full object-contain p-0.5" />
           </div>
           <span className="font-serif font-bold text-base tracking-tight text-zinc-900 dark:text-zinc-100">
             VerbalOS
@@ -49,8 +49,8 @@ export function MobileNav() {
         <div className="fixed inset-0 z-50 md:hidden flex flex-col bg-white dark:bg-zinc-950">
           <div className="flex h-14 items-center justify-between border-b border-zinc-200 px-4 dark:border-zinc-800">
             <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-md bg-zinc-900 text-zinc-50 font-serif font-bold text-xs dark:bg-zinc-100 dark:text-zinc-900">
-                VOS
+              <div className="flex h-7 w-7 items-center justify-center rounded-md overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-sm shrink-0">
+                <img src="/logo.png" alt="VerbalOS Logo" className="h-full w-full object-contain p-0.5" />
               </div>
               <span className="font-serif font-bold text-base text-zinc-900 dark:text-zinc-100">
                 VerbalOS

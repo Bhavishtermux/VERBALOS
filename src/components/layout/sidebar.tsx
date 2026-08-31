@@ -98,8 +98,8 @@ export function Sidebar({ className }: { className?: string }) {
       {/* Brand / Logo */}
       <div className="flex h-16 items-center px-6 border-b border-zinc-200/60 dark:border-zinc-800/60">
         <Link href="/dashboard" className="flex items-center gap-2.5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-900 text-zinc-50 font-serif font-bold text-xs shadow-sm dark:bg-zinc-100 dark:text-zinc-900">
-            VOS
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-sm shrink-0">
+            <img src="/logo.png" alt="VerbalOS Logo" className="h-full w-full object-contain p-0.5" />
           </div>
           <div>
             <span className="font-serif font-bold tracking-tight text-zinc-900 dark:text-zinc-50 text-base leading-none block">

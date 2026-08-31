@@ -87,8 +87,8 @@ export default function LoginPage() {
       <div className="max-w-md w-full space-y-6">
         {/* Brand Header */}
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-zinc-900 text-zinc-50 dark:bg-zinc-100 dark:text-zinc-900 font-serif font-bold text-sm shadow-sm mb-1">
-            VOS
+          <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-md mb-1 p-1">
+            <img src="/logo.png" alt="VerbalOS Logo" className="h-full w-full object-contain" />
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold font-serif tracking-tight text-zinc-900 dark:text-zinc-50">
             VerbalOS
