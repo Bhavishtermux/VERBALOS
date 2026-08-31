@@ -45,17 +45,21 @@ interface SelectedWordState {
   };
 }
 
+type WordClickHandler = (word: string, e: React.MouseEvent<HTMLElement>) => void;
+
+interface InteractiveParagraphProps {
+  text: string;
+  pIdx: number;
+  selectedWord: SelectedWordState | null;
+  onWordClick: WordClickHandler;
+}
+
 function InteractiveParagraph({
   text,
   pIdx,
   selectedWord,
   onWordClick,
-}: {
-  text: string;
-  pIdx: number;
-  selectedWord: SelectedWordState | null;
-  onWordClick: (word: string, e: React.MouseEvent<HTMLSpanElement>) => void;
-}) {
+}: InteractiveParagraphProps) {
   const tokens = text.split(new RegExp("(\\s+)", "g"));
   return (
     <p key={pIdx} className="mb-4 leading-relaxed font-serif text-base text-zinc-800 dark:text-zinc-200">
