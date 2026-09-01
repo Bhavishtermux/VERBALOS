@@ -573,33 +573,44 @@ export default function RcReadingPage() {
     );
   }
 
-  // Calculate Contextual Popup Position on Desktop
+  // Calculate Contextual Popup Position on Desktop (Viewport-Safe Clamping)
   const popupStyle = useMemo(() => {
     if (!selectedWord || isMobileScreen) return {};
 
     const { rect } = selectedWord;
-    const popupWidth = 280;
-    const popupHeight = 130;
-    const scrollY = window.scrollY;
-    const scrollX = window.scrollX;
+    const winWidth = typeof window !== "undefined" ? window.innerWidth : 1200;
+    const winHeight = typeof window !== "undefined" ? window.innerHeight : 800;
+    const popupWidth = Math.min(320, winWidth - 32);
+    const popupEstimatedHeight = 220;
+    const padding = 16;
 
-    // Horizontal positioning centered on word, clamped inside viewport
-    let left = rect.left + scrollX + rect.width / 2 - popupWidth / 2;
-    if (left < 16) left = 16;
-    if (left + popupWidth > window.innerWidth - 16) {
-      left = window.innerWidth - popupWidth - 16;
+    // Horizontal positioning: Center over word, strictly clamped within viewport boundaries
+    let left = rect.left + rect.width / 2 - popupWidth / 2;
+    if (left + popupWidth > winWidth - padding) {
+      left = winWidth - popupWidth - padding;
+    }
+    if (left < padding) {
+      left = padding;
     }
 
-    // Vertical positioning: Prefer above, fallback to below
-    let top = rect.top + scrollY - popupHeight - 10;
-    if (rect.top < popupHeight + 80) {
-      top = rect.bottom + scrollY + 10;
+    // Vertical positioning: Default below word, fallback to above if near bottom
+    let top = rect.bottom + 8;
+    if (top + popupEstimatedHeight > winHeight - padding) {
+      const spaceAbove = rect.top - padding;
+      if (spaceAbove > popupEstimatedHeight) {
+        top = rect.top - popupEstimatedHeight - 8;
+      } else {
+        top = Math.max(padding, winHeight - popupEstimatedHeight - padding);
+      }
     }
 
     return {
-      top: `${top}px`,
-      left: `${left}px`,
+      position: "fixed" as const,
+      top: `${Math.round(top)}px`,
+      left: `${Math.round(left)}px`,
       width: `${popupWidth}px`,
+      maxWidth: `calc(100vw - 32px)`,
+      zIndex: 9999,
     };
   }, [selectedWord, isMobileScreen]);
 
@@ -980,7 +991,7 @@ export default function RcReadingPage() {
               <div
                 ref={popupRef}
                 style={popupStyle}
-                className="absolute z-[100] rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-[#141416] p-3.5 shadow-2xl text-zinc-950 dark:text-zinc-50 select-none animate-ios-slide-up ring-1 ring-black/10 dark:ring-white/10 space-y-2 max-w-[320px]"
+                className="fixed rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-[#141416] p-3.5 shadow-2xl text-zinc-950 dark:text-zinc-50 select-none animate-ios-slide-up ring-1 ring-black/10 dark:ring-white/10 space-y-2"
               >
                 {/* Top: WORD + Part of speech */}
                 <div className="flex items-start justify-between border-b border-zinc-100 dark:border-zinc-800/80 pb-1.5">

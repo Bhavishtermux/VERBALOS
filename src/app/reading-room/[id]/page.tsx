@@ -262,6 +262,47 @@ export default function SourceArticleReadingPage() {
     );
   }
 
+  // Calculate Contextual Popup Position on Desktop (Viewport-Safe Clamping)
+  const popupStyle = useMemo(() => {
+    if (!selectedWord || isMobileScreen) return {};
+
+    const { rect } = selectedWord;
+    const winWidth = typeof window !== "undefined" ? window.innerWidth : 1200;
+    const winHeight = typeof window !== "undefined" ? window.innerHeight : 800;
+    const popupWidth = Math.min(320, winWidth - 32);
+    const popupEstimatedHeight = 220;
+    const padding = 16;
+
+    // Horizontal positioning: Center over word, strictly clamped within viewport boundaries
+    let left = rect.left + rect.width / 2 - popupWidth / 2;
+    if (left + popupWidth > winWidth - padding) {
+      left = winWidth - popupWidth - padding;
+    }
+    if (left < padding) {
+      left = padding;
+    }
+
+    // Vertical positioning: Default below word, fallback to above if near bottom
+    let top = rect.bottom + 8;
+    if (top + popupEstimatedHeight > winHeight - padding) {
+      const spaceAbove = rect.top - padding;
+      if (spaceAbove > popupEstimatedHeight) {
+        top = rect.top - popupEstimatedHeight - 8;
+      } else {
+        top = Math.max(padding, winHeight - popupEstimatedHeight - padding);
+      }
+    }
+
+    return {
+      position: "fixed" as const,
+      top: `${Math.round(top)}px`,
+      left: `${Math.round(left)}px`,
+      width: `${popupWidth}px`,
+      maxWidth: `calc(100vw - 32px)`,
+      zIndex: 9999,
+    };
+  }, [selectedWord, isMobileScreen]);
+
   const questions = article.practiceQuestions || [];
   const totalQuestions = questions.length;
   const answeredCount = Object.keys(selectedAnswers).length;
@@ -747,13 +788,8 @@ export default function SourceArticleReadingPage() {
       {selectedWord && !isMobileScreen && (
         <div
           ref={popupRef}
-          style={{
-            position: "fixed",
-            top: `${Math.min(selectedWord.rect.top + 28, window.innerHeight - 200)}px`,
-            left: `${Math.max(16, Math.min(selectedWord.rect.left, window.innerWidth - 330))}px`,
-            width: "310px",
-          }}
-          className="z-50 rounded-2xl border-2 border-zinc-300 dark:border-zinc-700 bg-white dark:bg-[#141416] p-3.5 shadow-2xl text-xs space-y-2 animate-in fade-in-50 zoom-in-95 select-none"
+          style={popupStyle}
+          className="fixed z-[9999] rounded-2xl border-2 border-zinc-300 dark:border-zinc-700 bg-white dark:bg-[#141416] p-3.5 shadow-2xl text-xs space-y-2 animate-in fade-in-50 zoom-in-95 select-none"
         >
           {/* Top: WORD + Part of speech */}
           <div className="flex items-start justify-between border-b border-zinc-100 dark:border-zinc-800/80 pb-1.5">
