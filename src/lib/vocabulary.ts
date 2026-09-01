@@ -195,6 +195,247 @@ export const VOCABULARY_DATABASE: Record<string, VocabEntry> = {
     example: "Economic historians examine wage series to reconstruct past standards of living.",
     synonyms: ["scholars", "chroniclers", "archivists"],
   },
+  california: {
+    word: "California",
+    definition: "A major US state on the Pacific coast, globally prominent as the center of global technology, software engineering, and venture capital (Silicon Valley).",
+    inContext: "The global hub of high-value microprocessor architecture and technological design.",
+    partOfSpeech: "Proper Noun",
+    pronunciation: "/ˌkæl.ɪˈfɔːr.njə/",
+    example: "A microchip could be designed in California, etched in Taiwan, and assembled in Shenzhen.",
+    synonyms: ["Silicon Valley hub", "US tech center"],
+  },
+  taiwan: {
+    word: "Taiwan",
+    definition: "An East Asian island economy leading global high-precision semiconductor fabrication and foundry manufacturing.",
+    inContext: "The indispensable global node for advanced silicon photolithography and microchip etching.",
+    partOfSpeech: "Proper Noun",
+    pronunciation: "/taɪˈwɑːn/",
+    example: "Advanced semiconductor fabrication remains heavily concentrated in Taiwan.",
+    synonyms: ["semiconductor hub", "foundry capital"],
+  },
+  malaysia: {
+    word: "Malaysia",
+    definition: "A Southeast Asian nation holding a central role in global semiconductor testing, packaging, and back-end electronics manufacturing.",
+    inContext: "The specialized microelectronics testing and packaging stage in global supply chains.",
+    partOfSpeech: "Proper Noun",
+    pronunciation: "/məˈleɪ.ʒə/",
+    example: "Microprocessors are packaged and tested in Malaysia before distribution.",
+    synonyms: ["Southeast Asian manufacturing node"],
+  },
+  shenzhen: {
+    word: "Shenzhen",
+    definition: "A major coastal technological metropolis in southeastern China, celebrated as the premier global center for consumer hardware assembly and electronics prototyping.",
+    inContext: "The high-speed final assembly factory node connecting global tech components into consumer devices.",
+    partOfSpeech: "Proper Noun",
+    pronunciation: "/ˈʃɛn.dʒɛn/",
+    example: "Smartphones are assembled with speed and precision in Shenzhen facilities.",
+    synonyms: ["hardware capital", "electronics hub"],
+  },
+  london: {
+    word: "London",
+    definition: "The capital of the United Kingdom and a leading global financial, cultural, and consumer metropolis.",
+    inContext: "A primary consumer endpoint for rapid forty-eight-hour international fulfillment.",
+    partOfSpeech: "Proper Noun",
+    pronunciation: "/ˈlʌn.dən/",
+    example: "Consumers in London receive electronics shipped from overseas within two days.",
+    synonyms: ["UK capital", "financial center"],
+  },
+  toyota: {
+    word: "Toyota",
+    definition: "A Japanese multinational automotive corporation famous for originating the Toyota Production System, lean manufacturing, and Just-In-Time (JIT) methods.",
+    inContext: "The pioneer and archetype of ultra-lean, inventory-minimizing production paradigms.",
+    partOfSpeech: "Proper Noun",
+    pronunciation: "/tɔɪˈoʊ.tə/",
+    example: "Inspired by the Toyota Production System, corporations eliminated inventory buffers.",
+    synonyms: ["lean manufacturing pioneer"],
+  },
+  priesthood: {
+    word: "priesthood",
+    definition: "An elite, authoritative leadership group holding exclusive orthodoxy, doctrine, and influence within an institution or discipline.",
+    inContext: "The entrenched circle of corporate executives and theorists advocating unquestioned efficiency dogma.",
+    partOfSpeech: "Noun",
+    pronunciation: "/ˈpriːst.hʊd/",
+    example: "The high priesthood of corporate management dogma worshiped at the altar of frictionless efficiency.",
+    synonyms: ["hierarchy", "orthodoxy", "elite", "establishment"],
+  },
+  dogma: {
+    word: "dogma",
+    definition: "A principle, doctrine, or system of beliefs laid down by authority as incontrovertibly and unquestionably true.",
+    inContext: "Rigid corporate doctrines that discourage questioning or critical reflection.",
+    partOfSpeech: "Noun",
+    pronunciation: "/ˈdɔːɡ.mə/",
+    example: "Just-In-Time production transformed from an operational tactic into an unquestioned dogma.",
+    synonyms: ["doctrine", "tenet", "creed", "canon", "orthodoxy"],
+    antonyms: ["skepticism", "empirical scrutiny", "flexibility"],
+  },
+  canonized: {
+    word: "canonized",
+    definition: "Sanctioned, elevated, or accepted as authoritative, sacred, or universally standard.",
+    inContext: "Institutionalized by global consulting firms as the supreme management rulebook.",
+    partOfSpeech: "Verb",
+    pronunciation: "/ˈkæn.ə.naɪzd/",
+    example: "Lean production was canonized by consultancies as the gold standard of enterprise efficiency.",
+    synonyms: ["sanctioned", "consecrated", "institutionalized", "lionized"],
+  },
+  canonize: {
+    word: "canonize",
+    definition: "To officially sanction, treat as authoritative, or place in a canon of supreme models.",
+    inContext: "Elevating a management model into an untouchable corporate truth.",
+    partOfSpeech: "Verb",
+    pronunciation: "/ˈkæn.ə.naɪz/",
+    example: "Business schools canonize successful strategies without analyzing their hidden risks.",
+    synonyms: ["sanction", "deify", "standardize"],
+  },
+  frictionless: {
+    word: "frictionless",
+    definition: "Operating smoothly without resistance, delay, transactional drag, or operational impediment.",
+    inContext: "A hyper-optimized logistical model designed to erase all storage costs and delays.",
+    partOfSpeech: "Adjective",
+    pronunciation: "/ˈfrɪk.ʃən.ləs/",
+    example: "Firms pursued frictionless supply chains with zero buffer inventory.",
+    synonyms: ["seamless", "effortless", "unimpeded", "smooth"],
+    antonyms: ["cumbersome", "resistive", "impeded"],
+  },
+  telemetry: {
+    word: "telemetry",
+    definition: "The automatic wireless recording and transmission of real-time data from remote systems and sensors.",
+    inContext: "Live satellite and sensor tracking enabling synchronized global shipping without warehouses.",
+    partOfSpeech: "Noun",
+    pronunciation: "/təˈlɛm.ə.tri/",
+    example: "Real-time telemetry permitted dispatchers to coordinate freight across oceans down to the hour.",
+    synonyms: ["remote sensing", "telemonitoring", "data transmission"],
+  },
+  monuments: {
+    word: "monuments",
+    definition: "Prominent enduring structures, symbols, or testimonies to a past practice or ideal.",
+    inContext: "Physical storage facilities disparaged as outdated symbols of capital waste.",
+    partOfSpeech: "Noun",
+    pronunciation: "/ˈmɑːn.jə.mənts/",
+    example: "Warehouses were stigmatized as wasteful monuments to capital inefficiency.",
+    synonyms: ["memorials", "testimonies", "symbols", "markers"],
+  },
+  monument: {
+    word: "monument",
+    definition: "An enduring structure or outstanding example testifying to a specific achievement or belief.",
+    inContext: "A symbolic structural representation of an economic philosophy.",
+    partOfSpeech: "Noun",
+    pronunciation: "/ˈmɑːn.jə.mənt/",
+    example: "The vast warehouse stood as a monument to traditional inventory management.",
+    synonyms: ["testament", "symbol", "marker"],
+  },
+  intoxicating: {
+    word: "intoxicating",
+    definition: "Exciting, mesmerizing, or exhilarating to the senses or intellect; irresistibly appealing.",
+    inContext: "The seductive financial allure of massive returns on invested capital.",
+    partOfSpeech: "Adjective",
+    pronunciation: "/ɪnˈtɑːk.sɪ.keɪ.tɪŋ/",
+    example: "The arithmetic of zero inventory was intoxicating to corporate leadership.",
+    synonyms: ["breathtaking", "exhilarating", "mesmerizing", "enthralling"],
+    antonyms: ["sobering", "tedious", "mundane"],
+  },
+  jurisdictions: {
+    word: "jurisdictions",
+    definition: "Territories, nations, or administrative spheres under distinct legal and economic authority.",
+    inContext: "Low-wage foreign manufacturing zones targeted for cost-arbitrage.",
+    partOfSpeech: "Noun",
+    pronunciation: "/ˌdʒʊr.ɪsˈdɪk.ʃənz/",
+    example: "Production was relocated to low-cost regulatory jurisdictions abroad.",
+    synonyms: ["territories", "regions", "domains", "authorities"],
+  },
+  microchip: {
+    word: "microchip",
+    definition: "A tiny wafer of semiconductor material containing millions of integrated circuits and transistors.",
+    inContext: "The foundational hardware component of the modern global digital economy.",
+    partOfSpeech: "Noun",
+    pronunciation: "/ˈmaɪ.kroʊ.tʃɪp/",
+    example: "Designing a modern microchip requires complex cross-border scientific coordination.",
+    synonyms: ["semiconductor", "integrated circuit", "silicon chip"],
+  },
+  chokepoints: {
+    word: "chokepoints",
+    definition: "Strategic narrow passages or straits where maritime transport or logistics flow can easily become congested or blocked.",
+    inContext: "Vulnerable geographic bottlenecks such as the Suez Canal, Malacca Strait, or Panama Canal.",
+    partOfSpeech: "Noun",
+    pronunciation: "/ˈtʃoʊk.pɔɪnts/",
+    example: "Piracy and regional conflict exposed the fragility of global maritime chokepoints.",
+    synonyms: ["bottlenecks", "straits", "passageways", "defiles"],
+  },
+  chokepoint: {
+    word: "chokepoint",
+    definition: "A strategic narrow route through which traffic or resources must pass, creating potential blockage.",
+    inContext: "A critical logistical vulnerability in international trade.",
+    partOfSpeech: "Noun",
+    pronunciation: "/ˈtʃoʊk.pɔɪnt/",
+    example: "The closure of the maritime chokepoint delayed billions of dollars in freight.",
+    synonyms: ["bottleneck", "narrow", "constriction"],
+  },
+  equilibrium: {
+    word: "equilibrium",
+    definition: "A state of balance and stability between opposing forces, influences, or systemic components.",
+    inContext: "The baseline geopolitical and climatic stability required to sustain lean global trade.",
+    partOfSpeech: "Noun",
+    pronunciation: "/ˌiː.kwəˈlɪb.ri.əm/",
+    example: "The supply chain model presumed perpetual political and macroeconomic equilibrium.",
+    synonyms: ["balance", "stability", "symmetry", "homeostasis"],
+    antonyms: ["instability", "disequilibrium", "volatility"],
+  },
+  catastrophic: {
+    word: "catastrophic",
+    definition: "Causing sudden, immense damage, disruption, or collapse; disastrous.",
+    inContext: "A systemic vulnerability so severe that it threatens total supply breakdown.",
+    partOfSpeech: "Adjective",
+    pronunciation: "/ˌkæt.əˈstrɑː.fɪk/",
+    example: "The trade network rested upon a catastrophic, unstated flaw.",
+    synonyms: ["disastrous", "calamitous", "ruinous", "fatal"],
+    antonyms: ["beneficial", "fortuitous", "harmless"],
+  },
+  unstated: {
+    word: "unstated",
+    definition: "Implicit or taken for granted rather than explicitly spoken, written, or acknowledged.",
+    inContext: "A hidden, untested assumption underpinning an entire economic theory.",
+    partOfSpeech: "Adjective",
+    pronunciation: "/ʌnˈsteɪ.tɪd/",
+    example: "An unstated premise of the policy was that maritime trade would never be disrupted.",
+    synonyms: ["implicit", "unspoken", "implied", "tacit"],
+    antonyms: ["explicit", "stated", "declared"],
+  },
+  immunity: {
+    word: "immunity",
+    definition: "The condition of being protected, exempt, or invulnerable from harm, disease, or liability.",
+    inContext: "The illusory belief that interconnected corporate networks were shielded from biological crises.",
+    partOfSpeech: "Noun",
+    pronunciation: "/ɪˈmjuː.nə.ti/",
+    example: "The assumption of pandemic immunity proved to be an expensive fallacy.",
+    synonyms: ["invulnerability", "exemption", "protection", "resistance"],
+    antonyms: ["vulnerability", "susceptibility"],
+  },
+  offshoring: {
+    word: "offshoring",
+    definition: "The relocation of business operations, factories, or services to an overseas country to capitalize on lower labor and overhead costs.",
+    inContext: "Shifting physical production abroad while retaining core design in Western headquarters.",
+    partOfSpeech: "Noun",
+    pronunciation: "/ˈɑːf.ʃɔːr.ɪŋ/",
+    example: "Aggressive offshoring expanded profit margins while introducing long lead-time risks.",
+    synonyms: ["relocation", "outsourcing", "geographic arbitrage"],
+  },
+  buffers: {
+    word: "buffers",
+    definition: "Shock-absorbing reserves, safety stocks, or protective margins designed to prevent systemic failure.",
+    inContext: "Surplus inventory maintained in warehouses to absorb unexpected transport delays.",
+    partOfSpeech: "Noun",
+    pronunciation: "/ˈbʌf.ɚz/",
+    example: "Stripping away physical inventory buffers removed the ability to handle supply shocks.",
+    synonyms: ["cushions", "safety stocks", "reserves", "safeguards"],
+  },
+  buffer: {
+    word: "buffer",
+    definition: "A reserve or cushion that lessens the impact of unexpected shocks or disturbances.",
+    inContext: "A safety mechanism guarding against logistical volatility.",
+    partOfSpeech: "Noun",
+    pronunciation: "/ˈbʌf.ɚ/",
+    example: "Without an inventory buffer, a single factory outage halts the entire production line.",
+    synonyms: ["cushion", "reserve", "safeguard"],
+  },
   // --- PHILOSOPHY & CONSCIOUSNESS ---
   solipsism: {
     word: "solipsism",
@@ -1595,9 +1836,10 @@ export async function fetchWordDefinition(rawWord: string): Promise<VocabLookupR
           const res: VocabLookupResult = {
             word: item.word || cleaned,
             definition: primaryDefinition,
+            inContext: `Highlighted in the passage to delineate critical thematic and analytical nuance.`,
             partOfSpeech: primaryPartOfSpeech,
             pronunciation: phonetic,
-            example: primaryExample || `Used in intellectual discourse to describe ${cleaned}.`,
+            example: primaryExample || `Used in critical reading discourse to describe ${cleaned}.`,
             synonyms: Array.from(new Set(allSynonyms)).slice(0, 5),
             antonyms: Array.from(new Set(allAntonyms)).slice(0, 5),
             isAvailable: true,
@@ -1610,10 +1852,68 @@ export async function fetchWordDefinition(rawWord: string): Promise<VocabLookupR
       }
     }
   } catch (e) {
-    console.warn("Live dictionary lookup failed for word: " + cleaned, e);
+    // Continue to next resolution layer
   }
 
-  // 5. Fallback to synchronous morphological solver
+  // 5. Try Datamuse Lexicon API (Extensive dictionary covering 200k+ words)
+  try {
+    const dmRes = await fetch(`https://api.datamuse.com/words?sp=${encodeURIComponent(cleaned)}&md=d,p,r&max=1`);
+    if (dmRes.ok) {
+      const dmData = await dmRes.json();
+      if (Array.isArray(dmData) && dmData.length > 0 && dmData[0].defs && dmData[0].defs.length > 0) {
+        const rawDef = dmData[0].defs[0]; // e.g. "n\tA state on the West Coast..."
+        const [posCode, ...defParts] = rawDef.split("\t");
+        const cleanDef = defParts.join(" ").trim();
+        let posLabel = "Noun";
+        if (posCode === "v") posLabel = "Verb";
+        else if (posCode === "adj") posLabel = "Adjective";
+        else if (posCode === "adv") posLabel = "Adverb";
+
+        const res: VocabLookupResult = {
+          word: dmData[0].word || cleaned,
+          definition: cleanDef.charAt(0).toUpperCase() + cleanDef.slice(1),
+          inContext: `Contextualized within the passage's argument to convey precise meaning.`,
+          partOfSpeech: posLabel,
+          pronunciation: `/${cleaned}/`,
+          example: `The term "${cleaned}" operates centrally in this analytical discussion.`,
+          synonyms: dmData[0].tags?.filter((t: string) => t.startsWith("syn:"))?.map((t: string) => t.replace("syn:", "")) || [],
+          isAvailable: true,
+          isCurated: true,
+        };
+        saveCachedWord(res);
+        return res;
+      }
+    }
+  } catch (e) {
+    // Continue to Wikipedia
+  }
+
+  // 6. Try Wikipedia REST API for Proper Nouns, Geography, Institutions & Historical Events
+  try {
+    const wikiRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cleaned)}`);
+    if (wikiRes.ok) {
+      const wikiData = await wikiRes.json();
+      if (wikiData.extract && wikiData.type !== "disambiguation") {
+        const firstSentence = wikiData.extract.split(". ")[0] + ".";
+        const res: VocabLookupResult = {
+          word: wikiData.title || cleaned,
+          definition: firstSentence,
+          inContext: wikiData.description ? `${wikiData.description} referenced in the passage.` : `Referenced as a key entity or subject in the text.`,
+          partOfSpeech: "Proper Noun",
+          pronunciation: `/${cleaned}/`,
+          example: `The passage discusses ${wikiData.title || cleaned} in the context of global systems.`,
+          isAvailable: true,
+          isCurated: true,
+        };
+        saveCachedWord(res);
+        return res;
+      }
+    }
+  } catch (e) {
+    // Fallback to morphology
+  }
+
+  // 7. Fallback to synchronous morphological solver
   const fallback = lookupWord(cleaned);
   saveCachedWord({ ...fallback, isCurated: true });
   return fallback;
